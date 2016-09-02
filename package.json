@@ -1,0 +1,31 @@
+{
+  "name": "tachyon-demo-site",
+  "version": "1.0.0",
+  "description": "Showcasing the use of tachyons-css with a simple react app",
+  "main": "main.js",
+  "scripts": {
+    "start": "watchify main.js -t bubleify -o bundle.js & npm run serve",
+    "serve": "wzrd main.js --pushstate -t [bubleify]",
+    "build": "rm -rf dist/ && mkdir dist && browserify main.js -t bubleify -o dist/bundle.js && cp index.html dist/index.html"
+  },
+  "keywords": [
+    "tachyons-css",
+    "css",
+    "demo"
+  ],
+  "author": "Calvin Webster <calweb@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "linchpin": "^1.0.2",
+    "most": "^1.0.1",
+    "react": "^15.3.1",
+    "react-dom": "^15.3.1",
+    "tachyons": "^4.2.0"
+  },
+  "devDependencies": {
+    "browserify": "^13.1.0",
+    "bubleify": "^0.5.1",
+    "watchify": "^3.7.0",
+    "wzrd": "^1.4.0"
+  }
+}
