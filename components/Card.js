@@ -1,6 +1,6 @@
 module.exports = React => ({ state }) => {
   return (
-    <article className="dib dib-ns bg-white mw5 ba b--black-10 mv4 mh3">
+    <article className="dib dib-ns bg-white ba b--black-10 mv4 mh3">
       <div className="pv2 ph3">
          <h1 className="f6 ttu tracked">Happy Co.</h1>
       </div>
