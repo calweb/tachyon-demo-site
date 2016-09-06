@@ -14,7 +14,7 @@ module.exports = function (React) { return function (ref) {
   }
 }; }
 
-},{"../containers":12}],2:[function(require,module,exports){
+},{"../containers":13}],2:[function(require,module,exports){
 module.exports = function (React) { return function (ref) {
 	var state = ref.state;
 }; }
@@ -24,7 +24,7 @@ module.exports = function (React) { return function (ref) {
   var state = ref.state;
 
   return (
-    React.createElement( 'article', { className: "dib dib-ns bg-white mw5 ba b--black-10 mv4 mh3" },
+    React.createElement( 'article', { className: "dib dib-ns bg-white ba b--black-10 mv4 mh3" },
       React.createElement( 'div', { className: "pv2 ph3" },
          React.createElement( 'h1', { className: "f6 ttu tracked" }, "Happy Co.")
       ),
@@ -76,20 +76,47 @@ module.exports = function (React) { return function (ref) {
   var state = ref.state;
 
   return (
-    React.createElement( 'header', { className: "tc pv4 pv5-ns" },
-      React.createElement( 'img', { src: "http://www.fillmurray.com/200/200", className: "br-100 pa1 ba b--black-10 h3 w3", alt: "avatar" }),
-      React.createElement( 'h1', { className: "f5 f4-ns fw6 mid-gray" }, "Bill Murray"),
-      React.createElement( 'h2', { className: "f6 gray fw2 ttu tracked" }, "Charleston, SC")
+    React.createElement( 'header', { className: "tc pv4 pv6-ns bg-dark-green" },
+      React.createElement( 'img', { src: "http://www.fillmurray.com/200/200", className: "br-100 pa1 ba b--white-60 bg-blue h3 w3", alt: "avatar" }),
+      React.createElement( 'h1', { className: "f5 f4-ns fw6 white-90" }, "Bill Murray"),
+      React.createElement( 'h2', { className: "f6 white-60 fw2 ttu tracked" }, "Charleston, SC")
     )
   )
 }; }
 
 },{}],6:[function(require,module,exports){
+var pin = require('linchpin')
+
 module.exports = function (React) { return function (ref) {
-	var state = ref.state;
+  var state = ref.state;
+
+  state.event$
+    .filter(function (e) { return e.target.classList.contains('nav'); })
+    .subscribe({
+      next: function next(e) {
+        state.route = e.target.getAttribute('rel')
+        pin.emit('repaint', state)
+      },
+      complete: function complete(e) { console.log('yo yo yo') },
+      error: function error(err) { console.log(err) }
+    })
+  return (
+    React.createElement( 'nav', { className: "bg-dark-green fixed-ns db dt-l w-100 border-box pa3 ph5-l" },
+      React.createElement( 'a', { className: "db dtc-l v-mid white-60 link dim w-100 w-25-l tc tl-l mt-7 mt-0-ns mb2 mb0-l", href: "#", title: "Home" },
+        React.createElement( 'img', { src: "http://lorempixel.com/400/200/abstract", className: "dib w2 h2 br-100", alt: "Site Name" })
+      ),
+      React.createElement( 'div', { className: "db dtc-l v-mid w-100 w-75-l tc tr-l" },
+        React.createElement( 'a', { className: "nav link dim white-60 f6 f5-l dib mr3 mr4-l", href: "#", rel: "home", title: "Home" }, "Home"),
+        React.createElement( 'a', { className: "nav link dim white-60 f6 f5-l dib mr3 mr4-l", href: "#", rel: "howitworks", title: "How it Works" }, "How it Works"),
+        React.createElement( 'a', { className: "nav link dim white-60 f6 f5-l dib mr3 mr4-l", href: "#", rel: "blog", title: "Blog" }, "Blog"),
+        React.createElement( 'a', { className: "nav link dim white-60 f6 f5-l dib mr3 mr4-l", href: "#", rel: "press", title: "Press" }, "Press"),
+        React.createElement( 'a', { className: "nav link dim white-60 f6 f5-l dib", href: "#", rel: "contact", title: "Contact" }, "Contact")
+      )
+    )
+  )
 }; }
 
-},{}],7:[function(require,module,exports){
+},{"linchpin":44}],7:[function(require,module,exports){
 module.exports = function (React) { return function (ref) {
 	var state = ref.state;
 }; }
@@ -100,6 +127,40 @@ module.exports = function (React) { return function (ref) {
 }; }
 
 },{}],9:[function(require,module,exports){
+module.exports = function (React) { return function (ref) {
+  var state = ref.state;
+  var idx = ref.idx;
+
+
+  if(idx % 2 === 0) {
+  return (
+    React.createElement( 'div', { className: "cf w-100 w-100-ns pt0 pb0 pv2-m pv2-ns" },
+
+      React.createElement( 'div', { className: "dib w-40-ns v-mid pa4" },
+        React.createElement( 'p', { className: "f4 lh-copy" }, "For desktop, this text is vertically aligned middle, no matter what the height of the image is. On mobile, this is a paragraph below an image."),
+        React.createElement( 'p', { className: "f4 lh-copy" }, "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+      ),
+      React.createElement( 'div', { className: "dib w-60-ns v-mid-ns" },
+        React.createElement( 'img', { src: "http://lorempixel.com/400/200/technics", alt: "A bright blue sky", className: "w-100 w-100-ns" })
+      )
+    )
+  )
+} else {
+  return (
+    React.createElement( 'div', { className: "cf w-100 w-100-ns pt0 pb0 pv2-m pv2-ns" },
+    React.createElement( 'div', { className: "dib w-60-ns v-mid-ns" },
+      React.createElement( 'img', { src: "http://lorempixel.com/400/200/technics", alt: "A bright blue sky", className: "w-100 w-100-ns" })
+    ),
+    React.createElement( 'div', { className: "dib w-40-ns v-mid pa4" },
+      React.createElement( 'p', { className: "f4 lh-copy" }, "For desktop, this text is vertically aligned middle, no matter what the height of the image is. On mobile, this is a paragraph below an image."),
+      React.createElement( 'p', { className: "f4 lh-copy" }, "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+    )
+  )
+  )
+}
+}; }
+
+},{}],10:[function(require,module,exports){
 module.exports = function (React) {
   return {
     App: require('./App')(React),
@@ -107,18 +168,35 @@ module.exports = function (React) {
     Card: require('./Card')(React),
     Footer: require('./Footer')(React),
     Header: require('./Header')(React),
+    Box: require('./box')(React),
     Nav: require('./Nav')(React),
     Post: require('./Post')(React),
     PostList: require('./PostList')(React)
   }
 }
 
-},{"./App":1,"./Banner":2,"./Card":3,"./Footer":4,"./Header":5,"./Nav":6,"./Post":7,"./PostList":8}],10:[function(require,module,exports){
+},{"./App":1,"./Banner":2,"./Card":3,"./Footer":4,"./Header":5,"./Nav":6,"./Post":7,"./PostList":8,"./box":9}],11:[function(require,module,exports){
+
 module.exports = function (React) { return function (ref) {
-	var state = ref.state;
+  var state = ref.state;
+
+  var ref$1 = require('../../components')(React);
+  var Box = ref$1.Box;
+  var Nav = ref$1.Nav;
+  var Footer = ref$1.Footer;
+  return (
+    React.createElement( 'div', null,
+      React.createElement( Nav, { state: state }),
+      React.createElement( 'section', { className: "bg-white-60 mw5 mw9-ns center pa3 ph5-ns" },
+        [0,1,2,3,4,5,6].map(function (el, idx) { return React.createElement( Box, { state: state, idx: idx }); }),
+
+        React.createElement( Footer, { state: state })
+      )
+    )
+  )
 }; }
 
-},{}],11:[function(require,module,exports){
+},{"../../components":10}],12:[function(require,module,exports){
 module.exports = function (React) { return function (ref) {
   var state = ref.state;
 
@@ -126,20 +204,27 @@ module.exports = function (React) { return function (ref) {
   var Header = ref$1.Header;
   var Footer = ref$1.Footer;
   var Card = ref$1.Card;
+  var Nav = ref$1.Nav;
   return (
-    React.createElement( 'section', { className: "mw5 mw8-ns center pa3 ph5-ns" },
+    React.createElement( 'div', null,
+      React.createElement( Nav, { state: state }),
       React.createElement( Header, { state: state }),
+      React.createElement( 'section', { className: "bg-white-60 mw5 mw9-ns center pa3 ph5-ns" },
 
-        React.createElement( Card, { state: state }),
-        React.createElement( Card, { state: state }),
-        React.createElement( Card, { state: state }),
-
-      React.createElement( Footer, { state: state })
+            React.createElement( Card, { state: state }),
+            React.createElement( Card, { state: state }),
+            React.createElement( Card, { state: state }),
+            React.createElement( Card, { state: state }),
+            React.createElement( Card, { state: state }),
+            React.createElement( Card, { state: state }),
+        React.createElement( Footer, { state: state })
+      )
     )
+
   )
 }; }
 
-},{"../../components":9}],12:[function(require,module,exports){
+},{"../../components":10}],13:[function(require,module,exports){
 module.exports = function (React) {
   return {
     Home: require('./Home')(React),
@@ -147,25 +232,395 @@ module.exports = function (React) {
   }
 }
 
-},{"./Blog":10,"./Home":11}],13:[function(require,module,exports){
+},{"./Blog":11,"./Home":12}],14:[function(require,module,exports){
 var React = require('react')
 var ReactDOM = require('react-dom')
 var pin = require('linchpin')
-var ref = require('./components')(React);
-var App = ref.App;
+var ref = require('most');
+var fromEvent = ref.fromEvent;
+var ref$1 = require('./components')(React);
+var App = ref$1.App;
+var $app = document.getElementById('app')
+var event$ = fromEvent('click', $app)
+                .tap(function (e) { return e.preventDefault(); })
 
 var initialState = {
-  route: 'home'
+  route: 'blog',
+  event$: event$
 }
 pin.on('repaint', function (state) { return render(state); })
 
 render(initialState)
 
 function render(state) {
-  ReactDOM.render(React.createElement( App, { state: state }), document.getElementById('app'))
+  ReactDOM.render(React.createElement( App, { state: state }), $app)
 }
 
-},{"./components":9,"linchpin":41,"react":187,"react-dom":44}],14:[function(require,module,exports){
+},{"./components":10,"linchpin":44,"most":110,"react":256,"react-dom":113}],15:[function(require,module,exports){
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@most/prelude')) :
+  typeof define === 'function' && define.amd ? define(['exports', '@most/prelude'], factory) :
+  (factory((global.mostMulticast = global.mostMulticast || {}),global.mostPrelude));
+}(this, (function (exports,_most_prelude) { 'use strict';
+
+var MulticastDisposable = function MulticastDisposable (source, sink) {
+  this.source = source
+  this.sink = sink
+  this.disposed = false
+};
+
+MulticastDisposable.prototype.dispose = function dispose () {
+  if (this.disposed) {
+    return
+  }
+  this.disposed = true
+  var remaining = this.source.remove(this.sink)
+  return remaining === 0 && this.source._dispose()
+};
+
+function tryEvent (t, x, sink) {
+  try {
+    sink.event(t, x)
+  } catch (e) {
+    sink.error(t, e)
+  }
+}
+
+function tryEnd (t, x, sink) {
+  try {
+    sink.end(t, x)
+  } catch (e) {
+    sink.error(t, e)
+  }
+}
+
+var dispose = function (disposable) { return disposable.dispose(); }
+
+var emptyDisposable = {
+  dispose: function dispose$1 () {}
+}
+
+var MulticastSource = function MulticastSource (source) {
+  this.source = source
+  this.sinks = []
+  this._disposable = emptyDisposable
+};
+
+MulticastSource.prototype.run = function run (sink, scheduler) {
+  var n = this.add(sink)
+  if (n === 1) {
+    this._disposable = this.source.run(this, scheduler)
+  }
+  return new MulticastDisposable(this, sink)
+};
+
+MulticastSource.prototype._dispose = function _dispose () {
+  var disposable = this._disposable
+  this._disposable = emptyDisposable
+  return Promise.resolve(disposable).then(dispose)
+};
+
+MulticastSource.prototype.add = function add (sink) {
+  this.sinks = _most_prelude.append(sink, this.sinks)
+  return this.sinks.length
+};
+
+MulticastSource.prototype.remove = function remove$1 (sink) {
+  var i = _most_prelude.findIndex(sink, this.sinks)
+  // istanbul ignore next
+  if (i >= 0) {
+    this.sinks = _most_prelude.remove(i, this.sinks)
+  }
+
+  return this.sinks.length
+};
+
+MulticastSource.prototype.event = function event (time, value) {
+  var s = this.sinks
+  if (s.length === 1) {
+    return s[0].event(time, value)
+  }
+  for (var i = 0; i < s.length; ++i) {
+    tryEvent(time, value, s[i])
+  }
+};
+
+MulticastSource.prototype.end = function end (time, value) {
+  var s = this.sinks
+  for (var i = 0; i < s.length; ++i) {
+    tryEnd(time, value, s[i])
+  }
+};
+
+MulticastSource.prototype.error = function error (time, err) {
+  var s = this.sinks
+  for (var i = 0; i < s.length; ++i) {
+    s[i].error(time, err)
+  }
+};
+
+function multicast (stream) {
+  var source = stream.source
+  return source instanceof MulticastSource
+    ? stream
+    : new stream.constructor(new MulticastSource(source))
+}
+
+exports['default'] = multicast;
+exports.MulticastSource = MulticastSource;
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+})));
+
+
+},{"@most/prelude":16}],16:[function(require,module,exports){
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+  typeof define === 'function' && define.amd ? define(['exports'], factory) :
+  (factory((global.mostPrelude = global.mostPrelude || {})));
+}(this, (function (exports) { 'use strict';
+
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+
+// Non-mutating array operations
+
+// cons :: a -> [a] -> [a]
+// a with x prepended
+function cons (x, a) {
+  var l = a.length
+  var b = new Array(l + 1)
+  b[0] = x
+  for (var i = 0; i < l; ++i) {
+    b[i + 1] = a[i]
+  }
+  return b
+}
+
+// append :: a -> [a] -> [a]
+// a with x appended
+function append (x, a) {
+  var l = a.length
+  var b = new Array(l + 1)
+  for (var i = 0; i < l; ++i) {
+    b[i] = a[i]
+  }
+
+  b[l] = x
+  return b
+}
+
+// drop :: Int -> [a] -> [a]
+// drop first n elements
+function drop (n, a) { // eslint-disable-line complexity
+  if (n < 0) {
+    throw new TypeError('n must be >= 0')
+  }
+
+  var l = a.length
+  if (n === 0 || l === 0) {
+    return a
+  }
+
+  if (n >= l) {
+    return []
+  }
+
+  return unsafeDrop(n, a, l - n)
+}
+
+// unsafeDrop :: Int -> [a] -> Int -> [a]
+// Internal helper for drop
+function unsafeDrop (n, a, l) {
+  var b = new Array(l)
+  for (var i = 0; i < l; ++i) {
+    b[i] = a[n + i]
+  }
+  return b
+}
+
+// tail :: [a] -> [a]
+// drop head element
+function tail (a) {
+  return drop(1, a)
+}
+
+// copy :: [a] -> [a]
+// duplicate a (shallow duplication)
+function copy (a) {
+  var l = a.length
+  var b = new Array(l)
+  for (var i = 0; i < l; ++i) {
+    b[i] = a[i]
+  }
+  return b
+}
+
+// map :: (a -> b) -> [a] -> [b]
+// transform each element with f
+function map (f, a) {
+  var l = a.length
+  var b = new Array(l)
+  for (var i = 0; i < l; ++i) {
+    b[i] = f(a[i])
+  }
+  return b
+}
+
+// reduce :: (a -> b -> a) -> a -> [b] -> a
+// accumulate via left-fold
+function reduce (f, z, a) {
+  var r = z
+  for (var i = 0, l = a.length; i < l; ++i) {
+    r = f(r, a[i], i)
+  }
+  return r
+}
+
+// replace :: a -> Int -> [a]
+// replace element at index
+function replace (x, i, a) { // eslint-disable-line complexity
+  if (i < 0) {
+    throw new TypeError('i must be >= 0')
+  }
+
+  var l = a.length
+  var b = new Array(l)
+  for (var j = 0; j < l; ++j) {
+    b[j] = i === j ? x : a[j]
+  }
+  return b
+}
+
+// remove :: Int -> [a] -> [a]
+// remove element at index
+function remove (i, a) {  // eslint-disable-line complexity
+  if (i < 0) {
+    throw new TypeError('i must be >= 0')
+  }
+
+  var l = a.length
+  if (l === 0 || i >= l) { // exit early if index beyond end of array
+    return a
+  }
+
+  if (l === 1) { // exit early if index in bounds and length === 1
+    return []
+  }
+
+  return unsafeRemove(i, a, l - 1)
+}
+
+// unsafeRemove :: Int -> [a] -> Int -> [a]
+// Internal helper to remove element at index
+function unsafeRemove (i, a, l) {
+  var b = new Array(l)
+  var j
+  for (j = 0; j < i; ++j) {
+    b[j] = a[j]
+  }
+  for (j = i; j < l; ++j) {
+    b[j] = a[j + 1]
+  }
+
+  return b
+}
+
+// removeAll :: (a -> boolean) -> [a] -> [a]
+// remove all elements matching a predicate
+function removeAll (f, a) {
+  var l = a.length
+  var b = new Array(l)
+  var j = 0
+  for (var x, i = 0; i < l; ++i) {
+    x = a[i]
+    if (!f(x)) {
+      b[j] = x
+      ++j
+    }
+  }
+
+  b.length = j
+  return b
+}
+
+// findIndex :: a -> [a] -> Int
+// find index of x in a, from the left
+function findIndex (x, a) {
+  for (var i = 0, l = a.length; i < l; ++i) {
+    if (x === a[i]) {
+      return i
+    }
+  }
+  return -1
+}
+
+// isArrayLike :: * -> boolean
+// Return true iff x is array-like
+function isArrayLike (x) {
+  return x != null && typeof x.length === 'number' && typeof x !== 'function'
+}
+
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+
+// id :: a -> a
+var id = function (x) { return x; }
+
+// compose :: (b -> c) -> (a -> b) -> (a -> c)
+var compose = function (f, g) { return function (x) { return f(g(x)); }; }
+
+// apply :: (a -> b) -> a -> b
+var apply = function (f, x) { return f(x); }
+
+// curry2 :: ((a, b) -> c) -> (a -> b -> c)
+function curry2 (f) {
+  function curried (a, b) {
+    switch (arguments.length) {
+      case 0: return curried
+      case 1: return function (b) { return f(a, b); }
+      default: return f(a, b)
+    }
+  }
+  return curried
+}
+
+// curry3 :: ((a, b, c) -> d) -> (a -> b -> c -> d)
+function curry3 (f) {
+  function curried (a, b, c) { // eslint-disable-line complexity
+    switch (arguments.length) {
+      case 0: return curried
+      case 1: return curry2(function (b, c) { return f(a, b, c); })
+      case 2: return function (c) { return f(a, b, c); }
+      default:return f(a, b, c)
+    }
+  }
+  return curried
+}
+
+exports.cons = cons;
+exports.append = append;
+exports.drop = drop;
+exports.tail = tail;
+exports.copy = copy;
+exports.map = map;
+exports.reduce = reduce;
+exports.replace = replace;
+exports.remove = remove;
+exports.removeAll = removeAll;
+exports.findIndex = findIndex;
+exports.isArrayLike = isArrayLike;
+exports.id = id;
+exports.compose = compose;
+exports.apply = apply;
+exports.curry2 = curry2;
+exports.curry3 = curry3;
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+})));
+
+
+},{}],17:[function(require,module,exports){
 /*!
  * EventEmitter2
  * https://github.com/hij1nx/EventEmitter2
@@ -740,7 +1195,7 @@ function render(state) {
   }
 }();
 
-},{}],15:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -826,7 +1281,7 @@ var EventListener = {
 
 module.exports = EventListener;
 }).call(this,require('_process'))
-},{"./emptyFunction":22,"_process":43}],16:[function(require,module,exports){
+},{"./emptyFunction":25,"_process":112}],19:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -862,7 +1317,7 @@ var ExecutionEnvironment = {
 };
 
 module.exports = ExecutionEnvironment;
-},{}],17:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 "use strict";
 
 /**
@@ -894,7 +1349,7 @@ function camelize(string) {
 }
 
 module.exports = camelize;
-},{}],18:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -934,7 +1389,7 @@ function camelizeStyleName(string) {
 }
 
 module.exports = camelizeStyleName;
-},{"./camelize":17}],19:[function(require,module,exports){
+},{"./camelize":20}],22:[function(require,module,exports){
 'use strict';
 
 /**
@@ -974,7 +1429,7 @@ function containsNode(outerNode, innerNode) {
 }
 
 module.exports = containsNode;
-},{"./isTextNode":32}],20:[function(require,module,exports){
+},{"./isTextNode":35}],23:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -1103,7 +1558,7 @@ function createArrayFromMixed(obj) {
 
 module.exports = createArrayFromMixed;
 }).call(this,require('_process'))
-},{"./invariant":30,"_process":43}],21:[function(require,module,exports){
+},{"./invariant":33,"_process":112}],24:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -1189,7 +1644,7 @@ function createNodesFromMarkup(markup, handleScript) {
 
 module.exports = createNodesFromMarkup;
 }).call(this,require('_process'))
-},{"./ExecutionEnvironment":16,"./createArrayFromMixed":20,"./getMarkupWrap":26,"./invariant":30,"_process":43}],22:[function(require,module,exports){
+},{"./ExecutionEnvironment":19,"./createArrayFromMixed":23,"./getMarkupWrap":29,"./invariant":33,"_process":112}],25:[function(require,module,exports){
 "use strict";
 
 /**
@@ -1228,7 +1683,7 @@ emptyFunction.thatReturnsArgument = function (arg) {
 };
 
 module.exports = emptyFunction;
-},{}],23:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -1250,7 +1705,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = emptyObject;
 }).call(this,require('_process'))
-},{"_process":43}],24:[function(require,module,exports){
+},{"_process":112}],27:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -1277,7 +1732,7 @@ function focusNode(node) {
 }
 
 module.exports = focusNode;
-},{}],25:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 'use strict';
 
 /**
@@ -1312,7 +1767,7 @@ function getActiveElement() /*?DOMElement*/{
 }
 
 module.exports = getActiveElement;
-},{}],26:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -1409,7 +1864,7 @@ function getMarkupWrap(nodeName) {
 
 module.exports = getMarkupWrap;
 }).call(this,require('_process'))
-},{"./ExecutionEnvironment":16,"./invariant":30,"_process":43}],27:[function(require,module,exports){
+},{"./ExecutionEnvironment":19,"./invariant":33,"_process":112}],30:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -1448,7 +1903,7 @@ function getUnboundedScrollPosition(scrollable) {
 }
 
 module.exports = getUnboundedScrollPosition;
-},{}],28:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 'use strict';
 
 /**
@@ -1481,7 +1936,7 @@ function hyphenate(string) {
 }
 
 module.exports = hyphenate;
-},{}],29:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -1520,7 +1975,7 @@ function hyphenateStyleName(string) {
 }
 
 module.exports = hyphenateStyleName;
-},{"./hyphenate":28}],30:[function(require,module,exports){
+},{"./hyphenate":31}],33:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -1572,7 +2027,7 @@ function invariant(condition, format, a, b, c, d, e, f) {
 
 module.exports = invariant;
 }).call(this,require('_process'))
-},{"_process":43}],31:[function(require,module,exports){
+},{"_process":112}],34:[function(require,module,exports){
 'use strict';
 
 /**
@@ -1595,7 +2050,7 @@ function isNode(object) {
 }
 
 module.exports = isNode;
-},{}],32:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 'use strict';
 
 /**
@@ -1620,7 +2075,7 @@ function isTextNode(object) {
 }
 
 module.exports = isTextNode;
-},{"./isNode":31}],33:[function(require,module,exports){
+},{"./isNode":34}],36:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -1670,7 +2125,7 @@ var keyMirror = function keyMirror(obj) {
 
 module.exports = keyMirror;
 }).call(this,require('_process'))
-},{"./invariant":30,"_process":43}],34:[function(require,module,exports){
+},{"./invariant":33,"_process":112}],37:[function(require,module,exports){
 "use strict";
 
 /**
@@ -1705,7 +2160,7 @@ var keyOf = function keyOf(oneKeyObj) {
 };
 
 module.exports = keyOf;
-},{}],35:[function(require,module,exports){
+},{}],38:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -1735,7 +2190,7 @@ function memoizeStringOnly(callback) {
 }
 
 module.exports = memoizeStringOnly;
-},{}],36:[function(require,module,exports){
+},{}],39:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -1758,7 +2213,7 @@ if (ExecutionEnvironment.canUseDOM) {
 }
 
 module.exports = performance || {};
-},{"./ExecutionEnvironment":16}],37:[function(require,module,exports){
+},{"./ExecutionEnvironment":19}],40:[function(require,module,exports){
 'use strict';
 
 /**
@@ -1792,7 +2247,7 @@ if (performance.now) {
 }
 
 module.exports = performanceNow;
-},{"./performance":36}],38:[function(require,module,exports){
+},{"./performance":39}],41:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -1859,7 +2314,7 @@ function shallowEqual(objA, objB) {
 }
 
 module.exports = shallowEqual;
-},{}],39:[function(require,module,exports){
+},{}],42:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -1928,7 +2383,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = warning;
 }).call(this,require('_process'))
-},{"./emptyFunction":22,"_process":43}],40:[function(require,module,exports){
+},{"./emptyFunction":25,"_process":112}],43:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -1953,7 +2408,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],41:[function(require,module,exports){
+},{}],44:[function(require,module,exports){
 (function (global){
 var EventEmitter2 = require('eventemitter2').EventEmitter2, _ref;
 
@@ -1972,7 +2427,4683 @@ util.inherits(Linchpin, EventEmitter2);
 module.exports = (_ref = global.linchpin) != null ? _ref : new Linchpin();
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"eventemitter2":14,"util":189}],42:[function(require,module,exports){
+},{"eventemitter2":17,"util":261}],45:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+module.exports = LinkedList;
+
+/**
+ * Doubly linked list
+ * @constructor
+ */
+function LinkedList() {
+	this.head = null;
+	this.length = 0;
+}
+
+/**
+ * Add a node to the end of the list
+ * @param {{prev:Object|null, next:Object|null, dispose:function}} x node to add
+ */
+LinkedList.prototype.add = function(x) {
+	if(this.head !== null) {
+		this.head.prev = x;
+		x.next = this.head;
+	}
+	this.head = x;
+	++this.length;
+};
+
+/**
+ * Remove the provided node from the list
+ * @param {{prev:Object|null, next:Object|null, dispose:function}} x node to remove
+ */
+LinkedList.prototype.remove = function(x) {
+	--this.length;
+	if(x === this.head) {
+		this.head = this.head.next;
+	}
+	if(x.next !== null) {
+		x.next.prev = x.prev;
+		x.next = null;
+	}
+	if(x.prev !== null) {
+		x.prev.next = x.next;
+		x.prev = null;
+	}
+};
+
+/**
+ * @returns {boolean} true iff there are no nodes in the list
+ */
+LinkedList.prototype.isEmpty = function() {
+	return this.length === 0;
+};
+
+/**
+ * Dispose all nodes
+ * @returns {Promise} promise that fulfills when all nodes have been disposed,
+ *  or rejects if an error occurs while disposing
+ */
+LinkedList.prototype.dispose = function() {
+	if(this.isEmpty()) {
+		return Promise.resolve();
+	}
+
+	var promises = [];
+	var x = this.head;
+	this.head = null;
+	this.length = 0;
+
+	while(x !== null) {
+		promises.push(x.dispose());
+		x = x.next;
+	}
+
+	return Promise.all(promises);
+};
+
+},{}],46:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+exports.isPromise = isPromise;
+
+function isPromise(p) {
+	return p !== null && typeof p === 'object' && typeof p.then === 'function';
+}
+
+},{}],47:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+// Based on https://github.com/petkaantonov/deque
+
+module.exports = Queue;
+
+function Queue(capPow2) {
+	this._capacity = capPow2||32;
+	this._length = 0;
+	this._head = 0;
+}
+
+Queue.prototype.push = function (x) {
+	var len = this._length;
+	this._checkCapacity(len + 1);
+
+	var i = (this._head + len) & (this._capacity - 1);
+	this[i] = x;
+	this._length = len + 1;
+};
+
+Queue.prototype.shift = function () {
+	var head = this._head;
+	var x = this[head];
+
+	this[head] = void 0;
+	this._head = (head + 1) & (this._capacity - 1);
+	this._length--;
+	return x;
+};
+
+Queue.prototype.isEmpty = function() {
+	return this._length === 0;
+};
+
+Queue.prototype.length = function () {
+	return this._length;
+};
+
+Queue.prototype._checkCapacity = function (size) {
+	if (this._capacity < size) {
+		this._ensureCapacity(this._capacity << 1);
+	}
+};
+
+Queue.prototype._ensureCapacity = function (capacity) {
+	var oldCapacity = this._capacity;
+	this._capacity = capacity;
+
+	var last = this._head + this._length;
+
+	if (last > oldCapacity) {
+		copy(this, 0, this, oldCapacity, last & (oldCapacity - 1));
+	}
+};
+
+function copy(src, srcIndex, dst, dstIndex, len) {
+	for (var j = 0; j < len; ++j) {
+		dst[j + dstIndex] = src[j + srcIndex];
+		src[j + srcIndex] = void 0;
+	}
+}
+
+
+},{}],48:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+module.exports = Stream;
+
+function Stream(source) {
+	this.source = source;
+}
+
+},{}],49:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var Stream = require('../Stream');
+var Pipe = require('../sink/Pipe');
+var runSource = require('../runSource').withDefaultScheduler;
+var dispose = require('../disposable/dispose');
+var PropagateTask = require('../scheduler/PropagateTask');
+
+exports.scan = scan;
+exports.reduce = reduce;
+
+/**
+ * Create a stream containing successive reduce results of applying f to
+ * the previous reduce result and the current stream item.
+ * @param {function(result:*, x:*):*} f reducer function
+ * @param {*} initial initial value
+ * @param {Stream} stream stream to scan
+ * @returns {Stream} new stream containing successive reduce results
+ */
+function scan(f, initial, stream) {
+	return new Stream(new Scan(f, initial, stream.source));
+}
+
+function Scan(f, z, source) {
+	this.source = source;
+	this.f = f;
+	this.value = z;
+}
+
+Scan.prototype.run = function(sink, scheduler) {
+	var d1 = scheduler.asap(PropagateTask.event(this.value, sink));
+	var d2 = this.source.run(new ScanSink(this.f, this.value, sink), scheduler);
+	return dispose.all([d1, d2]);
+};
+
+function ScanSink(f, z, sink) {
+	this.f = f;
+	this.value = z;
+	this.sink = sink;
+}
+
+ScanSink.prototype.event = function(t, x) {
+	var f = this.f;
+	this.value = f(this.value, x);
+	this.sink.event(t, this.value);
+};
+
+ScanSink.prototype.error = Pipe.prototype.error;
+ScanSink.prototype.end = Pipe.prototype.end;
+
+/**
+ * Reduce a stream to produce a single result.  Note that reducing an infinite
+ * stream will return a Promise that never fulfills, but that may reject if an error
+ * occurs.
+ * @param {function(result:*, x:*):*} f reducer function
+ * @param {*} initial initial value
+ * @param {Stream} stream to reduce
+ * @returns {Promise} promise for the file result of the reduce
+ */
+function reduce(f, initial, stream) {
+	return runSource(new Reduce(f, initial, stream.source));
+}
+
+function Reduce(f, z, source) {
+	this.source = source;
+	this.f = f;
+	this.value = z;
+}
+
+Reduce.prototype.run = function(sink, scheduler) {
+	return this.source.run(new ReduceSink(this.f, this.value, sink), scheduler);
+};
+
+function ReduceSink(f, z, sink) {
+	this.f = f;
+	this.value = z;
+	this.sink = sink;
+}
+
+ReduceSink.prototype.event = function(t, x) {
+	var f = this.f;
+	this.value = f(this.value, x);
+	this.sink.event(t, this.value);
+};
+
+ReduceSink.prototype.error = Pipe.prototype.error;
+
+ReduceSink.prototype.end = function(t) {
+	this.sink.end(t, this.value);
+};
+
+function noop() {}
+
+},{"../Stream":48,"../disposable/dispose":76,"../runSource":86,"../scheduler/PropagateTask":88,"../sink/Pipe":95}],50:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var combine = require('./combine').combine;
+var apply = require('@most/prelude').apply;
+
+exports.ap  = ap;
+
+/**
+ * Assume fs is a stream containing functions, and apply the latest function
+ * in fs to the latest value in xs.
+ * fs:         --f---------g--------h------>
+ * xs:         -a-------b-------c-------d-->
+ * ap(fs, xs): --fa-----fb-gb---gc--hc--hd->
+ * @param {Stream} fs stream of functions to apply to the latest x
+ * @param {Stream} xs stream of values to which to apply all the latest f
+ * @returns {Stream} stream containing all the applications of fs to xs
+ */
+function ap(fs, xs) {
+	return combine(apply, fs, xs);
+}
+
+},{"./combine":52,"@most/prelude":16}],51:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var streamOf = require('../source/core').of;
+var continueWith = require('./continueWith').continueWith;
+
+exports.concat = concat;
+exports.cons = cons;
+
+/**
+ * @param {*} x value to prepend
+ * @param {Stream} stream
+ * @returns {Stream} new stream with x prepended
+ */
+function cons(x, stream) {
+	return concat(streamOf(x), stream);
+}
+
+/**
+ * @param {Stream} left
+ * @param {Stream} right
+ * @returns {Stream} new stream containing all events in left followed by all
+ *  events in right.  This *timeshifts* right to the end of left.
+ */
+function concat(left, right) {
+	return continueWith(function() {
+		return right;
+	}, left);
+}
+
+},{"../source/core":99,"./continueWith":54}],52:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var Stream = require('../Stream');
+var transform = require('./transform');
+var core = require('../source/core');
+var Pipe = require('../sink/Pipe');
+var IndexSink = require('../sink/IndexSink');
+var dispose = require('../disposable/dispose');
+var base = require('@most/prelude');
+var invoke = require('../invoke');
+
+var map = base.map;
+var tail = base.tail;
+
+exports.combineArray = combineArray;
+exports.combine = combine;
+
+/**
+ * Combine latest events from all input streams
+ * @param {function(...events):*} f function to combine most recent events
+ * @returns {Stream} stream containing the result of applying f to the most recent
+ *  event of each input stream, whenever a new event arrives on any stream.
+ */
+function combine(f /*, ...streams */) {
+	return combineArray(f, tail(arguments));
+}
+
+/**
+ * Combine latest events from all input streams
+ * @param {function(...events):*} f function to combine most recent events
+ * @param {[Stream]} streams most recent events
+ * @returns {Stream} stream containing the result of applying f to the most recent
+ *  event of each input stream, whenever a new event arrives on any stream.
+ */
+function combineArray(f, streams) {
+	var l = streams.length;
+	return l === 0 ? core.empty()
+		 : l === 1 ? transform.map(f, streams[0])
+		 : new Stream(combineSources(f, streams));
+}
+
+function combineSources(f, streams) {
+	return new Combine(f, map(getSource, streams))
+}
+
+function getSource(stream) {
+	return stream.source;
+}
+
+function Combine(f, sources) {
+	this.f = f;
+	this.sources = sources;
+}
+
+Combine.prototype.run = function(sink, scheduler) {
+	var l = this.sources.length;
+	var disposables = new Array(l);
+	var sinks = new Array(l);
+
+	var mergeSink = new CombineSink(disposables, sinks, sink, this.f);
+
+	for(var indexSink, i=0; i<l; ++i) {
+		indexSink = sinks[i] = new IndexSink(i, mergeSink);
+		disposables[i] = this.sources[i].run(indexSink, scheduler);
+	}
+
+	return dispose.all(disposables);
+};
+
+function CombineSink(disposables, sinks, sink, f) {
+	this.sink = sink;
+	this.disposables = disposables;
+	this.sinks = sinks;
+	this.f = f;
+
+	var l = sinks.length;
+	this.awaiting = l;
+	this.values = new Array(l);
+	this.hasValue = new Array(l);
+	for(var i = 0; i < l; ++i) {
+		this.hasValue[i] = false;
+	}
+
+	this.activeCount = sinks.length;
+}
+
+CombineSink.prototype.error = Pipe.prototype.error;
+
+CombineSink.prototype.event = function(t, indexedValue) {
+	var i = indexedValue.index;
+	var awaiting = this._updateReady(i);
+
+	this.values[i] = indexedValue.value;
+	if(awaiting === 0) {
+		this.sink.event(t, invoke(this.f, this.values));
+	}
+};
+
+CombineSink.prototype._updateReady = function(index) {
+	if(this.awaiting > 0) {
+		if(!this.hasValue[index]) {
+			this.hasValue[index] = true
+			this.awaiting -= 1
+		}
+	}
+	return this.awaiting;
+}
+
+CombineSink.prototype.end = function(t, indexedValue) {
+	dispose.tryDispose(t, this.disposables[indexedValue.index], this.sink);
+	if(--this.activeCount === 0) {
+		this.sink.end(t, indexedValue.value);
+	}
+};
+
+},{"../Stream":48,"../disposable/dispose":76,"../invoke":81,"../sink/IndexSink":94,"../sink/Pipe":95,"../source/core":99,"./transform":72,"@most/prelude":16}],53:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var mergeMapConcurrently = require('./mergeConcurrently').mergeMapConcurrently;
+
+exports.concatMap = concatMap;
+
+/**
+ * Map each value in stream to a new stream, and concatenate them all
+ * stream:              -a---b---cX
+ * f(a):                 1-1-1-1X
+ * f(b):                        -2-2-2-2X
+ * f(c):                                -3-3-3-3X
+ * stream.concatMap(f): -1-1-1-1-2-2-2-2-3-3-3-3X
+ * @param {function(x:*):Stream} f function to map each value to a stream
+ * @param {Stream} stream
+ * @returns {Stream} new stream containing all events from each stream returned by f
+ */
+function concatMap(f, stream) {
+	return mergeMapConcurrently(f, 1, stream);
+}
+
+},{"./mergeConcurrently":62}],54:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var Stream = require('../Stream');
+var Sink = require('../sink/Pipe');
+var dispose = require('../disposable/dispose');
+var isPromise = require('../Promise').isPromise;
+
+exports.continueWith = continueWith;
+
+function continueWith(f, stream) {
+	return new Stream(new ContinueWith(f, stream.source));
+}
+
+function ContinueWith(f, source) {
+	this.f = f;
+	this.source = source;
+}
+
+ContinueWith.prototype.run = function(sink, scheduler) {
+	return new ContinueWithSink(this.f, this.source, sink, scheduler);
+};
+
+function ContinueWithSink(f, source, sink, scheduler) {
+	this.f = f;
+	this.sink = sink;
+	this.scheduler = scheduler;
+	this.active = true;
+	this.disposable = dispose.once(source.run(this, scheduler));
+}
+
+ContinueWithSink.prototype.error = Sink.prototype.error;
+
+ContinueWithSink.prototype.event = function(t, x) {
+	if(!this.active) {
+		return;
+	}
+	this.sink.event(t, x);
+};
+
+ContinueWithSink.prototype.end = function(t, x) {
+	if(!this.active) {
+		return;
+	}
+
+	dispose.tryDispose(t, this.disposable, this.sink);
+	this._startNext(t, x, this.sink);
+};
+
+ContinueWithSink.prototype._startNext = function(t, x, sink) {
+	try {
+		this.disposable = this._continue(this.f, x, sink);
+	} catch(e) {
+		sink.error(t, e);
+	}
+};
+
+ContinueWithSink.prototype._continue = function(f, x, sink) {
+	return f(x).source.run(sink, this.scheduler);
+};
+
+ContinueWithSink.prototype.dispose = function() {
+	this.active = false;
+	return this.disposable.dispose();
+};
+
+},{"../Promise":46,"../Stream":48,"../disposable/dispose":76,"../sink/Pipe":95}],55:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var Stream = require('../Stream');
+var Sink = require('../sink/Pipe');
+var dispose = require('../disposable/dispose');
+var PropagateTask = require('../scheduler/PropagateTask');
+
+exports.delay = delay;
+
+/**
+ * @param {Number} delayTime milliseconds to delay each item
+ * @param {Stream} stream
+ * @returns {Stream} new stream containing the same items, but delayed by ms
+ */
+function delay(delayTime, stream) {
+	return delayTime <= 0 ? stream
+		 : new Stream(new Delay(delayTime, stream.source));
+}
+
+function Delay(dt, source) {
+	this.dt = dt;
+	this.source = source;
+}
+
+Delay.prototype.run = function(sink, scheduler) {
+	var delaySink = new DelaySink(this.dt, sink, scheduler);
+	return dispose.all([delaySink, this.source.run(delaySink, scheduler)]);
+};
+
+function DelaySink(dt, sink, scheduler) {
+	this.dt = dt;
+	this.sink = sink;
+	this.scheduler = scheduler;
+}
+
+DelaySink.prototype.dispose = function() {
+	var self = this;
+	this.scheduler.cancelAll(function(task) {
+		return task.sink === self.sink;
+	});
+};
+
+DelaySink.prototype.event = function(t, x) {
+	this.scheduler.delay(this.dt, PropagateTask.event(x, this.sink));
+};
+
+DelaySink.prototype.end = function(t, x) {
+	this.scheduler.delay(this.dt, PropagateTask.end(x, this.sink));
+};
+
+DelaySink.prototype.error = Sink.prototype.error;
+
+},{"../Stream":48,"../disposable/dispose":76,"../scheduler/PropagateTask":88,"../sink/Pipe":95}],56:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var Stream = require('../Stream');
+var SafeSink = require('../sink/SafeSink');
+var Pipe = require('../sink/Pipe');
+var dispose = require('../disposable/dispose');
+var tryEvent = require('../source/tryEvent');
+var isPromise = require('../Promise').isPromise;
+var PropagateTask = require('../scheduler/PropagateTask');
+
+exports.flatMapError = recoverWith;
+exports.recoverWith  = recoverWith;
+exports.throwError   = throwError;
+
+/**
+ * If stream encounters an error, recover and continue with items from stream
+ * returned by f.
+ * @param {function(error:*):Stream} f function which returns a new stream
+ * @param {Stream} stream
+ * @returns {Stream} new stream which will recover from an error by calling f
+ */
+function recoverWith(f, stream) {
+	return new Stream(new RecoverWith(f, stream.source));
+}
+
+/**
+ * Create a stream containing only an error
+ * @param {*} e error value, preferably an Error or Error subtype
+ * @returns {Stream} new stream containing only an error
+ */
+function throwError(e) {
+	return new Stream(new ErrorSource(e));
+}
+
+function ErrorSource(e) {
+	this.value = e;
+}
+
+ErrorSource.prototype.run = function(sink, scheduler) {
+	return scheduler.asap(new PropagateTask(runError, this.value, sink));
+};
+
+function runError(t, e, sink) {
+	sink.error(t, e);
+}
+
+function RecoverWith(f, source) {
+	this.f = f;
+	this.source = source;
+}
+
+RecoverWith.prototype.run = function(sink, scheduler) {
+	return new RecoverWithSink(this.f, this.source, sink, scheduler);
+};
+
+function RecoverWithSink(f, source, sink, scheduler) {
+	this.f = f;
+	this.sink = new SafeSink(sink);
+	this.scheduler = scheduler;
+	this.disposable = source.run(this, scheduler);
+}
+
+RecoverWithSink.prototype.event = function(t, x) {
+		tryEvent.tryEvent(t, x, this.sink);
+}
+
+RecoverWithSink.prototype.end = function(t, x) {
+		tryEvent.tryEnd(t, x, this.sink);
+}
+
+RecoverWithSink.prototype.error = function(t, e) {
+	var nextSink = this.sink.disable();
+
+	dispose.tryDispose(t, this.disposable, this.sink);
+	this._startNext(t, e, nextSink);
+};
+
+RecoverWithSink.prototype._startNext = function(t, x, sink) {
+	try {
+		this.disposable = this._continue(this.f, x, sink);
+	} catch(e) {
+		sink.error(t, e);
+	}
+};
+
+RecoverWithSink.prototype._continue = function(f, x, sink) {
+	var stream = f(x);
+	return stream.source.run(sink, this.scheduler);
+};
+
+RecoverWithSink.prototype.dispose = function() {
+	return this.disposable.dispose();
+};
+
+},{"../Promise":46,"../Stream":48,"../disposable/dispose":76,"../scheduler/PropagateTask":88,"../sink/Pipe":95,"../sink/SafeSink":96,"../source/tryEvent":107}],57:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var Stream = require('../Stream');
+var Sink = require('../sink/Pipe');
+var Filter = require('../fusion/Filter');
+
+exports.filter = filter;
+exports.skipRepeats = skipRepeats;
+exports.skipRepeatsWith = skipRepeatsWith;
+
+/**
+ * Retain only items matching a predicate
+ * @param {function(x:*):boolean} p filtering predicate called for each item
+ * @param {Stream} stream stream to filter
+ * @returns {Stream} stream containing only items for which predicate returns truthy
+ */
+function filter(p, stream) {
+	return new Stream(Filter.create(p, stream.source));
+}
+
+/**
+ * Skip repeated events, using === to detect duplicates
+ * @param {Stream} stream stream from which to omit repeated events
+ * @returns {Stream} stream without repeated events
+ */
+function skipRepeats(stream) {
+	return skipRepeatsWith(same, stream);
+}
+
+/**
+ * Skip repeated events using the provided equals function to detect duplicates
+ * @param {function(a:*, b:*):boolean} equals optional function to compare items
+ * @param {Stream} stream stream from which to omit repeated events
+ * @returns {Stream} stream without repeated events
+ */
+function skipRepeatsWith(equals, stream) {
+	return new Stream(new SkipRepeats(equals, stream.source));
+}
+
+function SkipRepeats(equals, source) {
+	this.equals = equals;
+	this.source = source;
+}
+
+SkipRepeats.prototype.run = function(sink, scheduler) {
+	return this.source.run(new SkipRepeatsSink(this.equals, sink), scheduler);
+};
+
+function SkipRepeatsSink(equals, sink) {
+	this.equals = equals;
+	this.sink = sink;
+	this.value = void 0;
+	this.init = true;
+}
+
+SkipRepeatsSink.prototype.end   = Sink.prototype.end;
+SkipRepeatsSink.prototype.error = Sink.prototype.error;
+
+SkipRepeatsSink.prototype.event = function(t, x) {
+	if(this.init) {
+		this.init = false;
+		this.value = x;
+		this.sink.event(t, x);
+	} else if(!this.equals(this.value, x)) {
+		this.value = x;
+		this.sink.event(t, x);
+	}
+};
+
+function same(a, b) {
+	return a === b;
+}
+
+},{"../Stream":48,"../fusion/Filter":78,"../sink/Pipe":95}],58:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var mergeConcurrently = require('./mergeConcurrently').mergeConcurrently;
+var mergeMapConcurrently = require('./mergeConcurrently').mergeMapConcurrently;
+
+exports.flatMap = flatMap;
+exports.join = join;
+
+/**
+ * Map each value in the stream to a new stream, and merge it into the
+ * returned outer stream. Event arrival times are preserved.
+ * @param {function(x:*):Stream} f chaining function, must return a Stream
+ * @param {Stream} stream
+ * @returns {Stream} new stream containing all events from each stream returned by f
+ */
+function flatMap(f, stream) {
+	return mergeMapConcurrently(f, Infinity, stream);
+}
+
+/**
+ * Monadic join. Flatten a Stream<Stream<X>> to Stream<X> by merging inner
+ * streams to the outer. Event arrival times are preserved.
+ * @param {Stream<Stream<X>>} stream stream of streams
+ * @returns {Stream<X>} new stream containing all events of all inner streams
+ */
+function join(stream) {
+	return mergeConcurrently(Infinity, stream);
+}
+
+},{"./mergeConcurrently":62}],59:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var Stream = require('../Stream');
+var Sink = require('../sink/Pipe');
+var dispose = require('../disposable/dispose');
+var PropagateTask = require('../scheduler/PropagateTask');
+var Map = require('../fusion/Map');
+
+exports.throttle = throttle;
+exports.debounce = debounce;
+
+/**
+ * Limit the rate of events by suppressing events that occur too often
+ * @param {Number} period time to suppress events
+ * @param {Stream} stream
+ * @returns {Stream}
+ */
+function throttle(period, stream) {
+	return new Stream(throttleSource(period, stream.source));
+}
+
+function throttleSource(period, source) {
+	return source instanceof Map ? commuteMapThrottle(period, source)
+		: source instanceof Throttle ? fuseThrottle(period, source)
+		: new Throttle(period, source)
+}
+
+function commuteMapThrottle(period, source) {
+	return Map.create(source.f, throttleSource(period, source.source))
+}
+
+function fuseThrottle(period, source) {
+	return new Throttle(Math.max(period, source.period), source.source)
+}
+
+function Throttle(period, source) {
+	this.period = period;
+	this.source = source;
+}
+
+Throttle.prototype.run = function(sink, scheduler) {
+	return this.source.run(new ThrottleSink(this.period, sink), scheduler);
+};
+
+function ThrottleSink(period, sink) {
+	this.time = 0;
+	this.period = period;
+	this.sink = sink;
+}
+
+ThrottleSink.prototype.event = function(t, x) {
+	if(t >= this.time) {
+		this.time = t + this.period;
+		this.sink.event(t, x);
+	}
+};
+
+ThrottleSink.prototype.end   = Sink.prototype.end;
+
+ThrottleSink.prototype.error = Sink.prototype.error;
+
+/**
+ * Wait for a burst of events to subside and emit only the last event in the burst
+ * @param {Number} period events occuring more frequently than this
+ *  will be suppressed
+ * @param {Stream} stream stream to debounce
+ * @returns {Stream} new debounced stream
+ */
+function debounce(period, stream) {
+	return new Stream(new Debounce(period, stream.source));
+}
+
+function Debounce(dt, source) {
+	this.dt = dt;
+	this.source = source;
+}
+
+Debounce.prototype.run = function(sink, scheduler) {
+	return new DebounceSink(this.dt, this.source, sink, scheduler);
+};
+
+function DebounceSink(dt, source, sink, scheduler) {
+	this.dt = dt;
+	this.sink = sink;
+	this.scheduler = scheduler;
+	this.value = void 0;
+	this.timer = null;
+
+	var sourceDisposable = source.run(this, scheduler);
+	this.disposable = dispose.all([this, sourceDisposable]);
+}
+
+DebounceSink.prototype.event = function(t, x) {
+	this._clearTimer();
+	this.value = x;
+	this.timer = this.scheduler.delay(this.dt, PropagateTask.event(x, this.sink));
+};
+
+DebounceSink.prototype.end = function(t, x) {
+	if(this._clearTimer()) {
+		this.sink.event(t, this.value);
+		this.value = void 0;
+	}
+	this.sink.end(t, x);
+};
+
+DebounceSink.prototype.error = function(t, x) {
+	this._clearTimer();
+	this.sink.error(t, x);
+};
+
+DebounceSink.prototype.dispose = function() {
+	this._clearTimer();
+};
+
+DebounceSink.prototype._clearTimer = function() {
+	if(this.timer === null) {
+		return false;
+	}
+	this.timer.dispose();
+	this.timer = null;
+	return true;
+};
+
+},{"../Stream":48,"../disposable/dispose":76,"../fusion/Map":80,"../scheduler/PropagateTask":88,"../sink/Pipe":95}],60:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var Stream = require('../Stream');
+var Pipe = require('../sink/Pipe');
+
+exports.loop = loop;
+
+/**
+ * Generalized feedback loop. Call a stepper function for each event. The stepper
+ * will be called with 2 params: the current seed and the an event value.  It must
+ * return a new { seed, value } pair. The `seed` will be fed back into the next
+ * invocation of stepper, and the `value` will be propagated as the event value.
+ * @param {function(seed:*, value:*):{seed:*, value:*}} stepper loop step function
+ * @param {*} seed initial seed value passed to first stepper call
+ * @param {Stream} stream event stream
+ * @returns {Stream} new stream whose values are the `value` field of the objects
+ * returned by the stepper
+ */
+function loop(stepper, seed, stream) {
+	return new Stream(new Loop(stepper, seed, stream.source));
+}
+
+function Loop(stepper, seed, source) {
+	this.step = stepper;
+	this.seed = seed;
+	this.source = source;
+}
+
+Loop.prototype.run = function(sink, scheduler) {
+	return this.source.run(new LoopSink(this.step, this.seed, sink), scheduler);
+};
+
+function LoopSink(stepper, seed, sink) {
+	this.step = stepper;
+	this.seed = seed;
+	this.sink = sink;
+}
+
+LoopSink.prototype.error = Pipe.prototype.error;
+
+LoopSink.prototype.event = function(t, x) {
+	var result = this.step(this.seed, x);
+	this.seed = result.seed;
+	this.sink.event(t, result.value);
+};
+
+LoopSink.prototype.end = function(t) {
+	this.sink.end(t, this.seed);
+};
+
+},{"../Stream":48,"../sink/Pipe":95}],61:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var Stream = require('../Stream');
+var Pipe = require('../sink/Pipe');
+var IndexSink = require('../sink/IndexSink');
+var empty = require('../source/core').empty;
+var dispose = require('../disposable/dispose');
+var base = require('@most/prelude');
+
+var copy = base.copy;
+var reduce = base.reduce;
+
+exports.merge = merge;
+exports.mergeArray = mergeArray;
+
+/**
+ * @returns {Stream} stream containing events from all streams in the argument
+ * list in time order.  If two events are simultaneous they will be merged in
+ * arbitrary order.
+ */
+function merge(/*...streams*/) {
+	return mergeArray(copy(arguments));
+}
+
+/**
+ * @param {Array} streams array of stream to merge
+ * @returns {Stream} stream containing events from all input observables
+ * in time order.  If two events are simultaneous they will be merged in
+ * arbitrary order.
+ */
+function mergeArray(streams) {
+    var l = streams.length;
+    return l === 0 ? empty()
+		 : l === 1 ? streams[0]
+		 : new Stream(mergeSources(streams));
+}
+
+/**
+ * This implements fusion/flattening for merge.  It will
+ * fuse adjacent merge operations.  For example:
+ * - a.merge(b).merge(c) effectively becomes merge(a, b, c)
+ * - merge(a, merge(b, c)) effectively becomes merge(a, b, c)
+ * It does this by concatenating the sources arrays of
+ * any nested Merge sources, in effect "flattening" nested
+ * merge operations into a single merge.
+ */
+function mergeSources(streams) {
+	return new Merge(reduce(appendSources, [], streams))
+}
+
+function appendSources(sources, stream) {
+	var source = stream.source;
+	return source instanceof Merge
+		? sources.concat(source.sources)
+		: sources.concat(source)
+}
+
+function Merge(sources) {
+	this.sources = sources;
+}
+
+Merge.prototype.run = function(sink, scheduler) {
+	var l = this.sources.length;
+	var disposables = new Array(l);
+	var sinks = new Array(l);
+
+	var mergeSink = new MergeSink(disposables, sinks, sink);
+
+	for(var indexSink, i=0; i<l; ++i) {
+		indexSink = sinks[i] = new IndexSink(i, mergeSink);
+		disposables[i] = this.sources[i].run(indexSink, scheduler);
+	}
+
+	return dispose.all(disposables);
+};
+
+function MergeSink(disposables, sinks, sink) {
+	this.sink = sink;
+	this.disposables = disposables;
+	this.activeCount = sinks.length;
+}
+
+MergeSink.prototype.error = Pipe.prototype.error;
+
+MergeSink.prototype.event = function(t, indexValue) {
+	this.sink.event(t, indexValue.value);
+};
+
+MergeSink.prototype.end = function(t, indexedValue) {
+	dispose.tryDispose(t, this.disposables[indexedValue.index], this.sink);
+	if(--this.activeCount === 0) {
+		this.sink.end(t, indexedValue.value);
+	}
+};
+
+},{"../Stream":48,"../disposable/dispose":76,"../sink/IndexSink":94,"../sink/Pipe":95,"../source/core":99,"@most/prelude":16}],62:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var Stream = require('../Stream');
+var dispose = require('../disposable/dispose');
+var LinkedList = require('../LinkedList');
+var identity = require('@most/prelude').id;
+
+exports.mergeConcurrently = mergeConcurrently;
+exports.mergeMapConcurrently = mergeMapConcurrently;
+
+function mergeConcurrently(concurrency, stream) {
+	return mergeMapConcurrently(identity, concurrency, stream);
+}
+
+function mergeMapConcurrently(f, concurrency, stream) {
+	return new Stream(new MergeConcurrently(f, concurrency, stream.source));
+}
+
+function MergeConcurrently(f, concurrency, source) {
+	this.f = f;
+	this.concurrency = concurrency;
+	this.source = source;
+}
+
+MergeConcurrently.prototype.run = function(sink, scheduler) {
+	return new Outer(this.f, this.concurrency, this.source, sink, scheduler);
+};
+
+function Outer(f, concurrency, source, sink, scheduler) {
+	this.f = f;
+	this.concurrency = concurrency;
+	this.sink = sink;
+	this.scheduler = scheduler;
+	this.pending = [];
+	this.current = new LinkedList();
+	this.disposable = dispose.once(source.run(this, scheduler));
+	this.active = true;
+}
+
+Outer.prototype.event = function(t, x) {
+	this._addInner(t, x);
+};
+
+Outer.prototype._addInner = function(t, x) {
+	if(this.current.length < this.concurrency) {
+		this._startInner(t, x);
+	} else {
+		this.pending.push(x);
+	}
+};
+
+Outer.prototype._startInner = function(t, x) {
+	try {
+		this._initInner(t, x);
+	} catch(e) {
+		this.error(t, e);
+	}
+};
+
+Outer.prototype._initInner = function(t, x) {
+	var innerSink = new Inner(t, this, this.sink);
+	innerSink.disposable = mapAndRun(this.f, x, innerSink, this.scheduler);
+	this.current.add(innerSink);
+}
+
+function mapAndRun(f, x, sink, scheduler) {
+	return f(x).source.run(sink, scheduler);
+}
+
+Outer.prototype.end = function(t, x) {
+	this.active = false;
+	dispose.tryDispose(t, this.disposable, this.sink);
+	this._checkEnd(t, x);
+};
+
+Outer.prototype.error = function(t, e) {
+	this.active = false;
+	this.sink.error(t, e);
+};
+
+Outer.prototype.dispose = function() {
+	this.active = false;
+	this.pending.length = 0;
+	return Promise.all([this.disposable.dispose(), this.current.dispose()]);
+};
+
+Outer.prototype._endInner = function(t, x, inner) {
+	this.current.remove(inner);
+	dispose.tryDispose(t, inner, this);
+
+	if(this.pending.length === 0) {
+		this._checkEnd(t, x);
+	} else {
+		this._startInner(t, this.pending.shift());
+	}
+};
+
+Outer.prototype._checkEnd = function(t, x) {
+	if(!this.active && this.current.isEmpty()) {
+		this.sink.end(t, x);
+	}
+};
+
+function Inner(time, outer, sink) {
+	this.prev = this.next = null;
+	this.time = time;
+	this.outer = outer;
+	this.sink = sink;
+	this.disposable = void 0;
+}
+
+Inner.prototype.event = function(t, x) {
+	this.sink.event(Math.max(t, this.time), x);
+};
+
+Inner.prototype.end = function(t, x) {
+	this.outer._endInner(Math.max(t, this.time), x, this);
+};
+
+Inner.prototype.error = function(t, e) {
+	this.outer.error(Math.max(t, this.time), e);
+};
+
+Inner.prototype.dispose = function() {
+	return this.disposable.dispose();
+};
+
+},{"../LinkedList":45,"../Stream":48,"../disposable/dispose":76,"@most/prelude":16}],63:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var run = require('../runSource').withDefaultScheduler;
+var tap = require('./transform').tap;
+
+exports.observe = observe;
+exports.drain = drain;
+
+/**
+ * Observe all the event values in the stream in time order. The
+ * provided function `f` will be called for each event value
+ * @param {function(x:T):*} f function to call with each event value
+ * @param {Stream<T>} stream stream to observe
+ * @return {Promise} promise that fulfills after the stream ends without
+ *  an error, or rejects if the stream ends with an error.
+ */
+function observe(f, stream) {
+	return drain(tap(f, stream));
+}
+
+var defaultScheduler = require('../scheduler/defaultScheduler');
+var dispose = require('../disposable/dispose');
+
+/**
+ * "Run" a stream by creating demand and consuming all events
+ * @param {Stream<T>} stream stream to drain
+ * @return {Promise} promise that fulfills after the stream ends without
+ *  an error, or rejects if the stream ends with an error.
+ */
+function drain(stream) {
+	return run(stream.source);
+}
+
+},{"../disposable/dispose":76,"../runSource":86,"../scheduler/defaultScheduler":92,"./transform":72}],64:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var Stream = require('../Stream');
+var fatal = require('../fatalError');
+var just = require('../source/core').of;
+
+exports.fromPromise = fromPromise;
+exports.awaitPromises = awaitPromises;
+
+/**
+ * Create a stream containing only the promise's fulfillment
+ * value at the time it fulfills.
+ * @param {Promise<T>} p promise
+ * @return {Stream<T>} stream containing promise's fulfillment value.
+ *  If the promise rejects, the stream will error
+ */
+function fromPromise(p) {
+	return awaitPromises(just(p));
+}
+
+/**
+ * Turn a Stream<Promise<T>> into Stream<T> by awaiting each promise.
+ * Event order is preserved.
+ * @param {Stream<Promise<T>>} stream
+ * @return {Stream<T>} stream of fulfillment values.  The stream will
+ * error if any promise rejects.
+ */
+function awaitPromises(stream) {
+	return new Stream(new Await(stream.source));
+}
+
+function Await(source) {
+	this.source = source;
+}
+
+Await.prototype.run = function(sink, scheduler) {
+	return this.source.run(new AwaitSink(sink, scheduler), scheduler);
+};
+
+function AwaitSink(sink, scheduler) {
+	this.sink = sink;
+	this.scheduler = scheduler;
+	this.queue = Promise.resolve();
+	var self = this;
+
+	// Pre-create closures, to avoid creating them per event
+	this._eventBound = function(x) {
+		self.sink.event(self.scheduler.now(), x);
+	};
+
+	this._endBound = function(x) {
+		self.sink.end(self.scheduler.now(), x);
+	};
+
+	this._errorBound = function(e) {
+		self.sink.error(self.scheduler.now(), e);
+	};
+}
+
+AwaitSink.prototype.event = function(t, promise) {
+	var self = this;
+	this.queue = this.queue.then(function() {
+		return self._event(promise);
+	}).catch(this._errorBound);
+};
+
+AwaitSink.prototype.end = function(t, x) {
+	var self = this;
+	this.queue = this.queue.then(function() {
+		return self._end(x);
+	}).catch(this._errorBound);
+};
+
+AwaitSink.prototype.error = function(t, e) {
+	var self = this;
+	// Don't resolve error values, propagate directly
+	this.queue = this.queue.then(function() {
+		return self._errorBound(e);
+	}).catch(fatal);
+};
+
+AwaitSink.prototype._event = function(promise) {
+	return promise.then(this._eventBound);
+};
+
+AwaitSink.prototype._end = function(x) {
+	return Promise.resolve(x).then(this._endBound);
+};
+
+},{"../Stream":48,"../fatalError":77,"../source/core":99}],65:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var Stream = require('../Stream');
+var Pipe = require('../sink/Pipe');
+var dispose = require('../disposable/dispose');
+var base = require('@most/prelude');
+var invoke = require('../invoke');
+
+exports.sample = sample;
+exports.sampleWith = sampleWith;
+exports.sampleArray = sampleArray;
+
+/**
+ * When an event arrives on sampler, emit the result of calling f with the latest
+ * values of all streams being sampled
+ * @param {function(...values):*} f function to apply to each set of sampled values
+ * @param {Stream} sampler streams will be sampled whenever an event arrives
+ *  on sampler
+ * @returns {Stream} stream of sampled and transformed values
+ */
+function sample(f, sampler /*, ...streams */) {
+	return sampleArray(f, sampler, base.drop(2, arguments));
+}
+
+/**
+ * When an event arrives on sampler, emit the latest event value from stream.
+ * @param {Stream} sampler stream of events at whose arrival time
+ *  stream's latest value will be propagated
+ * @param {Stream} stream stream of values
+ * @returns {Stream} sampled stream of values
+ */
+function sampleWith(sampler, stream) {
+	return new Stream(new Sampler(base.id, sampler.source, [stream.source]));
+}
+
+function sampleArray(f, sampler, streams) {
+	return new Stream(new Sampler(f, sampler.source, base.map(getSource, streams)));
+}
+
+function getSource(stream) {
+	return stream.source;
+}
+
+function Sampler(f, sampler, sources) {
+	this.f = f;
+	this.sampler = sampler;
+	this.sources = sources;
+}
+
+Sampler.prototype.run = function(sink, scheduler) {
+	var l = this.sources.length;
+	var disposables = new Array(l+1);
+	var sinks = new Array(l);
+
+	var sampleSink = new SampleSink(this.f, sinks, sink);
+
+	for(var hold, i=0; i<l; ++i) {
+		hold = sinks[i] = new Hold(sampleSink);
+		disposables[i] = this.sources[i].run(hold, scheduler);
+	}
+
+	disposables[i] = this.sampler.run(sampleSink, scheduler);
+
+	return dispose.all(disposables);
+};
+
+function Hold(sink) {
+	this.sink = sink;
+	this.hasValue = false;
+}
+
+Hold.prototype.event = function(t, x) {
+	this.value = x;
+	this.hasValue = true;
+	this.sink._notify(this);
+};
+
+Hold.prototype.end = function () {};
+Hold.prototype.error = Pipe.prototype.error;
+
+function SampleSink(f, sinks, sink) {
+	this.f = f;
+	this.sinks = sinks;
+	this.sink = sink;
+	this.active = false;
+}
+
+SampleSink.prototype._notify = function() {
+	if(!this.active) {
+		this.active = this.sinks.every(hasValue);
+	}
+};
+
+SampleSink.prototype.event = function(t) {
+	if(this.active) {
+		this.sink.event(t, invoke(this.f, base.map(getValue, this.sinks)));
+	}
+};
+
+SampleSink.prototype.end = Pipe.prototype.end;
+SampleSink.prototype.error = Pipe.prototype.error;
+
+function hasValue(hold) {
+	return hold.hasValue;
+}
+
+function getValue(hold) {
+	return hold.value;
+}
+
+},{"../Stream":48,"../disposable/dispose":76,"../invoke":81,"../sink/Pipe":95,"@most/prelude":16}],66:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var Stream = require('../Stream');
+var Sink = require('../sink/Pipe');
+var core = require('../source/core');
+var dispose = require('../disposable/dispose');
+var Map = require('../fusion/Map');
+
+exports.take = take;
+exports.skip = skip;
+exports.slice = slice;
+exports.takeWhile = takeWhile;
+exports.skipWhile = skipWhile;
+
+/**
+ * @param {number} n
+ * @param {Stream} stream
+ * @returns {Stream} new stream containing only up to the first n items from stream
+ */
+function take(n, stream) {
+	return slice(0, n, stream);
+}
+
+/**
+ * @param {number} n
+ * @param {Stream} stream
+ * @returns {Stream} new stream with the first n items removed
+ */
+function skip(n, stream) {
+	return slice(n, Infinity, stream);
+}
+
+/**
+ * Slice a stream by index. Negative start/end indexes are not supported
+ * @param {number} start
+ * @param {number} end
+ * @param {Stream} stream
+ * @returns {Stream} stream containing items where start <= index < end
+ */
+function slice(start, end, stream) {
+	return end <= start ? core.empty()
+		: new Stream(sliceSource(start, end, stream.source));
+}
+
+function sliceSource(start, end, source) {
+	return source instanceof Map ? commuteMapSlice(start, end, source)
+		: source instanceof Slice ? fuseSlice(start, end, source)
+		: new Slice(start, end, source);
+}
+
+function commuteMapSlice(start, end, source) {
+	return Map.create(source.f, sliceSource(start, end, source.source))
+}
+
+function fuseSlice(start, end, source) {
+	start += source.min;
+	end = Math.min(end + source.min, source.max);
+	return new Slice(start, end, source.source);
+}
+
+function Slice(min, max, source) {
+	this.source = source;
+	this.min = min;
+	this.max = max;
+}
+
+Slice.prototype.run = function(sink, scheduler) {
+	return new SliceSink(this.min, this.max - this.min, this.source, sink, scheduler);
+};
+
+function SliceSink(skip, take, source, sink, scheduler) {
+	this.sink = sink;
+	this.skip = skip;
+	this.take = take;
+	this.disposable = dispose.once(source.run(this, scheduler));
+}
+
+SliceSink.prototype.end   = Sink.prototype.end;
+SliceSink.prototype.error = Sink.prototype.error;
+
+SliceSink.prototype.event = function(t, x) {
+	if(this.skip > 0) {
+		this.skip -= 1;
+		return;
+	}
+
+	if(this.take === 0) {
+		return;
+	}
+
+	this.take -= 1;
+	this.sink.event(t, x);
+	if(this.take === 0) {
+		this.dispose();
+		this.sink.end(t, x);
+	}
+};
+
+SliceSink.prototype.dispose = function() {
+	return this.disposable.dispose();
+};
+
+function takeWhile(p, stream) {
+	return new Stream(new TakeWhile(p, stream.source));
+}
+
+function TakeWhile(p, source) {
+	this.p = p;
+	this.source = source;
+}
+
+TakeWhile.prototype.run = function(sink, scheduler) {
+	return new TakeWhileSink(this.p, this.source, sink, scheduler);
+};
+
+function TakeWhileSink(p, source, sink, scheduler) {
+	this.p = p;
+	this.sink = sink;
+	this.active = true;
+	this.disposable = dispose.once(source.run(this, scheduler));
+}
+
+TakeWhileSink.prototype.end   = Sink.prototype.end;
+TakeWhileSink.prototype.error = Sink.prototype.error;
+
+TakeWhileSink.prototype.event = function(t, x) {
+	if(!this.active) {
+		return;
+	}
+
+	var p = this.p;
+	this.active = p(x);
+	if(this.active) {
+		this.sink.event(t, x);
+	} else {
+		this.dispose();
+		this.sink.end(t, x);
+	}
+};
+
+TakeWhileSink.prototype.dispose = function() {
+	return this.disposable.dispose();
+};
+
+function skipWhile(p, stream) {
+	return new Stream(new SkipWhile(p, stream.source));
+}
+
+function SkipWhile(p, source) {
+	this.p = p;
+	this.source = source;
+}
+
+SkipWhile.prototype.run = function(sink, scheduler) {
+	return this.source.run(new SkipWhileSink(this.p, sink), scheduler);
+};
+
+function SkipWhileSink(p, sink) {
+	this.p = p;
+	this.sink = sink;
+	this.skipping = true;
+}
+
+SkipWhileSink.prototype.end   = Sink.prototype.end;
+SkipWhileSink.prototype.error = Sink.prototype.error;
+
+SkipWhileSink.prototype.event = function(t, x) {
+	if(this.skipping) {
+		var p = this.p;
+		this.skipping = p(x);
+		if(this.skipping) {
+			return;
+		}
+	}
+
+	this.sink.event(t, x);
+};
+
+},{"../Stream":48,"../disposable/dispose":76,"../fusion/Map":80,"../sink/Pipe":95,"../source/core":99}],67:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var Stream = require('../Stream');
+var dispose = require('../disposable/dispose');
+
+exports.switch = switchLatest;
+
+/**
+ * Given a stream of streams, return a new stream that adopts the behavior
+ * of the most recent inner stream.
+ * @param {Stream} stream of streams on which to switch
+ * @returns {Stream} switching stream
+ */
+function switchLatest(stream) {
+	return new Stream(new Switch(stream.source));
+}
+
+function Switch(source) {
+	this.source = source;
+}
+
+Switch.prototype.run = function(sink, scheduler) {
+	var switchSink = new SwitchSink(sink, scheduler);
+	return dispose.all([switchSink, this.source.run(switchSink, scheduler)]);
+};
+
+function SwitchSink(sink, scheduler) {
+	this.sink = sink;
+	this.scheduler = scheduler;
+	this.current = null;
+	this.ended = false;
+}
+
+SwitchSink.prototype.event = function(t, stream) {
+	this._disposeCurrent(t); // TODO: capture the result of this dispose
+	this.current = new Segment(t, Infinity, this, this.sink);
+	this.current.disposable = stream.source.run(this.current, this.scheduler);
+};
+
+SwitchSink.prototype.end = function(t, x) {
+	this.ended = true;
+	this._checkEnd(t, x);
+};
+
+SwitchSink.prototype.error = function(t, e) {
+	this.ended = true;
+	this.sink.error(t, e);
+};
+
+SwitchSink.prototype.dispose = function() {
+	return this._disposeCurrent(this.scheduler.now());
+};
+
+SwitchSink.prototype._disposeCurrent = function(t) {
+	if(this.current !== null) {
+		return this.current._dispose(t);
+	}
+};
+
+SwitchSink.prototype._disposeInner = function(t, inner) {
+	inner._dispose(t); // TODO: capture the result of this dispose
+	if(inner === this.current) {
+		this.current = null;
+	}
+};
+
+SwitchSink.prototype._checkEnd = function(t, x) {
+	if(this.ended && this.current === null) {
+		this.sink.end(t, x);
+	}
+};
+
+SwitchSink.prototype._endInner = function(t, x, inner) {
+	this._disposeInner(t, inner);
+	this._checkEnd(t, x);
+};
+
+SwitchSink.prototype._errorInner = function(t, e, inner) {
+	this._disposeInner(t, inner);
+	this.sink.error(t, e);
+};
+
+function Segment(min, max, outer, sink) {
+	this.min = min;
+	this.max = max;
+	this.outer = outer;
+	this.sink = sink;
+	this.disposable = dispose.empty();
+}
+
+Segment.prototype.event = function(t, x) {
+	if(t < this.max) {
+		this.sink.event(Math.max(t, this.min), x);
+	}
+};
+
+Segment.prototype.end = function(t, x) {
+	this.outer._endInner(Math.max(t, this.min), x, this);
+};
+
+Segment.prototype.error = function(t, e) {
+	this.outer._errorInner(Math.max(t, this.min), e, this);
+};
+
+Segment.prototype._dispose = function(t) {
+	this.max = t;
+	dispose.tryDispose(t, this.disposable, this.sink)
+};
+
+},{"../Stream":48,"../disposable/dispose":76}],68:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+exports.thru = function thru(f, stream) {
+	return f(stream);
+}
+
+},{}],69:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var Stream = require('../Stream');
+var Pipe = require('../sink/Pipe');
+var dispose = require('../disposable/dispose');
+var join = require('../combinator/flatMap').join;
+
+exports.during    = during;
+exports.takeUntil = takeUntil;
+exports.skipUntil = skipUntil;
+
+function takeUntil(signal, stream) {
+	return new Stream(new Until(signal.source, stream.source));
+}
+
+function skipUntil(signal, stream) {
+	return new Stream(new Since(signal.source, stream.source));
+}
+
+function during(timeWindow, stream) {
+	return takeUntil(join(timeWindow), skipUntil(timeWindow, stream));
+}
+
+function Until(maxSignal, source) {
+	this.maxSignal = maxSignal;
+	this.source = source;
+}
+
+Until.prototype.run = function(sink, scheduler) {
+	var min = new Bound(-Infinity, sink);
+	var max = new UpperBound(this.maxSignal, sink, scheduler);
+	var disposable = this.source.run(new TimeWindowSink(min, max, sink), scheduler);
+
+	return dispose.all([min, max, disposable]);
+};
+
+function Since(minSignal, source) {
+	this.minSignal = minSignal;
+	this.source = source;
+}
+
+Since.prototype.run = function(sink, scheduler) {
+	var min = new LowerBound(this.minSignal, sink, scheduler);
+	var max = new Bound(Infinity, sink);
+	var disposable = this.source.run(new TimeWindowSink(min, max, sink), scheduler);
+
+	return dispose.all([min, max, disposable]);
+};
+
+function Bound(value, sink) {
+	this.value = value;
+	this.sink = sink;
+}
+
+Bound.prototype.error = Pipe.prototype.error;
+Bound.prototype.event = noop;
+Bound.prototype.end = noop;
+Bound.prototype.dispose = noop;
+
+function TimeWindowSink(min, max, sink) {
+	this.min = min;
+	this.max = max;
+	this.sink = sink;
+}
+
+TimeWindowSink.prototype.event = function(t, x) {
+	if(t >= this.min.value && t < this.max.value) {
+		this.sink.event(t, x);
+	}
+};
+
+TimeWindowSink.prototype.error = Pipe.prototype.error;
+TimeWindowSink.prototype.end = Pipe.prototype.end;
+
+function LowerBound(signal, sink, scheduler) {
+	this.value = Infinity;
+	this.sink = sink;
+	this.disposable = signal.run(this, scheduler);
+}
+
+LowerBound.prototype.event = function(t /*, x */) {
+	if(t < this.value) {
+		this.value = t;
+	}
+};
+
+LowerBound.prototype.end = noop;
+LowerBound.prototype.error = Pipe.prototype.error;
+
+LowerBound.prototype.dispose = function() {
+	return this.disposable.dispose();
+};
+
+function UpperBound(signal, sink, scheduler) {
+	this.value = Infinity;
+	this.sink = sink;
+	this.disposable = signal.run(this, scheduler);
+}
+
+UpperBound.prototype.event = function(t, x) {
+	if(t < this.value) {
+		this.value = t;
+		this.sink.end(t, x);
+	}
+};
+
+UpperBound.prototype.end = noop;
+UpperBound.prototype.error = Pipe.prototype.error;
+
+UpperBound.prototype.dispose = function() {
+	return this.disposable.dispose();
+};
+
+function noop() {}
+
+},{"../Stream":48,"../combinator/flatMap":58,"../disposable/dispose":76,"../sink/Pipe":95}],70:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var Stream = require('../Stream');
+var Sink = require('../sink/Pipe');
+
+exports.timestamp = timestamp;
+
+function timestamp(stream) {
+	return new Stream(new Timestamp(stream.source));
+}
+
+function Timestamp(source) {
+	this.source = source;
+}
+
+Timestamp.prototype.run = function(sink, scheduler) {
+	return this.source.run(new TimestampSink(sink), scheduler);
+};
+
+function TimestampSink(sink) {
+	this.sink = sink;
+}
+
+TimestampSink.prototype.end   = Sink.prototype.end;
+TimestampSink.prototype.error = Sink.prototype.error;
+
+TimestampSink.prototype.event = function(t, x) {
+	this.sink.event(t, { time: t, value: x });
+};
+
+},{"../Stream":48,"../sink/Pipe":95}],71:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var Stream = require('../Stream');
+
+exports.transduce = transduce;
+
+/**
+ * Transform a stream by passing its events through a transducer.
+ * @param  {function} transducer transducer function
+ * @param  {Stream} stream stream whose events will be passed through the
+ *  transducer
+ * @return {Stream} stream of events transformed by the transducer
+ */
+function transduce(transducer, stream) {
+	return new Stream(new Transduce(transducer, stream.source));
+}
+
+function Transduce(transducer, source) {
+	this.transducer = transducer;
+	this.source = source;
+}
+
+Transduce.prototype.run = function(sink, scheduler) {
+	var xf = this.transducer(new Transformer(sink));
+	return this.source.run(new TransduceSink(getTxHandler(xf), sink), scheduler);
+};
+
+function TransduceSink(adapter, sink) {
+	this.xf = adapter;
+	this.sink = sink;
+}
+
+TransduceSink.prototype.event = function(t, x) {
+	var next = this.xf.step(t, x);
+
+	return this.xf.isReduced(next)
+		? this.sink.end(t, this.xf.getResult(next))
+		: next;
+};
+
+TransduceSink.prototype.end = function(t, x) {
+	return this.xf.result(x);
+};
+
+TransduceSink.prototype.error = function(t, e) {
+	return this.sink.error(t, e);
+};
+
+function Transformer(sink) {
+	this.time = -Infinity;
+	this.sink = sink;
+}
+
+Transformer.prototype['@@transducer/init'] = Transformer.prototype.init = function() {};
+
+Transformer.prototype['@@transducer/step'] = Transformer.prototype.step = function(t, x) {
+	if(!isNaN(t)) {
+		this.time = Math.max(t, this.time);
+	}
+	return this.sink.event(this.time, x);
+};
+
+Transformer.prototype['@@transducer/result'] = Transformer.prototype.result = function(x) {
+	return this.sink.end(this.time, x);
+};
+
+/**
+ * Given an object supporting the new or legacy transducer protocol,
+ * create an adapter for it.
+ * @param {object} tx transform
+ * @returns {TxAdapter|LegacyTxAdapter}
+ */
+function getTxHandler(tx) {
+	return typeof tx['@@transducer/step'] === 'function'
+		? new TxAdapter(tx)
+		: new LegacyTxAdapter(tx);
+}
+
+/**
+ * Adapter for new official transducer protocol
+ * @param {object} tx transform
+ * @constructor
+ */
+function TxAdapter(tx) {
+	this.tx = tx;
+}
+
+TxAdapter.prototype.step = function(t, x) {
+	return this.tx['@@transducer/step'](t, x);
+};
+TxAdapter.prototype.result = function(x) {
+	return this.tx['@@transducer/result'](x);
+};
+TxAdapter.prototype.isReduced = function(x) {
+	return x != null && x['@@transducer/reduced'];
+};
+TxAdapter.prototype.getResult = function(x) {
+	return x['@@transducer/value'];
+};
+
+/**
+ * Adapter for older transducer protocol
+ * @param {object} tx transform
+ * @constructor
+ */
+function LegacyTxAdapter(tx) {
+	this.tx = tx;
+}
+
+LegacyTxAdapter.prototype.step = function(t, x) {
+	return this.tx.step(t, x);
+};
+LegacyTxAdapter.prototype.result = function(x) {
+	return this.tx.result(x);
+};
+LegacyTxAdapter.prototype.isReduced = function(x) {
+	return x != null && x.__transducers_reduced__;
+};
+LegacyTxAdapter.prototype.getResult = function(x) {
+	return x.value;
+};
+
+},{"../Stream":48}],72:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var Stream = require('../Stream');
+var Map = require('../fusion/Map');
+var Pipe = require('../sink/Pipe');
+
+exports.map = map;
+exports.constant = constant;
+exports.tap = tap;
+
+/**
+ * Transform each value in the stream by applying f to each
+ * @param {function(*):*} f mapping function
+ * @param {Stream} stream stream to map
+ * @returns {Stream} stream containing items transformed by f
+ */
+function map(f, stream) {
+	return new Stream(Map.create(f, stream.source));
+}
+
+/**
+ * Replace each value in the stream with x
+ * @param {*} x
+ * @param {Stream} stream
+ * @returns {Stream} stream containing items replaced with x
+ */
+function constant(x, stream) {
+	return map(function() {
+		return x;
+	}, stream);
+}
+
+/**
+ * Perform a side effect for each item in the stream
+ * @param {function(x:*):*} f side effect to execute for each item. The
+ *  return value will be discarded.
+ * @param {Stream} stream stream to tap
+ * @returns {Stream} new stream containing the same items as this stream
+ */
+function tap(f, stream) {
+	return new Stream(new Tap(f, stream.source));
+}
+
+function Tap(f, source) {
+	this.source = source;
+	this.f = f;
+}
+
+Tap.prototype.run = function(sink, scheduler) {
+	return this.source.run(new TapSink(this.f, sink), scheduler);
+}
+
+function TapSink(f, sink) {
+	this.sink = sink;
+	this.f = f;
+}
+
+TapSink.prototype.end = Pipe.prototype.end;
+TapSink.prototype.error = Pipe.prototype.error;
+
+TapSink.prototype.event = function(t, x) {
+	var f = this.f;
+	f(x);
+	this.sink.event(t, x);
+}
+
+},{"../Stream":48,"../fusion/Map":80,"../sink/Pipe":95}],73:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var Stream = require('../Stream');
+var transform = require('./transform');
+var core = require('../source/core');
+var Sink = require('../sink/Pipe');
+var IndexSink = require('../sink/IndexSink');
+var dispose = require('../disposable/dispose');
+var base = require('@most/prelude');
+var invoke = require('../invoke');
+var Queue = require('../Queue');
+
+var map = base.map;
+var tail = base.tail;
+
+exports.zip = zip;
+exports.zipArray = zipArray;
+
+/**
+ * Combine streams pairwise (or tuple-wise) by index by applying f to values
+ * at corresponding indices.  The returned stream ends when any of the input
+ * streams ends.
+ * @param {function} f function to combine values
+ * @returns {Stream} new stream with items at corresponding indices combined
+ *  using f
+ */
+function zip(f /*,...streams */) {
+	return zipArray(f, tail(arguments));
+}
+
+/**
+ * Combine streams pairwise (or tuple-wise) by index by applying f to values
+ * at corresponding indices.  The returned stream ends when any of the input
+ * streams ends.
+ * @param {function} f function to combine values
+ * @param {[Stream]} streams streams to zip using f
+ * @returns {Stream} new stream with items at corresponding indices combined
+ *  using f
+ */
+function zipArray(f, streams) {
+	return streams.length === 0 ? core.empty()
+		 : streams.length === 1 ? transform.map(f, streams[0])
+		 : new Stream(new Zip(f, map(getSource, streams)));
+}
+
+function getSource(stream) {
+	return stream.source;
+}
+
+function Zip(f, sources) {
+	this.f = f;
+	this.sources = sources;
+}
+
+Zip.prototype.run = function(sink, scheduler) {
+	var l = this.sources.length;
+	var disposables = new Array(l);
+	var sinks = new Array(l);
+	var buffers = new Array(l);
+
+	var zipSink = new ZipSink(this.f, buffers, sinks, sink);
+
+	for(var indexSink, i=0; i<l; ++i) {
+		buffers[i] = new Queue();
+		indexSink = sinks[i] = new IndexSink(i, zipSink);
+		disposables[i] = this.sources[i].run(indexSink, scheduler);
+	}
+
+	return dispose.all(disposables);
+};
+
+function ZipSink(f, buffers, sinks, sink) {
+	this.f = f;
+	this.sinks = sinks;
+	this.sink = sink;
+	this.buffers = buffers;
+}
+
+ZipSink.prototype.event = function(t, indexedValue) {
+	var buffers = this.buffers;
+	var buffer = buffers[indexedValue.index];
+
+	buffer.push(indexedValue.value);
+
+	if(buffer.length() === 1) {
+		if(!ready(this.buffers)) {
+			return;
+		}
+
+		emitZipped(this.f, t, buffers, this.sink);
+
+		if (ended(this.buffers, this.sinks)) {
+			this.sink.end(t, void 0);
+		}
+	}
+};
+
+ZipSink.prototype.end = function(t, indexedValue) {
+	var buffer = this.buffers[indexedValue.index];
+	if(buffer.isEmpty()) {
+		this.sink.end(t, indexedValue.value);
+	}
+};
+
+ZipSink.prototype.error = Sink.prototype.error;
+
+function emitZipped (f, t, buffers, sink) {
+	sink.event(t, invoke(f, map(head, buffers)));
+}
+
+function head(buffer) {
+	return buffer.shift();
+}
+
+function ended(buffers, sinks) {
+	for(var i=0, l=buffers.length; i<l; ++i) {
+		if(buffers[i].isEmpty() && !sinks[i].active) {
+			return true;
+		}
+	}
+	return false;
+}
+
+function ready(buffers) {
+	for(var i=0, l=buffers.length; i<l; ++i) {
+		if(buffers[i].isEmpty()) {
+			return false;
+		}
+	}
+	return true;
+}
+
+},{"../Queue":47,"../Stream":48,"../disposable/dispose":76,"../invoke":81,"../sink/IndexSink":94,"../sink/Pipe":95,"../source/core":99,"./transform":72,"@most/prelude":16}],74:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+module.exports = Disposable;
+
+/**
+ * Create a new Disposable which will dispose its underlying resource.
+ * @param {function} dispose function
+ * @param {*?} data any data to be passed to disposer function
+ * @constructor
+ */
+function Disposable(dispose, data) {
+	this._dispose = dispose;
+	this._data = data;
+}
+
+Disposable.prototype.dispose = function() {
+	return this._dispose(this._data);
+};
+
+},{}],75:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+module.exports = SettableDisposable;
+
+function SettableDisposable() {
+	this.disposable = void 0;
+	this.disposed = false;
+	this._resolve = void 0;
+
+	var self = this;
+	this.result = new Promise(function(resolve) {
+		self._resolve = resolve;
+	});
+}
+
+SettableDisposable.prototype.setDisposable = function(disposable) {
+	if(this.disposable !== void 0) {
+		throw new Error('setDisposable called more than once');
+	}
+
+	this.disposable = disposable;
+
+	if(this.disposed) {
+		this._resolve(disposable.dispose());
+	}
+};
+
+SettableDisposable.prototype.dispose = function() {
+	if(this.disposed) {
+		return this.result;
+	}
+
+	this.disposed = true;
+
+	if(this.disposable !== void 0) {
+		this.result = this.disposable.dispose();
+	}
+
+	return this.result;
+};
+
+},{}],76:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var Disposable = require('./Disposable');
+var SettableDisposable = require('./SettableDisposable');
+var isPromise = require('../Promise').isPromise;
+var base = require('@most/prelude');
+
+var map = base.map;
+var identity = base.id;
+
+exports.tryDispose = tryDispose;
+exports.create = create;
+exports.once = once;
+exports.empty = empty;
+exports.all = all;
+exports.settable = settable;
+exports.promised = promised;
+
+/**
+ * Call disposable.dispose.  If it returns a promise, catch promise
+ * error and forward it through the provided sink.
+ * @param {number} t time
+ * @param {{dispose: function}} disposable
+ * @param {{error: function}} sink
+ * @return {*} result of disposable.dispose
+ */
+function tryDispose(t, disposable, sink) {
+	var result = disposeSafely(disposable);
+	return isPromise(result)
+		? result.catch(function (e) {
+			sink.error(t, e);
+		})
+		: result;
+}
+
+/**
+ * Create a new Disposable which will dispose its underlying resource
+ * at most once.
+ * @param {function} dispose function
+ * @param {*?} data any data to be passed to disposer function
+ * @return {Disposable}
+ */
+function create(dispose, data) {
+	return once(new Disposable(dispose, data));
+}
+
+/**
+ * Create a noop disposable. Can be used to satisfy a Disposable
+ * requirement when no actual resource needs to be disposed.
+ * @return {Disposable|exports|module.exports}
+ */
+function empty() {
+	return new Disposable(identity, void 0);
+}
+
+/**
+ * Create a disposable that will dispose all input disposables in parallel.
+ * @param {Array<Disposable>} disposables
+ * @return {Disposable}
+ */
+function all(disposables) {
+	return create(disposeAll, disposables);
+}
+
+function disposeAll(disposables) {
+	return Promise.all(map(disposeSafely, disposables));
+}
+
+function disposeSafely(disposable) {
+	try {
+		return disposable.dispose();
+	} catch(e) {
+		return Promise.reject(e);
+	}
+}
+
+/**
+ * Create a disposable from a promise for another disposable
+ * @param {Promise<Disposable>} disposablePromise
+ * @return {Disposable}
+ */
+function promised(disposablePromise) {
+	return create(disposePromise, disposablePromise);
+}
+
+function disposePromise(disposablePromise) {
+	return disposablePromise.then(disposeOne);
+}
+
+function disposeOne(disposable) {
+	return disposable.dispose();
+}
+
+/**
+ * Create a disposable proxy that allows its underlying disposable to
+ * be set later.
+ * @return {SettableDisposable}
+ */
+function settable() {
+	return new SettableDisposable();
+}
+
+/**
+ * Wrap an existing disposable (which may not already have been once()d)
+ * so that it will only dispose its underlying resource at most once.
+ * @param {{ dispose: function() }} disposable
+ * @return {Disposable} wrapped disposable
+ */
+function once(disposable) {
+	return new Disposable(disposeMemoized, memoized(disposable));
+}
+
+function disposeMemoized(memoized) {
+	if(!memoized.disposed) {
+		memoized.disposed = true;
+		memoized.value = disposeSafely(memoized.disposable);
+		memoized.disposable = void 0;
+	}
+
+	return memoized.value;
+}
+
+function memoized(disposable) {
+	return { disposed: false, disposable: disposable, value: void 0 };
+}
+
+},{"../Promise":46,"./Disposable":74,"./SettableDisposable":75,"@most/prelude":16}],77:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+module.exports = fatalError;
+
+function fatalError (e) {
+	setTimeout(function() {
+		throw e;
+	}, 0);
+}
+
+},{}],78:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var Pipe = require('../sink/Pipe');
+
+module.exports = Filter;
+
+function Filter(p, source) {
+	this.p = p;
+	this.source = source;
+}
+
+/**
+ * Create a filtered source, fusing adjacent filter.filter if possible
+ * @param {function(x:*):boolean} p filtering predicate
+ * @param {{run:function}} source source to filter
+ * @returns {Filter} filtered source
+ */
+Filter.create = function createFilter(p, source) {
+	if (source instanceof Filter) {
+		return new Filter(and(source.p, p), source.source);
+	}
+
+	return new Filter(p, source);
+};
+
+Filter.prototype.run = function(sink, scheduler) {
+	return this.source.run(new FilterSink(this.p, sink), scheduler);
+};
+
+function FilterSink(p, sink) {
+	this.p = p;
+	this.sink = sink;
+}
+
+FilterSink.prototype.end   = Pipe.prototype.end;
+FilterSink.prototype.error = Pipe.prototype.error;
+
+FilterSink.prototype.event = function(t, x) {
+	var p = this.p;
+	p(x) && this.sink.event(t, x);
+};
+
+function and(p, q) {
+	return function(x) {
+		return p(x) && q(x);
+	};
+}
+
+},{"../sink/Pipe":95}],79:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var Pipe = require('../sink/Pipe');
+
+module.exports = FilterMap;
+
+function FilterMap(p, f, source) {
+	this.p = p;
+	this.f = f;
+	this.source = source;
+}
+
+FilterMap.prototype.run = function(sink, scheduler) {
+	return this.source.run(new FilterMapSink(this.p, this.f, sink), scheduler);
+};
+
+function FilterMapSink(p, f, sink) {
+	this.p = p;
+	this.f = f;
+	this.sink = sink;
+}
+
+FilterMapSink.prototype.event = function(t, x) {
+	var f = this.f;
+	var p = this.p;
+	p(x) && this.sink.event(t, f(x));
+};
+
+FilterMapSink.prototype.end = Pipe.prototype.end;
+FilterMapSink.prototype.error = Pipe.prototype.error;
+
+},{"../sink/Pipe":95}],80:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var Pipe = require('../sink/Pipe');
+var Filter = require('./Filter');
+var FilterMap = require('./FilterMap');
+var base = require('@most/prelude');
+
+module.exports = Map;
+
+function Map(f, source) {
+	this.f = f;
+	this.source = source;
+}
+
+/**
+ * Create a mapped source, fusing adjacent map.map, filter.map,
+ * and filter.map.map if possible
+ * @param {function(*):*} f mapping function
+ * @param {{run:function}} source source to map
+ * @returns {Map|FilterMap} mapped source, possibly fused
+ */
+Map.create = function createMap(f, source) {
+	if(source instanceof Map) {
+		return new Map(base.compose(f, source.f), source.source);
+	}
+
+	if(source instanceof Filter) {
+		return new FilterMap(source.p, f, source.source);
+	}
+
+	return new Map(f, source);
+};
+
+Map.prototype.run = function(sink, scheduler) {
+	return this.source.run(new MapSink(this.f, sink), scheduler);
+};
+
+function MapSink(f, sink) {
+	this.f = f;
+	this.sink = sink;
+}
+
+MapSink.prototype.end   = Pipe.prototype.end;
+MapSink.prototype.error = Pipe.prototype.error;
+
+MapSink.prototype.event = function(t, x) {
+	var f = this.f;
+	this.sink.event(t, f(x));
+};
+
+},{"../sink/Pipe":95,"./Filter":78,"./FilterMap":79,"@most/prelude":16}],81:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+module.exports = invoke;
+
+function invoke(f, args) {
+	/*eslint complexity: [2,7]*/
+	switch(args.length) {
+		case 0: return f();
+		case 1: return f(args[0]);
+		case 2: return f(args[0], args[1]);
+		case 3: return f(args[0], args[1], args[2]);
+		case 4: return f(args[0], args[1], args[2], args[3]);
+		case 5: return f(args[0], args[1], args[2], args[3], args[4]);
+		default:
+			return f.apply(void 0, args);
+	}
+}
+
+},{}],82:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+exports.isIterable = isIterable;
+exports.getIterator = getIterator;
+exports.makeIterable = makeIterable;
+
+/*global Set, Symbol*/
+var iteratorSymbol;
+// Firefox ships a partial implementation using the name @@iterator.
+// https://bugzilla.mozilla.org/show_bug.cgi?id=907077#c14
+if (typeof Set === 'function' && typeof new Set()['@@iterator'] === 'function') {
+	iteratorSymbol = '@@iterator';
+} else {
+	iteratorSymbol = typeof Symbol === 'function' && Symbol.iterator ||
+	'_es6shim_iterator_';
+}
+
+function isIterable(o) {
+	return typeof o[iteratorSymbol] === 'function';
+}
+
+function getIterator(o) {
+	return o[iteratorSymbol]();
+}
+
+function makeIterable(f, o) {
+	o[iteratorSymbol] = f;
+	return o;
+}
+
+},{}],83:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var Stream = require('../Stream');
+var dispose = require('../disposable/dispose');
+
+exports.fromObservable = fromObservable;
+exports.ObservableSource = ObservableSource;
+exports.SubscriberSink = SubscriberSink;
+
+function fromObservable(observable) {
+	return new Stream(new ObservableSource(observable));
+}
+
+function ObservableSource(observable) {
+	this.observable = observable;
+}
+
+ObservableSource.prototype.run = function(sink, scheduler) {
+	var sub = this.observable.subscribe(new SubscriberSink(sink, scheduler));
+	if(typeof sub === 'function') {
+		return dispose.create(sub);
+	} else if(sub && typeof sub.unsubscribe === 'function') {
+		return dispose.create(unsubscribe, sub);
+	}
+
+	throw new TypeError('Observable returned invalid subscription ' + String(sub));
+}
+
+function SubscriberSink(sink, scheduler) {
+	this.sink = sink;
+	this.scheduler = scheduler;
+}
+
+SubscriberSink.prototype.next = function(x) {
+	this.sink.event(this.scheduler.now(), x);
+}
+
+SubscriberSink.prototype.complete = function(x) {
+	this.sink.end(this.scheduler.now(), x);
+}
+
+SubscriberSink.prototype.error = function(e) {
+	this.sink.error(this.scheduler.now(), e);
+}
+
+function unsubscribe(subscription) {
+	return subscription.unsubscribe();
+}
+
+},{"../Stream":48,"../disposable/dispose":76}],84:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var symbolObservable = require('symbol-observable').default;
+
+module.exports = getObservable;
+
+function getObservable(o) {
+	var obs = null;
+	if(o) {
+		// Access foreign method only once
+		var method = o[symbolObservable];
+		if(typeof method === 'function') {
+			obs = method.call(o);
+			if(!(obs && typeof obs.subscribe === 'function')) {
+				throw new TypeError('invalid observable ' + obs);
+			}
+		}
+	}
+
+	return obs;
+}
+
+},{"symbol-observable":257}],85:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var defaultScheduler = require('../scheduler/defaultScheduler');
+var dispose = require('../disposable/dispose');
+var fatalError = require('../fatalError');
+
+exports.subscribe = subscribe;
+exports.SubscribeObserver = SubscribeObserver;
+exports.Subscription = Subscription;
+
+function subscribe(subscriber, stream) {
+	if(subscriber == null || typeof subscriber !== 'object') {
+		throw new TypeError('subscriber must be an object');
+	}
+
+	var disposable = dispose.settable();
+	var observer = new SubscribeObserver(fatalError, subscriber, disposable);
+
+	disposable.setDisposable(stream.source.run(observer, defaultScheduler));
+
+	return new Subscription(disposable);
+}
+
+function SubscribeObserver(fatalError, subscriber, disposable) {
+	this.fatalError = fatalError;
+	this.subscriber = subscriber;
+	this.disposable = disposable;
+}
+
+SubscribeObserver.prototype.event = function(t, x) {
+	if(typeof this.subscriber.next === 'function') {
+		this.subscriber.next(x);
+	}
+};
+
+SubscribeObserver.prototype.end = function(t, x) {
+	var s = this.subscriber;
+	doDispose(this.fatalError, s, s.complete, s.error, this.disposable, x);
+};
+
+SubscribeObserver.prototype.error = function(t, e) {
+	var s = this.subscriber;
+	doDispose(this.fatalError, s, s.error, s.error, this.disposable, e);
+};
+
+function Subscription(disposable) {
+	this.disposable = disposable;
+}
+
+Subscription.prototype.unsubscribe = function() {
+	this.disposable.dispose();
+}
+
+function doDispose(fatal, subscriber, complete, error, disposable, x) {
+	Promise.resolve(disposable.dispose()).then(function () {
+		if(typeof complete === 'function') {
+			complete.call(subscriber, x);
+		}
+	}).catch(function(e) {
+		if(typeof error === 'function') {
+			error.call(subscriber, e);
+		}
+	}).catch(fatal);
+}
+
+},{"../disposable/dispose":76,"../fatalError":77,"../scheduler/defaultScheduler":92}],86:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var dispose = require('./disposable/dispose');
+var defaultScheduler = require('./scheduler/defaultScheduler');
+
+exports.withDefaultScheduler = withDefaultScheduler;
+exports.withScheduler = withScheduler;
+
+function withDefaultScheduler(source) {
+	return withScheduler(source, defaultScheduler);
+}
+
+function withScheduler(source, scheduler) {
+	return new Promise(function (resolve, reject) {
+		runSource(source, scheduler, resolve, reject);
+	});
+}
+
+function runSource(source, scheduler, resolve, reject) {
+	var disposable = dispose.settable();
+	var observer = new Drain(resolve, reject, disposable);
+
+	disposable.setDisposable(source.run(observer, scheduler));
+}
+
+function Drain(end, error, disposable) {
+	this._end = end;
+	this._error = error;
+	this._disposable = disposable;
+	this.active = true;
+}
+
+Drain.prototype.event = function(t, x) {};
+
+Drain.prototype.end = function(t, x) {
+	if (!this.active) {
+		return;
+	}
+	this.active = false;
+	disposeThen(this._end, this._error, this._disposable, x);
+};
+
+Drain.prototype.error = function(t, e) {
+	this.active = false;
+	disposeThen(this._error, this._error, this._disposable, e);
+};
+
+function disposeThen(end, error, disposable, x) {
+	Promise.resolve(disposable.dispose()).then(function () {
+		end(x);
+	}, error);
+}
+
+},{"./disposable/dispose":76,"./scheduler/defaultScheduler":92}],87:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var defer = require('../task').defer;
+
+/*global setTimeout, clearTimeout*/
+
+module.exports = ClockTimer;
+
+function ClockTimer() {}
+
+ClockTimer.prototype.now = Date.now;
+
+ClockTimer.prototype.setTimer = function(f, dt) {
+	return dt <= 0 ? runAsap(f) : setTimeout(f, dt);
+};
+
+ClockTimer.prototype.clearTimer = function(t) {
+	return t instanceof Asap ? t.cancel() : clearTimeout(t);
+};
+
+function Asap(f) {
+	this.f = f;
+	this.active = true;
+}
+
+Asap.prototype.run = function() {
+	return this.active && this.f();
+};
+
+Asap.prototype.error = function(e) {
+	throw e;
+};
+
+Asap.prototype.cancel = function() {
+	this.active = false;
+};
+
+function runAsap(f) {
+	var task = new Asap(f);
+	defer(task);
+	return task;
+}
+
+},{"../task":109}],88:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var fatal = require('../fatalError');
+
+module.exports = PropagateTask;
+
+function PropagateTask(run, value, sink) {
+	this._run = run;
+	this.value = value;
+	this.sink = sink;
+	this.active = true;
+}
+
+PropagateTask.event = function(value, sink) {
+	return new PropagateTask(emit, value, sink);
+};
+
+PropagateTask.end = function(value, sink) {
+	return new PropagateTask(end, value, sink);
+};
+
+PropagateTask.error = function(value, sink) {
+	return new PropagateTask(error, value, sink);
+};
+
+PropagateTask.prototype.dispose = function() {
+	this.active = false;
+};
+
+PropagateTask.prototype.run = function(t) {
+	if(!this.active) {
+		return;
+	}
+	this._run(t, this.value, this.sink);
+};
+
+PropagateTask.prototype.error = function(t, e) {
+	if(!this.active) {
+		return fatal(e);
+	}
+	this.sink.error(t, e);
+};
+
+function error(t, e, sink) {
+	sink.error(t, e);
+}
+
+function emit(t, x, sink) {
+	sink.event(t, x);
+}
+
+function end(t, x, sink) {
+	sink.end(t, x);
+}
+
+},{"../fatalError":77}],89:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+module.exports = ScheduledTask;
+
+function ScheduledTask(delay, period, task, scheduler) {
+	this.time = delay;
+	this.period = period;
+	this.task = task;
+	this.scheduler = scheduler;
+	this.active = true;
+}
+
+ScheduledTask.prototype.run = function() {
+	return this.task.run(this.time);
+};
+
+ScheduledTask.prototype.error = function(e) {
+	return this.task.error(this.time, e);
+};
+
+ScheduledTask.prototype.dispose = function() {
+	this.scheduler.cancel(this);
+	return this.task.dispose();
+};
+
+},{}],90:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var base = require('@most/prelude');
+var ScheduledTask = require('./ScheduledTask');
+var runTask = require('../task').runTask;
+var Timeline = require('./Timeline');
+
+module.exports = Scheduler;
+
+function Scheduler(timer, timeline) {
+	this.timer = timer;
+	this.timeline = timeline;
+
+	this._timer = null;
+	this._nextArrival = Infinity;
+
+	var self = this;
+	this._runReadyTasksBound = function() {
+		self._runReadyTasks(self.now());
+	};
+}
+
+Scheduler.prototype.now = function() {
+	return this.timer.now();
+};
+
+Scheduler.prototype.asap = function(task) {
+	return this.schedule(0, -1, task);
+};
+
+Scheduler.prototype.delay = function(delay, task) {
+	return this.schedule(delay, -1, task);
+};
+
+Scheduler.prototype.periodic = function(period, task) {
+	return this.schedule(0, period, task);
+};
+
+Scheduler.prototype.schedule = function(delay, period, task) {
+	var now = this.now();
+	var st = new ScheduledTask(now + Math.max(0, delay), period, task, this);
+
+	this.timeline.add(st);
+	this._scheduleNextRun(now);
+	return st;
+};
+
+Scheduler.prototype.cancel = function(task) {
+	task.active = false;
+	if(this.timeline.remove(task)) {
+		this._reschedule();
+	}
+};
+
+Scheduler.prototype.cancelAll = function(f) {
+	this.timeline.removeAll(f);
+	this._reschedule();
+}
+
+Scheduler.prototype._reschedule = function() {
+	if(this.timeline.isEmpty()) {
+		this._unschedule();
+	} else {
+		this._scheduleNextRun(this.now());
+	}
+};
+
+Scheduler.prototype._unschedule = function() {
+	this.timer.clearTimer(this._timer);
+	this._timer = null;
+};
+
+Scheduler.prototype._scheduleNextRun = function(now) {
+	if(this.timeline.isEmpty()) {
+		return;
+	}
+
+	var nextArrival = this.timeline.nextArrival();
+
+	if(this._timer === null) {
+		this._scheduleNextArrival(nextArrival, now);
+	} else if(nextArrival < this._nextArrival) {
+		this._unschedule();
+		this._scheduleNextArrival(nextArrival, now);
+	}
+};
+
+Scheduler.prototype._scheduleNextArrival = function(nextArrival, now) {
+	this._nextArrival = nextArrival;
+	var delay = Math.max(0, nextArrival - now);
+	this._timer = this.timer.setTimer(this._runReadyTasksBound, delay);
+};
+
+Scheduler.prototype._runReadyTasks = function(now) {
+	this._timer = null;
+	this.timeline.runTasks(now, runTask)
+	this._scheduleNextRun(this.now());
+};
+
+},{"../task":109,"./ScheduledTask":89,"./Timeline":91,"@most/prelude":16}],91:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var base = require('@most/prelude');
+
+module.exports = Timeline;
+
+function Timeline() {
+	this.tasks = [];
+}
+
+Timeline.prototype.nextArrival = function() {
+	return this.isEmpty() ? Infinity : this.tasks[0].time;
+}
+
+Timeline.prototype.isEmpty = function() {
+	return this.tasks.length === 0;
+}
+
+Timeline.prototype.add = function(st) {
+	insertByTime(st, this.tasks);
+}
+
+Timeline.prototype.remove = function(st) {
+	var i = binarySearch(st.time, this.tasks);
+
+	if(i >= 0 && i < this.tasks.length) {
+		var at = base.findIndex(st, this.tasks[i].events);
+		if(at >= 0) {
+			this.tasks[i].events.splice(at, 1);
+			return true;
+		}
+	}
+
+	return false;
+}
+
+Timeline.prototype.removeAll = function(f) {
+	for(var i = 0, l = this.tasks.length; i < l; ++i) {
+		removeAllFrom(f, this.tasks[i]);
+	}
+};
+
+Timeline.prototype.runTasks = function(t, runTask) {
+	var tasks = this.tasks;
+	var l = tasks.length;
+	var i = 0;
+
+	while(i < l && tasks[i].time <= t) {
+		++i;
+	}
+
+	this.tasks = tasks.slice(i);
+
+	// Run all ready tasks
+	for (var j = 0; j < i; ++j) {
+		this.tasks = runTasks(runTask, tasks[j], this.tasks);
+	}
+}
+
+function runTasks(runTask, timeslot, tasks) {
+	var events = timeslot.events;
+	for(var i=0; i<events.length; ++i) {
+		var task = events[i];
+
+		if(task.active) {
+			runTask(task);
+
+			// Reschedule periodic repeating tasks
+			// Check active again, since a task may have canceled itself
+			if(task.period >= 0 && task.active) {
+				task.time = task.time + task.period;
+				insertByTime(task, tasks);
+			}
+		}
+	}
+
+	return tasks;
+}
+
+function insertByTime(task, timeslots) {
+	var l = timeslots.length;
+
+	if(l === 0) {
+		timeslots.push(newTimeslot(task.time, [task]));
+		return;
+	}
+
+	var i = binarySearch(task.time, timeslots);
+
+	if(i >= l) {
+		timeslots.push(newTimeslot(task.time, [task]));
+	} else if(task.time === timeslots[i].time) {
+		timeslots[i].events.push(task);
+	} else {
+		timeslots.splice(i, 0, newTimeslot(task.time, [task]));
+	}
+}
+
+function removeAllFrom(f, timeslot) {
+	timeslot.events = base.removeAll(f, timeslot.events);
+}
+
+function binarySearch(t, sortedArray) {
+	var lo = 0;
+	var hi = sortedArray.length;
+	var mid, y;
+
+	while (lo < hi) {
+		mid = Math.floor((lo + hi) / 2);
+		y = sortedArray[mid];
+
+		if (t === y.time) {
+			return mid;
+		} else if (t < y.time) {
+			hi = mid;
+		} else {
+			lo = mid + 1;
+		}
+	}
+	return hi;
+}
+
+function newTimeslot(t, events) {
+	return { time: t, events: events };
+}
+
+},{"@most/prelude":16}],92:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var Scheduler = require('./Scheduler');
+var ClockTimer = require('./ClockTimer');
+var Timeline = require('./Timeline');
+
+module.exports = new Scheduler(new ClockTimer(), new Timeline());
+
+},{"./ClockTimer":87,"./Scheduler":90,"./Timeline":91}],93:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var defer = require('../task').defer;
+
+module.exports = DeferredSink;
+
+function DeferredSink(sink) {
+	this.sink = sink;
+	this.events = [];
+	this.active = true;
+}
+
+DeferredSink.prototype.event = function(t, x) {
+	if(!this.active) {
+		return;
+	}
+
+	if(this.events.length === 0) {
+		defer(new PropagateAllTask(this.sink, t, this.events));
+	}
+
+	this.events.push({ time: t, value: x });
+};
+
+DeferredSink.prototype.end = function(t, x) {
+	if(!this.active) {
+		return;
+	}
+
+	this._end(new EndTask(t, x, this.sink));
+};
+
+DeferredSink.prototype.error = function(t, e) {
+	this._end(new ErrorTask(t, e, this.sink));
+};
+
+DeferredSink.prototype._end = function(task) {
+	this.active = false;
+	defer(task);
+}
+
+function PropagateAllTask(sink, time, events) {
+	this.sink = sink;
+	this.events = events;
+	this.time = time;
+}
+
+PropagateAllTask.prototype.run = function() {
+	var events = this.events;
+	var sink = this.sink;
+	var event;
+
+	for(var i = 0, l = events.length; i<l; ++i) {
+		event = events[i];
+		this.time = event.time;
+		sink.event(event.time, event.value);
+	}
+
+	events.length = 0;
+};
+
+PropagateAllTask.prototype.error = function(e) {
+	this.sink.error(this.time, e);
+};
+
+function EndTask(t, x, sink) {
+	this.time = t;
+	this.value = x;
+	this.sink = sink;
+}
+
+EndTask.prototype.run = function() {
+	this.sink.end(this.time, this.value);
+};
+
+EndTask.prototype.error = function(e) {
+	this.sink.error(this.time, e);
+};
+
+function ErrorTask(t, e, sink) {
+	this.time = t;
+	this.value = e;
+	this.sink = sink;
+}
+
+ErrorTask.prototype.run = function() {
+	this.sink.error(this.time, this.value);
+};
+
+ErrorTask.prototype.error = function(e) {
+	throw e;
+};
+
+},{"../task":109}],94:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var Sink = require('./Pipe');
+
+module.exports = IndexSink;
+
+function IndexSink(i, sink) {
+	this.sink = sink;
+	this.index = i;
+	this.active = true;
+	this.value = void 0;
+}
+
+IndexSink.prototype.event = function(t, x) {
+	if(!this.active) {
+		return;
+	}
+	this.value = x;
+	this.sink.event(t, this);
+};
+
+IndexSink.prototype.end = function(t, x) {
+	if(!this.active) {
+		return;
+	}
+	this.active = false;
+	this.sink.end(t, { index: this.index, value: x });
+};
+
+IndexSink.prototype.error = Sink.prototype.error;
+
+},{"./Pipe":95}],95:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+module.exports = Pipe;
+
+/**
+ * A sink mixin that simply forwards event, end, and error to
+ * another sink.
+ * @param sink
+ * @constructor
+ */
+function Pipe(sink) {
+	this.sink = sink;
+}
+
+Pipe.prototype.event = function(t, x) {
+	return this.sink.event(t, x);
+};
+
+Pipe.prototype.end = function(t, x) {
+	return this.sink.end(t, x);
+};
+
+Pipe.prototype.error = function(t, e) {
+	return this.sink.error(t, e);
+};
+
+},{}],96:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+module.exports = SafeSink;
+
+function SafeSink(sink) {
+	this.sink = sink;
+	this.active = true;
+}
+
+SafeSink.prototype.event = function(t, x) {
+	if(!this.active) {
+		return;
+	}
+	this.sink.event(t, x);
+};
+
+SafeSink.prototype.end = function(t, x) {
+	if(!this.active) {
+		return;
+	}
+	this.disable();
+	this.sink.end(t, x);
+};
+
+SafeSink.prototype.error = function(t, e) {
+	this.disable();
+	this.sink.error(t, e);
+};
+
+SafeSink.prototype.disable = function() {
+	this.active = false;
+	return this.sink;
+}
+
+},{}],97:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var DeferredSink = require('../sink/DeferredSink');
+var dispose = require('../disposable/dispose');
+var tryEvent = require('./tryEvent');
+
+module.exports = EventEmitterSource;
+
+function EventEmitterSource(event, source) {
+	this.event = event;
+	this.source = source;
+}
+
+EventEmitterSource.prototype.run = function(sink, scheduler) {
+	// NOTE: Because EventEmitter allows events in the same call stack as
+	// a listener is added, use a DeferredSink to buffer events
+	// until the stack clears, then propagate.  This maintains most.js's
+	// invariant that no event will be delivered in the same call stack
+	// as an observer begins observing.
+	var dsink = new DeferredSink(sink);
+
+	function addEventVariadic(a) {
+		var l = arguments.length;
+		if(l > 1) {
+			var arr = new Array(l);
+			for(var i=0; i<l; ++i) {
+				arr[i] = arguments[i];
+			}
+			tryEvent.tryEvent(scheduler.now(), arr, dsink);
+		} else {
+			tryEvent.tryEvent(scheduler.now(), a, dsink);
+		}
+	}
+
+	this.source.addListener(this.event, addEventVariadic);
+
+	return dispose.create(disposeEventEmitter, { target: this, addEvent: addEventVariadic });
+};
+
+function disposeEventEmitter(info) {
+	var target = info.target;
+	target.source.removeListener(target.event, info.addEvent);
+}
+
+},{"../disposable/dispose":76,"../sink/DeferredSink":93,"./tryEvent":107}],98:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var dispose = require('../disposable/dispose');
+var tryEvent = require('./tryEvent');
+
+module.exports = EventTargetSource;
+
+function EventTargetSource(event, source, capture) {
+	this.event = event;
+	this.source = source;
+	this.capture = capture;
+}
+
+EventTargetSource.prototype.run = function(sink, scheduler) {
+	function addEvent(e) {
+		tryEvent.tryEvent(scheduler.now(), e, sink);
+	}
+
+	this.source.addEventListener(this.event, addEvent, this.capture);
+
+	return dispose.create(disposeEventTarget,
+		{ target: this, addEvent: addEvent });
+};
+
+function disposeEventTarget(info) {
+	var target = info.target;
+	target.source.removeEventListener(target.event, info.addEvent, target.capture);
+}
+
+},{"../disposable/dispose":76,"./tryEvent":107}],99:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var Stream = require('../Stream');
+var dispose = require('../disposable/dispose');
+var PropagateTask = require('../scheduler/PropagateTask');
+
+exports.of = streamOf;
+exports.empty = empty;
+exports.never = never;
+
+/**
+ * Stream containing only x
+ * @param {*} x
+ * @returns {Stream}
+ */
+ function streamOf(x) {
+ 	return new Stream(new Just(x));
+ }
+
+ function Just(x) {
+ 	this.value = x;
+ }
+
+ Just.prototype.run = function(sink, scheduler) {
+ 	return scheduler.asap(new PropagateTask(runJust, this.value, sink));
+ };
+
+ function runJust(t, x, sink) {
+ 	sink.event(t, x);
+ 	sink.end(t, void 0);
+ }
+
+/**
+ * Stream containing no events and ends immediately
+ * @returns {Stream}
+ */
+function empty() {
+	return EMPTY;
+}
+
+function EmptySource() {}
+
+EmptySource.prototype.run = function(sink, scheduler) {
+	var task = PropagateTask.end(void 0, sink);
+	scheduler.asap(task);
+
+	return dispose.create(disposeEmpty, task);
+};
+
+function disposeEmpty(task) {
+	return task.dispose();
+}
+
+var EMPTY = new Stream(new EmptySource());
+
+/**
+ * Stream containing no events and never ends
+ * @returns {Stream}
+ */
+function never() {
+	return NEVER;
+}
+
+function NeverSource() {}
+
+NeverSource.prototype.run = function() {
+	return dispose.empty();
+};
+
+var NEVER = new Stream(new NeverSource());
+
+},{"../Stream":48,"../disposable/dispose":76,"../scheduler/PropagateTask":88}],100:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var Stream = require('../Stream');
+var fromArray = require('./fromArray').fromArray;
+var isIterable = require('../iterable').isIterable;
+var fromIterable = require('./fromIterable').fromIterable;
+var getObservable = require('../observable/getObservable');
+var fromObservable = require('../observable/fromObservable').fromObservable;
+var isArrayLike = require('@most/prelude').isArrayLike;
+
+exports.from = from;
+
+function from(a) { // eslint-disable-line complexity
+	if(a instanceof Stream) {
+		return a;
+	}
+
+	var observable = getObservable(a);
+	if(observable != null) {
+		return fromObservable(observable);
+	}
+
+	if(Array.isArray(a) || isArrayLike(a)) {
+		return fromArray(a);
+	}
+
+	if(isIterable(a)) {
+		return fromIterable(a);
+	}
+
+	throw new TypeError('from(x) must be observable, iterable, or array-like: ' + a);
+}
+
+},{"../Stream":48,"../iterable":82,"../observable/fromObservable":83,"../observable/getObservable":84,"./fromArray":101,"./fromIterable":103,"@most/prelude":16}],101:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var Stream = require('../Stream');
+var PropagateTask = require('../scheduler/PropagateTask');
+
+exports.fromArray = fromArray;
+
+function fromArray (a) {
+	return new Stream(new ArraySource(a));
+}
+
+function ArraySource(a) {
+	this.array = a;
+}
+
+ArraySource.prototype.run = function(sink, scheduler) {
+	return scheduler.asap(new PropagateTask(runProducer, this.array, sink));
+};
+
+function runProducer(t, array, sink) {
+	for(var i=0, l=array.length; i<l && this.active; ++i) {
+		sink.event(t, array[i]);
+	}
+
+	this.active && end(t);
+
+	function end(t) {
+		sink.end(t);
+	}
+}
+
+},{"../Stream":48,"../scheduler/PropagateTask":88}],102:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var Stream = require('../Stream');
+var EventTargetSource = require('./EventTargetSource');
+var EventEmitterSource = require('./EventEmitterSource');
+
+exports.fromEvent = fromEvent;
+
+/**
+ * Create a stream from an EventTarget, such as a DOM Node, or EventEmitter.
+ * @param {String} event event type name, e.g. 'click'
+ * @param {EventTarget|EventEmitter} source EventTarget or EventEmitter
+ * @param {*?} capture for DOM events, whether to use
+ *  capturing--passed as 3rd parameter to addEventListener.
+ * @returns {Stream} stream containing all events of the specified type
+ * from the source.
+ */
+function fromEvent(event, source, capture) {
+	var s;
+
+	if(typeof source.addEventListener === 'function' && typeof source.removeEventListener === 'function') {
+		if(arguments.length < 3) {
+			capture = false
+		}
+
+		s = new EventTargetSource(event, source, capture);
+	} else if(typeof source.addListener === 'function' && typeof source.removeListener === 'function') {
+		s = new EventEmitterSource(event, source);
+	} else {
+		throw new Error('source must support addEventListener/removeEventListener or addListener/removeListener');
+	}
+
+	return new Stream(s);
+}
+
+},{"../Stream":48,"./EventEmitterSource":97,"./EventTargetSource":98}],103:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var Stream = require('../Stream');
+var getIterator = require('../iterable').getIterator;
+var PropagateTask = require('../scheduler/PropagateTask');
+
+exports.fromIterable = fromIterable;
+
+function fromIterable(iterable) {
+	return new Stream(new IterableSource(iterable));
+}
+
+function IterableSource(iterable) {
+	this.iterable = iterable;
+}
+
+IterableSource.prototype.run = function(sink, scheduler) {
+	return new IteratorProducer(getIterator(this.iterable), sink, scheduler);
+};
+
+function IteratorProducer(iterator, sink, scheduler) {
+	this.scheduler = scheduler;
+	this.iterator = iterator;
+	this.task = new PropagateTask(runProducer, this, sink);
+	scheduler.asap(this.task);
+}
+
+IteratorProducer.prototype.dispose = function() {
+	return this.task.dispose();
+};
+
+function runProducer(t, producer, sink) {
+	var x = producer.iterator.next();
+	if(x.done) {
+		sink.end(t, x.value);
+	} else {
+		sink.event(t, x.value);
+	}
+
+	producer.scheduler.asap(producer.task);
+}
+
+},{"../Stream":48,"../iterable":82,"../scheduler/PropagateTask":88}],104:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2014 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var Stream = require('../Stream');
+var base = require('@most/prelude');
+
+exports.generate = generate;
+
+/**
+ * Compute a stream using an *async* generator, which yields promises
+ * to control event times.
+ * @param f
+ * @returns {Stream}
+ */
+function generate(f /*, ...args */) {
+	return new Stream(new GenerateSource(f, base.tail(arguments)));
+}
+
+function GenerateSource(f, args) {
+	this.f = f;
+	this.args = args;
+}
+
+GenerateSource.prototype.run = function(sink, scheduler) {
+	return new Generate(this.f.apply(void 0, this.args), sink, scheduler);
+};
+
+function Generate(iterator, sink, scheduler) {
+	this.iterator = iterator;
+	this.sink = sink;
+	this.scheduler = scheduler;
+	this.active = true;
+
+	var self = this;
+	function err(e) {
+		self.sink.error(self.scheduler.now(), e);
+	}
+
+	Promise.resolve(this).then(next).catch(err);
+}
+
+function next(generate, x) {
+	return generate.active ? handle(generate, generate.iterator.next(x)) : x;
+}
+
+function handle(generate, result) {
+	if (result.done) {
+		return generate.sink.end(generate.scheduler.now(), result.value);
+	}
+
+	return Promise.resolve(result.value).then(function (x) {
+		return emit(generate, x);
+	}, function(e) {
+		return error(generate, e);
+	});
+}
+
+function emit(generate, x) {
+	generate.sink.event(generate.scheduler.now(), x);
+	return next(generate, x);
+}
+
+function error(generate, e) {
+	return handle(generate, generate.iterator.throw(e));
+}
+
+Generate.prototype.dispose = function() {
+	this.active = false;
+};
+
+},{"../Stream":48,"@most/prelude":16}],105:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var Stream = require('../Stream');
+
+exports.iterate = iterate;
+
+/**
+ * Compute a stream by iteratively calling f to produce values
+ * Event times may be controlled by returning a Promise from f
+ * @param {function(x:*):*|Promise<*>} f
+ * @param {*} x initial value
+ * @returns {Stream}
+ */
+function iterate(f, x) {
+	return new Stream(new IterateSource(f, x));
+}
+
+function IterateSource(f, x) {
+	this.f = f;
+	this.value = x;
+}
+
+IterateSource.prototype.run = function(sink, scheduler) {
+	return new Iterate(this.f, this.value, sink, scheduler);
+};
+
+function Iterate(f, initial, sink, scheduler) {
+	this.f = f;
+	this.sink = sink;
+	this.scheduler = scheduler;
+	this.active = true;
+
+	var x = initial;
+
+	var self = this;
+	function err(e) {
+		self.sink.error(self.scheduler.now(), e);
+	}
+
+	function start(iterate) {
+		return stepIterate(iterate, x);
+	}
+
+	Promise.resolve(this).then(start).catch(err);
+}
+
+Iterate.prototype.dispose = function() {
+	this.active = false;
+};
+
+function stepIterate(iterate, x) {
+	iterate.sink.event(iterate.scheduler.now(), x);
+
+	if(!iterate.active) {
+		return x;
+	}
+
+	var f = iterate.f;
+	return Promise.resolve(f(x)).then(function(y) {
+		return continueIterate(iterate, y);
+	});
+}
+
+function continueIterate(iterate, x) {
+	return !iterate.active ? iterate.value : stepIterate(iterate, x);
+}
+
+},{"../Stream":48}],106:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var Stream = require('../Stream');
+var dispose = require('../disposable/dispose');
+var PropagateTask = require('../scheduler/PropagateTask');
+
+exports.periodic = periodic;
+
+/**
+ * Create a stream that emits the current time periodically
+ * @param {Number} period periodicity of events in millis
+ * @param {*} value value to emit each period
+ * @returns {Stream} new stream that emits the current time every period
+ */
+function periodic(period, value) {
+	return new Stream(new Periodic(period, value));
+}
+
+function Periodic(period, value) {
+	this.period = period;
+	this.value = value;
+}
+
+Periodic.prototype.run = function(sink, scheduler) {
+	return scheduler.periodic(this.period, PropagateTask.event(this.value, sink));
+};
+
+},{"../Stream":48,"../disposable/dispose":76,"../scheduler/PropagateTask":88}],107:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+exports.tryEvent = tryEvent;
+exports.tryEnd = tryEnd;
+
+function tryEvent(t, x, sink) {
+	try {
+		sink.event(t, x);
+	} catch(e) {
+		sink.error(t, e);
+	}
+}
+
+function tryEnd(t, x, sink) {
+	try {
+		sink.end(t, x);
+	} catch(e) {
+		sink.error(t, e);
+	}
+}
+
+},{}],108:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var Stream = require('../Stream');
+
+exports.unfold = unfold;
+
+/**
+ * Compute a stream by unfolding tuples of future values from a seed value
+ * Event times may be controlled by returning a Promise from f
+ * @param {function(seed:*):{value:*, seed:*, done:boolean}|Promise<{value:*, seed:*, done:boolean}>} f unfolding function accepts
+ *  a seed and returns a new tuple with a value, new seed, and boolean done flag.
+ *  If tuple.done is true, the stream will end.
+ * @param {*} seed seed value
+ * @returns {Stream} stream containing all value of all tuples produced by the
+ *  unfolding function.
+ */
+function unfold(f, seed) {
+	return new Stream(new UnfoldSource(f, seed));
+}
+
+function UnfoldSource(f, seed) {
+	this.f = f;
+	this.value = seed;
+}
+
+UnfoldSource.prototype.run = function(sink, scheduler) {
+	return new Unfold(this.f, this.value, sink, scheduler);
+};
+
+function Unfold(f, x, sink, scheduler) {
+	this.f = f;
+	this.sink = sink;
+	this.scheduler = scheduler;
+	this.active = true;
+
+	var self = this;
+	function err(e) {
+		self.sink.error(self.scheduler.now(), e);
+	}
+
+	function start(unfold) {
+		return stepUnfold(unfold, x);
+	}
+
+	Promise.resolve(this).then(start).catch(err);
+}
+
+Unfold.prototype.dispose = function() {
+	this.active = false;
+};
+
+function stepUnfold(unfold, x) {
+	var f = unfold.f;
+	return Promise.resolve(f(x)).then(function(tuple) {
+		return continueUnfold(unfold, tuple);
+	});
+}
+
+function continueUnfold(unfold, tuple) {
+	if(tuple.done) {
+		unfold.sink.end(unfold.scheduler.now(), tuple.value);
+		return tuple.value;
+	}
+
+	unfold.sink.event(unfold.scheduler.now(), tuple.value);
+
+	if(!unfold.active) {
+		return tuple.value;
+	}
+	return stepUnfold(unfold, tuple.seed);
+}
+
+},{"../Stream":48}],109:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+exports.defer = defer;
+exports.runTask = runTask;
+
+function defer(task) {
+	return Promise.resolve(task).then(runTask);
+}
+
+function runTask(task) {
+	try {
+		return task.run();
+	} catch(e) {
+		return task.error(e);
+	}
+}
+
+},{}],110:[function(require,module,exports){
+/** @license MIT License (c) copyright 2010-2016 original author or authors */
+/** @author Brian Cavalier */
+/** @author John Hann */
+
+var Stream = require('./lib/Stream');
+var base = require('@most/prelude');
+var core = require('./lib/source/core');
+var from = require('./lib/source/from').from;
+var periodic = require('./lib/source/periodic').periodic;
+var symbolObservable = require('symbol-observable').default;
+
+/**
+ * Core stream type
+ * @type {Stream}
+ */
+exports.Stream = Stream;
+
+// Add of and empty to constructor for fantasy-land compat
+exports.of       = Stream.of    = core.of;
+exports.just     = core.of; // easier ES6 import alias
+exports.empty    = Stream.empty = core.empty;
+exports.never    = core.never;
+exports.from     = from;
+exports.periodic = periodic;
+
+//-----------------------------------------------------------------------
+// Draft ES Observable proposal interop
+// https://github.com/zenparsing/es-observable
+
+var subscribe = require('./lib/observable/subscribe').subscribe;
+
+Stream.prototype.subscribe = function(subscriber) {
+	return subscribe(subscriber, this);
+};
+
+Stream.prototype[symbolObservable] = function() {
+	return this;
+};
+
+//-----------------------------------------------------------------------
+// Fluent adapter
+
+var thru = require('./lib/combinator/thru').thru;
+
+/**
+ * Adapt a functional stream transform to fluent style.
+ * It applies f to the this stream object
+ * @param  {function(s: Stream): Stream} f function that
+ * receives the stream itself and must return a new stream
+ * @return {Stream}
+ */
+Stream.prototype.thru = function(f) {
+	return thru(f, this);
+}
+
+//-----------------------------------------------------------------------
+// Adapting other sources
+
+var events = require('./lib/source/fromEvent');
+
+/**
+ * Create a stream of events from the supplied EventTarget or EventEmitter
+ * @param {String} event event name
+ * @param {EventTarget|EventEmitter} source EventTarget or EventEmitter. The source
+ *  must support either addEventListener/removeEventListener (w3c EventTarget:
+ *  http://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-EventTarget),
+ *  or addListener/removeListener (node EventEmitter: http://nodejs.org/api/events.html)
+ * @returns {Stream} stream of events of the specified type from the source
+ */
+exports.fromEvent = events.fromEvent;
+
+//-----------------------------------------------------------------------
+// Observing
+
+var observe = require('./lib/combinator/observe');
+
+exports.observe = observe.observe;
+exports.forEach = observe.observe;
+exports.drain   = observe.drain;
+
+/**
+ * Process all the events in the stream
+ * @returns {Promise} promise that fulfills when the stream ends, or rejects
+ *  if the stream fails with an unhandled error.
+ */
+Stream.prototype.observe = Stream.prototype.forEach = function(f) {
+	return observe.observe(f, this);
+};
+
+/**
+ * Consume all events in the stream, without providing a function to process each.
+ * This causes a stream to become active and begin emitting events, and is useful
+ * in cases where all processing has been setup upstream via other combinators, and
+ * there is no need to process the terminal events.
+ * @returns {Promise} promise that fulfills when the stream ends, or rejects
+ *  if the stream fails with an unhandled error.
+ */
+Stream.prototype.drain = function() {
+	return observe.drain(this);
+};
+
+//-------------------------------------------------------
+
+var loop = require('./lib/combinator/loop').loop;
+
+exports.loop = loop;
+
+/**
+ * Generalized feedback loop. Call a stepper function for each event. The stepper
+ * will be called with 2 params: the current seed and the an event value.  It must
+ * return a new { seed, value } pair. The `seed` will be fed back into the next
+ * invocation of stepper, and the `value` will be propagated as the event value.
+ * @param {function(seed:*, value:*):{seed:*, value:*}} stepper loop step function
+ * @param {*} seed initial seed value passed to first stepper call
+ * @returns {Stream} new stream whose values are the `value` field of the objects
+ * returned by the stepper
+ */
+Stream.prototype.loop = function(stepper, seed) {
+	return loop(stepper, seed, this);
+};
+
+//-------------------------------------------------------
+
+var accumulate = require('./lib/combinator/accumulate');
+
+exports.scan   = accumulate.scan;
+exports.reduce = accumulate.reduce;
+
+/**
+ * Create a stream containing successive reduce results of applying f to
+ * the previous reduce result and the current stream item.
+ * @param {function(result:*, x:*):*} f reducer function
+ * @param {*} initial initial value
+ * @returns {Stream} new stream containing successive reduce results
+ */
+Stream.prototype.scan = function(f, initial) {
+	return accumulate.scan(f, initial, this);
+};
+
+/**
+ * Reduce the stream to produce a single result.  Note that reducing an infinite
+ * stream will return a Promise that never fulfills, but that may reject if an error
+ * occurs.
+ * @param {function(result:*, x:*):*} f reducer function
+ * @param {*} initial optional initial value
+ * @returns {Promise} promise for the file result of the reduce
+ */
+Stream.prototype.reduce = function(f, initial) {
+	return accumulate.reduce(f, initial, this);
+};
+
+//-----------------------------------------------------------------------
+// Building and extending
+
+var unfold = require('./lib/source/unfold');
+var iterate = require('./lib/source/iterate');
+var generate = require('./lib/source/generate');
+var build = require('./lib/combinator/build');
+
+exports.unfold    = unfold.unfold;
+exports.iterate   = iterate.iterate;
+exports.generate  = generate.generate;
+exports.concat    = build.concat;
+exports.startWith = build.cons;
+
+/**
+ * @param {Stream} tail
+ * @returns {Stream} new stream containing all items in this followed by
+ *  all items in tail
+ */
+Stream.prototype.concat = function(tail) {
+	return build.concat(this, tail);
+};
+
+/**
+ * @param {*} x value to prepend
+ * @returns {Stream} a new stream with x prepended
+ */
+Stream.prototype.startWith = function(x) {
+	return build.cons(x, this);
+};
+
+//-----------------------------------------------------------------------
+// Transforming
+
+var transform = require('./lib/combinator/transform');
+var applicative = require('./lib/combinator/applicative');
+
+exports.map      = transform.map;
+exports.constant = transform.constant;
+exports.tap      = transform.tap;
+exports.ap       = applicative.ap;
+
+/**
+ * Transform each value in the stream by applying f to each
+ * @param {function(*):*} f mapping function
+ * @returns {Stream} stream containing items transformed by f
+ */
+Stream.prototype.map = function(f) {
+	return transform.map(f, this);
+};
+
+/**
+ * Assume this stream contains functions, and apply each function to each item
+ * in the provided stream.  This generates, in effect, a cross product.
+ * @param {Stream} xs stream of items to which
+ * @returns {Stream} stream containing the cross product of items
+ */
+Stream.prototype.ap = function(xs) {
+	return applicative.ap(this, xs);
+};
+
+/**
+ * Replace each value in the stream with x
+ * @param {*} x
+ * @returns {Stream} stream containing items replaced with x
+ */
+Stream.prototype.constant = function(x) {
+	return transform.constant(x, this);
+};
+
+/**
+ * Perform a side effect for each item in the stream
+ * @param {function(x:*):*} f side effect to execute for each item. The
+ *  return value will be discarded.
+ * @returns {Stream} new stream containing the same items as this stream
+ */
+Stream.prototype.tap = function(f) {
+	return transform.tap(f, this);
+};
+
+//-----------------------------------------------------------------------
+// Transducer support
+
+var transduce = require('./lib/combinator/transduce');
+
+exports.transduce = transduce.transduce;
+
+/**
+ * Transform this stream by passing its events through a transducer.
+ * @param  {function} transducer transducer function
+ * @return {Stream} stream of events transformed by the transducer
+ */
+Stream.prototype.transduce = function(transducer) {
+	return transduce.transduce(transducer, this);
+};
+
+//-----------------------------------------------------------------------
+// FlatMapping
+
+var flatMap = require('./lib/combinator/flatMap');
+
+exports.flatMap = exports.chain = flatMap.flatMap;
+exports.join    = flatMap.join;
+
+/**
+ * Map each value in the stream to a new stream, and merge it into the
+ * returned outer stream. Event arrival times are preserved.
+ * @param {function(x:*):Stream} f chaining function, must return a Stream
+ * @returns {Stream} new stream containing all events from each stream returned by f
+ */
+Stream.prototype.flatMap = Stream.prototype.chain = function(f) {
+	return flatMap.flatMap(f, this);
+};
+
+/**
+ * Monadic join. Flatten a Stream<Stream<X>> to Stream<X> by merging inner
+ * streams to the outer. Event arrival times are preserved.
+ * @returns {Stream<X>} new stream containing all events of all inner streams
+ */
+Stream.prototype.join = function() {
+	return flatMap.join(this);
+};
+
+var continueWith = require('./lib/combinator/continueWith').continueWith;
+
+exports.continueWith = continueWith;
+exports.flatMapEnd = continueWith;
+
+/**
+ * Map the end event to a new stream, and begin emitting its values.
+ * @param {function(x:*):Stream} f function that receives the end event value,
+ * and *must* return a new Stream to continue with.
+ * @returns {Stream} new stream that emits all events from the original stream,
+ * followed by all events from the stream returned by f.
+ */
+Stream.prototype.continueWith = Stream.prototype.flatMapEnd = function(f) {
+	return continueWith(f, this);
+};
+
+var concatMap = require('./lib/combinator/concatMap').concatMap;
+
+exports.concatMap = concatMap;
+
+Stream.prototype.concatMap = function(f) {
+	return concatMap(f, this);
+};
+
+//-----------------------------------------------------------------------
+// Concurrent merging
+
+var mergeConcurrently = require('./lib/combinator/mergeConcurrently');
+
+exports.mergeConcurrently = mergeConcurrently.mergeConcurrently;
+
+/**
+ * Flatten a Stream<Stream<X>> to Stream<X> by merging inner
+ * streams to the outer, limiting the number of inner streams that may
+ * be active concurrently.
+ * @param {number} concurrency at most this many inner streams will be
+ *  allowed to be active concurrently.
+ * @return {Stream<X>} new stream containing all events of all inner
+ *  streams, with limited concurrency.
+ */
+Stream.prototype.mergeConcurrently = function(concurrency) {
+	return mergeConcurrently.mergeConcurrently(concurrency, this);
+};
+
+//-----------------------------------------------------------------------
+// Merging
+
+var merge = require('./lib/combinator/merge');
+
+exports.merge = merge.merge;
+exports.mergeArray = merge.mergeArray;
+
+/**
+ * Merge this stream and all the provided streams
+ * @returns {Stream} stream containing items from this stream and s in time
+ * order.  If two events are simultaneous they will be merged in
+ * arbitrary order.
+ */
+Stream.prototype.merge = function(/*...streams*/) {
+	return merge.mergeArray(base.cons(this, arguments));
+};
+
+//-----------------------------------------------------------------------
+// Combining
+
+var combine = require('./lib/combinator/combine');
+
+exports.combine = combine.combine;
+exports.combineArray = combine.combineArray;
+
+/**
+ * Combine latest events from all input streams
+ * @param {function(...events):*} f function to combine most recent events
+ * @returns {Stream} stream containing the result of applying f to the most recent
+ *  event of each input stream, whenever a new event arrives on any stream.
+ */
+Stream.prototype.combine = function(f /*, ...streams*/) {
+	return combine.combineArray(f, base.replace(this, 0, arguments));
+};
+
+//-----------------------------------------------------------------------
+// Sampling
+
+var sample = require('./lib/combinator/sample');
+
+exports.sample = sample.sample;
+exports.sampleWith = sample.sampleWith;
+
+/**
+ * When an event arrives on sampler, emit the latest event value from stream.
+ * @param {Stream} sampler stream of events at whose arrival time
+ *  signal's latest value will be propagated
+ * @returns {Stream} sampled stream of values
+ */
+Stream.prototype.sampleWith = function(sampler) {
+	return sample.sampleWith(sampler, this);
+};
+
+/**
+ * When an event arrives on this stream, emit the result of calling f with the latest
+ * values of all streams being sampled
+ * @param {function(...values):*} f function to apply to each set of sampled values
+ * @returns {Stream} stream of sampled and transformed values
+ */
+Stream.prototype.sample = function(f /* ...streams */) {
+	return sample.sampleArray(f, this, base.tail(arguments));
+};
+
+//-----------------------------------------------------------------------
+// Zipping
+
+var zip = require('./lib/combinator/zip');
+
+exports.zip = zip.zip;
+
+/**
+ * Pair-wise combine items with those in s. Given 2 streams:
+ * [1,2,3] zipWith f [4,5,6] -> [f(1,4),f(2,5),f(3,6)]
+ * Note: zip causes fast streams to buffer and wait for slow streams.
+ * @param {function(a:Stream, b:Stream, ...):*} f function to combine items
+ * @returns {Stream} new stream containing pairs
+ */
+Stream.prototype.zip = function(f /*, ...streams*/) {
+	return zip.zipArray(f, base.replace(this, 0, arguments));
+};
+
+//-----------------------------------------------------------------------
+// Switching
+
+var switchLatest = require('./lib/combinator/switch').switch;
+
+exports.switch       = switchLatest;
+exports.switchLatest = switchLatest;
+
+/**
+ * Given a stream of streams, return a new stream that adopts the behavior
+ * of the most recent inner stream.
+ * @returns {Stream} switching stream
+ */
+Stream.prototype.switch = Stream.prototype.switchLatest = function() {
+	return switchLatest(this);
+};
+
+//-----------------------------------------------------------------------
+// Filtering
+
+var filter = require('./lib/combinator/filter');
+
+exports.filter          = filter.filter;
+exports.skipRepeats     = exports.distinct   = filter.skipRepeats;
+exports.skipRepeatsWith = exports.distinctBy = filter.skipRepeatsWith;
+
+/**
+ * Retain only items matching a predicate
+ * stream:                           -12345678-
+ * filter(x => x % 2 === 0, stream): --2-4-6-8-
+ * @param {function(x:*):boolean} p filtering predicate called for each item
+ * @returns {Stream} stream containing only items for which predicate returns truthy
+ */
+Stream.prototype.filter = function(p) {
+	return filter.filter(p, this);
+};
+
+/**
+ * Skip repeated events, using === to compare items
+ * stream:           -abbcd-
+ * distinct(stream): -ab-cd-
+ * @returns {Stream} stream with no repeated events
+ */
+Stream.prototype.skipRepeats = function() {
+	return filter.skipRepeats(this);
+};
+
+/**
+ * Skip repeated events, using supplied equals function to compare items
+ * @param {function(a:*, b:*):boolean} equals function to compare items
+ * @returns {Stream} stream with no repeated events
+ */
+Stream.prototype.skipRepeatsWith = function(equals) {
+	return filter.skipRepeatsWith(equals, this);
+};
+
+//-----------------------------------------------------------------------
+// Slicing
+
+var slice = require('./lib/combinator/slice');
+
+exports.take      = slice.take;
+exports.skip      = slice.skip;
+exports.slice     = slice.slice;
+exports.takeWhile = slice.takeWhile;
+exports.skipWhile = slice.skipWhile;
+
+/**
+ * stream:          -abcd-
+ * take(2, stream): -ab|
+ * @param {Number} n take up to this many events
+ * @returns {Stream} stream containing at most the first n items from this stream
+ */
+Stream.prototype.take = function(n) {
+	return slice.take(n, this);
+};
+
+/**
+ * stream:          -abcd->
+ * skip(2, stream): ---cd->
+ * @param {Number} n skip this many events
+ * @returns {Stream} stream not containing the first n events
+ */
+Stream.prototype.skip = function(n) {
+	return slice.skip(n, this);
+};
+
+/**
+ * Slice a stream by event index. Equivalent to, but more efficient than
+ * stream.take(end).skip(start);
+ * NOTE: Negative start and end are not supported
+ * @param {Number} start skip all events before the start index
+ * @param {Number} end allow all events from the start index to the end index
+ * @returns {Stream} stream containing items where start <= index < end
+ */
+Stream.prototype.slice = function(start, end) {
+	return slice.slice(start, end, this);
+};
+
+/**
+ * stream:                        -123451234->
+ * takeWhile(x => x < 5, stream): -1234|
+ * @param {function(x:*):boolean} p predicate
+ * @returns {Stream} stream containing items up to, but not including, the
+ * first item for which p returns falsy.
+ */
+Stream.prototype.takeWhile = function(p) {
+	return slice.takeWhile(p, this);
+};
+
+/**
+ * stream:                        -123451234->
+ * skipWhile(x => x < 5, stream): -----51234->
+ * @param {function(x:*):boolean} p predicate
+ * @returns {Stream} stream containing items following *and including* the
+ * first item for which p returns falsy.
+ */
+Stream.prototype.skipWhile = function(p) {
+	return slice.skipWhile(p, this);
+};
+
+//-----------------------------------------------------------------------
+// Time slicing
+
+var timeslice = require('./lib/combinator/timeslice');
+
+exports.until  = exports.takeUntil = timeslice.takeUntil;
+exports.since  = exports.skipUntil = timeslice.skipUntil;
+exports.during = timeslice.during;
+
+/**
+ * stream:                    -a-b-c-d-e-f-g->
+ * signal:                    -------x
+ * takeUntil(signal, stream): -a-b-c-|
+ * @param {Stream} signal retain only events in stream before the first
+ * event in signal
+ * @returns {Stream} new stream containing only events that occur before
+ * the first event in signal.
+ */
+Stream.prototype.until = Stream.prototype.takeUntil = function(signal) {
+	return timeslice.takeUntil(signal, this);
+};
+
+/**
+ * stream:                    -a-b-c-d-e-f-g->
+ * signal:                    -------x
+ * takeUntil(signal, stream): -------d-e-f-g->
+ * @param {Stream} signal retain only events in stream at or after the first
+ * event in signal
+ * @returns {Stream} new stream containing only events that occur after
+ * the first event in signal.
+ */
+Stream.prototype.since = Stream.prototype.skipUntil = function(signal) {
+	return timeslice.skipUntil(signal, this);
+};
+
+/**
+ * stream:                    -a-b-c-d-e-f-g->
+ * timeWindow:                -----s
+ * s:                               -----t
+ * stream.during(timeWindow): -----c-d-e-|
+ * @param {Stream<Stream>} timeWindow a stream whose first event (s) represents
+ *  the window start time.  That event (s) is itself a stream whose first event (t)
+ *  represents the window end time
+ * @returns {Stream} new stream containing only events within the provided timespan
+ */
+Stream.prototype.during = function(timeWindow) {
+	return timeslice.during(timeWindow, this);
+};
+
+//-----------------------------------------------------------------------
+// Delaying
+
+var delay = require('./lib/combinator/delay').delay;
+
+exports.delay = delay;
+
+/**
+ * @param {Number} delayTime milliseconds to delay each item
+ * @returns {Stream} new stream containing the same items, but delayed by ms
+ */
+Stream.prototype.delay = function(delayTime) {
+	return delay(delayTime, this);
+};
+
+//-----------------------------------------------------------------------
+// Getting event timestamp
+
+var timestamp = require('./lib/combinator/timestamp').timestamp;
+
+exports.timestamp = timestamp;
+
+/**
+ * Expose event timestamps into the stream. Turns a Stream<X> into
+ * Stream<{time:t, value:X}>
+ * @returns {Stream<{time:number, value:*}>}
+ */
+Stream.prototype.timestamp = function() {
+	return timestamp(this);
+};
+
+//-----------------------------------------------------------------------
+// Rate limiting
+
+var limit = require('./lib/combinator/limit');
+
+exports.throttle = limit.throttle;
+exports.debounce = limit.debounce;
+
+/**
+ * Limit the rate of events
+ * stream:              abcd----abcd----
+ * throttle(2, stream): a-c-----a-c-----
+ * @param {Number} period time to suppress events
+ * @returns {Stream} new stream that skips events for throttle period
+ */
+Stream.prototype.throttle = function(period) {
+	return limit.throttle(period, this);
+};
+
+/**
+ * Wait for a burst of events to subside and emit only the last event in the burst
+ * stream:              abcd----abcd----
+ * debounce(2, stream): -----d-------d--
+ * @param {Number} period events occuring more frequently than this
+ *  on the provided scheduler will be suppressed
+ * @returns {Stream} new debounced stream
+ */
+Stream.prototype.debounce = function(period) {
+	return limit.debounce(period, this);
+};
+
+//-----------------------------------------------------------------------
+// Awaiting Promises
+
+var promises = require('./lib/combinator/promises');
+
+exports.fromPromise = promises.fromPromise;
+exports.await       = promises.awaitPromises;
+
+/**
+ * Await promises, turning a Stream<Promise<X>> into Stream<X>.  Preserves
+ * event order, but timeshifts events based on promise resolution time.
+ * @returns {Stream<X>} stream containing non-promise values
+ */
+Stream.prototype.await = function() {
+	return promises.awaitPromises(this);
+};
+
+//-----------------------------------------------------------------------
+// Error handling
+
+var errors = require('./lib/combinator/errors');
+
+exports.recoverWith  = errors.flatMapError;
+exports.flatMapError = errors.flatMapError;
+exports.throwError   = errors.throwError;
+
+/**
+ * If this stream encounters an error, recover and continue with items from stream
+ * returned by f.
+ * stream:                  -a-b-c-X-
+ * f(X):                           d-e-f-g-
+ * flatMapError(f, stream): -a-b-c-d-e-f-g-
+ * @param {function(error:*):Stream} f function which returns a new stream
+ * @returns {Stream} new stream which will recover from an error by calling f
+ */
+Stream.prototype.recoverWith = Stream.prototype.flatMapError = function(f) {
+	return errors.flatMapError(f, this);
+};
+
+//-----------------------------------------------------------------------
+// Multicasting
+
+var multicast = require('@most/multicast').default;
+
+exports.multicast = multicast;
+
+/**
+ * Transform the stream into multicast stream.  That means that many subscribers
+ * to the stream will not cause multiple invocations of the internal machinery.
+ * @returns {Stream} new stream which will multicast events to all observers.
+ */
+Stream.prototype.multicast = function() {
+	return multicast(this);
+};
+
+},{"./lib/Stream":48,"./lib/combinator/accumulate":49,"./lib/combinator/applicative":50,"./lib/combinator/build":51,"./lib/combinator/combine":52,"./lib/combinator/concatMap":53,"./lib/combinator/continueWith":54,"./lib/combinator/delay":55,"./lib/combinator/errors":56,"./lib/combinator/filter":57,"./lib/combinator/flatMap":58,"./lib/combinator/limit":59,"./lib/combinator/loop":60,"./lib/combinator/merge":61,"./lib/combinator/mergeConcurrently":62,"./lib/combinator/observe":63,"./lib/combinator/promises":64,"./lib/combinator/sample":65,"./lib/combinator/slice":66,"./lib/combinator/switch":67,"./lib/combinator/thru":68,"./lib/combinator/timeslice":69,"./lib/combinator/timestamp":70,"./lib/combinator/transduce":71,"./lib/combinator/transform":72,"./lib/combinator/zip":73,"./lib/observable/subscribe":85,"./lib/source/core":99,"./lib/source/from":100,"./lib/source/fromEvent":102,"./lib/source/generate":104,"./lib/source/iterate":105,"./lib/source/periodic":106,"./lib/source/unfold":108,"@most/multicast":15,"@most/prelude":16,"symbol-observable":257}],111:[function(require,module,exports){
 'use strict';
 /* eslint-disable no-unused-vars */
 var hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -2057,7 +7188,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 	return to;
 };
 
-},{}],43:[function(require,module,exports){
+},{}],112:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -2239,12 +7370,12 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],44:[function(require,module,exports){
+},{}],113:[function(require,module,exports){
 'use strict';
 
 module.exports = require('react/lib/ReactDOM');
 
-},{"react/lib/ReactDOM":82}],45:[function(require,module,exports){
+},{"react/lib/ReactDOM":151}],114:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -2269,7 +7400,7 @@ var AutoFocusUtils = {
 };
 
 module.exports = AutoFocusUtils;
-},{"./ReactDOMComponentTree":86,"fbjs/lib/focusNode":24}],46:[function(require,module,exports){
+},{"./ReactDOMComponentTree":155,"fbjs/lib/focusNode":27}],115:[function(require,module,exports){
 /**
  * Copyright 2013-present Facebook, Inc.
  * All rights reserved.
@@ -2658,7 +7789,7 @@ var BeforeInputEventPlugin = {
 };
 
 module.exports = BeforeInputEventPlugin;
-},{"./EventConstants":60,"./EventPropagators":64,"./FallbackCompositionState":65,"./SyntheticCompositionEvent":143,"./SyntheticInputEvent":147,"fbjs/lib/ExecutionEnvironment":16,"fbjs/lib/keyOf":34}],47:[function(require,module,exports){
+},{"./EventConstants":129,"./EventPropagators":133,"./FallbackCompositionState":134,"./SyntheticCompositionEvent":212,"./SyntheticInputEvent":216,"fbjs/lib/ExecutionEnvironment":19,"fbjs/lib/keyOf":37}],116:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -2807,7 +7938,7 @@ var CSSProperty = {
 };
 
 module.exports = CSSProperty;
-},{}],48:[function(require,module,exports){
+},{}],117:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -3015,7 +8146,7 @@ var CSSPropertyOperations = {
 
 module.exports = CSSPropertyOperations;
 }).call(this,require('_process'))
-},{"./CSSProperty":47,"./ReactInstrumentation":116,"./dangerousStyleValue":161,"_process":43,"fbjs/lib/ExecutionEnvironment":16,"fbjs/lib/camelizeStyleName":18,"fbjs/lib/hyphenateStyleName":29,"fbjs/lib/memoizeStringOnly":35,"fbjs/lib/warning":39}],49:[function(require,module,exports){
+},{"./CSSProperty":116,"./ReactInstrumentation":185,"./dangerousStyleValue":230,"_process":112,"fbjs/lib/ExecutionEnvironment":19,"fbjs/lib/camelizeStyleName":21,"fbjs/lib/hyphenateStyleName":32,"fbjs/lib/memoizeStringOnly":38,"fbjs/lib/warning":42}],118:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -3124,7 +8255,7 @@ PooledClass.addPoolingTo(CallbackQueue);
 
 module.exports = CallbackQueue;
 }).call(this,require('_process'))
-},{"./PooledClass":69,"./reactProdInvariant":180,"_process":43,"fbjs/lib/invariant":30,"object-assign":42}],50:[function(require,module,exports){
+},{"./PooledClass":138,"./reactProdInvariant":249,"_process":112,"fbjs/lib/invariant":33,"object-assign":111}],119:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -3450,7 +8581,7 @@ var ChangeEventPlugin = {
 };
 
 module.exports = ChangeEventPlugin;
-},{"./EventConstants":60,"./EventPluginHub":61,"./EventPropagators":64,"./ReactDOMComponentTree":86,"./ReactUpdates":136,"./SyntheticEvent":145,"./getEventTarget":169,"./isEventSupported":176,"./isTextInputElement":177,"fbjs/lib/ExecutionEnvironment":16,"fbjs/lib/keyOf":34}],51:[function(require,module,exports){
+},{"./EventConstants":129,"./EventPluginHub":130,"./EventPropagators":133,"./ReactDOMComponentTree":155,"./ReactUpdates":205,"./SyntheticEvent":214,"./getEventTarget":238,"./isEventSupported":245,"./isTextInputElement":246,"fbjs/lib/ExecutionEnvironment":19,"fbjs/lib/keyOf":37}],120:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -3647,7 +8778,7 @@ var DOMChildrenOperations = {
 
 module.exports = DOMChildrenOperations;
 }).call(this,require('_process'))
-},{"./DOMLazyTree":52,"./Danger":56,"./ReactDOMComponentTree":86,"./ReactInstrumentation":116,"./ReactMultiChildUpdateTypes":121,"./createMicrosoftUnsafeLocalFunction":160,"./setInnerHTML":182,"./setTextContent":183,"_process":43}],52:[function(require,module,exports){
+},{"./DOMLazyTree":121,"./Danger":125,"./ReactDOMComponentTree":155,"./ReactInstrumentation":185,"./ReactMultiChildUpdateTypes":190,"./createMicrosoftUnsafeLocalFunction":229,"./setInnerHTML":251,"./setTextContent":252,"_process":112}],121:[function(require,module,exports){
 /**
  * Copyright 2015-present, Facebook, Inc.
  * All rights reserved.
@@ -3766,7 +8897,7 @@ DOMLazyTree.queueHTML = queueHTML;
 DOMLazyTree.queueText = queueText;
 
 module.exports = DOMLazyTree;
-},{"./DOMNamespaces":53,"./createMicrosoftUnsafeLocalFunction":160,"./setInnerHTML":182,"./setTextContent":183}],53:[function(require,module,exports){
+},{"./DOMNamespaces":122,"./createMicrosoftUnsafeLocalFunction":229,"./setInnerHTML":251,"./setTextContent":252}],122:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -3787,7 +8918,7 @@ var DOMNamespaces = {
 };
 
 module.exports = DOMNamespaces;
-},{}],54:[function(require,module,exports){
+},{}],123:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -3996,7 +9127,7 @@ var DOMProperty = {
 
 module.exports = DOMProperty;
 }).call(this,require('_process'))
-},{"./reactProdInvariant":180,"_process":43,"fbjs/lib/invariant":30}],55:[function(require,module,exports){
+},{"./reactProdInvariant":249,"_process":112,"fbjs/lib/invariant":33}],124:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -4220,7 +9351,7 @@ var DOMPropertyOperations = {
 
 module.exports = DOMPropertyOperations;
 }).call(this,require('_process'))
-},{"./DOMProperty":54,"./ReactDOMComponentTree":86,"./ReactInstrumentation":116,"./quoteAttributeValueForBrowser":179,"_process":43,"fbjs/lib/warning":39}],56:[function(require,module,exports){
+},{"./DOMProperty":123,"./ReactDOMComponentTree":155,"./ReactInstrumentation":185,"./quoteAttributeValueForBrowser":248,"_process":112,"fbjs/lib/warning":42}],125:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -4271,7 +9402,7 @@ var Danger = {
 
 module.exports = Danger;
 }).call(this,require('_process'))
-},{"./DOMLazyTree":52,"./reactProdInvariant":180,"_process":43,"fbjs/lib/ExecutionEnvironment":16,"fbjs/lib/createNodesFromMarkup":21,"fbjs/lib/emptyFunction":22,"fbjs/lib/invariant":30}],57:[function(require,module,exports){
+},{"./DOMLazyTree":121,"./reactProdInvariant":249,"_process":112,"fbjs/lib/ExecutionEnvironment":19,"fbjs/lib/createNodesFromMarkup":24,"fbjs/lib/emptyFunction":25,"fbjs/lib/invariant":33}],126:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -4299,7 +9430,7 @@ var keyOf = require('fbjs/lib/keyOf');
 var DefaultEventPluginOrder = [keyOf({ ResponderEventPlugin: null }), keyOf({ SimpleEventPlugin: null }), keyOf({ TapEventPlugin: null }), keyOf({ EnterLeaveEventPlugin: null }), keyOf({ ChangeEventPlugin: null }), keyOf({ SelectEventPlugin: null }), keyOf({ BeforeInputEventPlugin: null })];
 
 module.exports = DefaultEventPluginOrder;
-},{"fbjs/lib/keyOf":34}],58:[function(require,module,exports){
+},{"fbjs/lib/keyOf":37}],127:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -4350,7 +9481,7 @@ var DisabledInputUtils = {
 };
 
 module.exports = DisabledInputUtils;
-},{}],59:[function(require,module,exports){
+},{}],128:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -4456,7 +9587,7 @@ var EnterLeaveEventPlugin = {
 };
 
 module.exports = EnterLeaveEventPlugin;
-},{"./EventConstants":60,"./EventPropagators":64,"./ReactDOMComponentTree":86,"./SyntheticMouseEvent":149,"fbjs/lib/keyOf":34}],60:[function(require,module,exports){
+},{"./EventConstants":129,"./EventPropagators":133,"./ReactDOMComponentTree":155,"./SyntheticMouseEvent":218,"fbjs/lib/keyOf":37}],129:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -4554,7 +9685,7 @@ var EventConstants = {
 };
 
 module.exports = EventConstants;
-},{"fbjs/lib/keyMirror":33}],61:[function(require,module,exports){
+},{"fbjs/lib/keyMirror":36}],130:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -4808,7 +9939,7 @@ var EventPluginHub = {
 
 module.exports = EventPluginHub;
 }).call(this,require('_process'))
-},{"./EventPluginRegistry":62,"./EventPluginUtils":63,"./ReactErrorUtils":107,"./accumulateInto":156,"./forEachAccumulated":165,"./reactProdInvariant":180,"_process":43,"fbjs/lib/invariant":30}],62:[function(require,module,exports){
+},{"./EventPluginRegistry":131,"./EventPluginUtils":132,"./ReactErrorUtils":176,"./accumulateInto":225,"./forEachAccumulated":234,"./reactProdInvariant":249,"_process":112,"fbjs/lib/invariant":33}],131:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -5058,7 +10189,7 @@ var EventPluginRegistry = {
 
 module.exports = EventPluginRegistry;
 }).call(this,require('_process'))
-},{"./reactProdInvariant":180,"_process":43,"fbjs/lib/invariant":30}],63:[function(require,module,exports){
+},{"./reactProdInvariant":249,"_process":112,"fbjs/lib/invariant":33}],132:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -5290,7 +10421,7 @@ var EventPluginUtils = {
 
 module.exports = EventPluginUtils;
 }).call(this,require('_process'))
-},{"./EventConstants":60,"./ReactErrorUtils":107,"./reactProdInvariant":180,"_process":43,"fbjs/lib/invariant":30,"fbjs/lib/warning":39}],64:[function(require,module,exports){
+},{"./EventConstants":129,"./ReactErrorUtils":176,"./reactProdInvariant":249,"_process":112,"fbjs/lib/invariant":33,"fbjs/lib/warning":42}],133:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -5430,7 +10561,7 @@ var EventPropagators = {
 
 module.exports = EventPropagators;
 }).call(this,require('_process'))
-},{"./EventConstants":60,"./EventPluginHub":61,"./EventPluginUtils":63,"./accumulateInto":156,"./forEachAccumulated":165,"_process":43,"fbjs/lib/warning":39}],65:[function(require,module,exports){
+},{"./EventConstants":129,"./EventPluginHub":130,"./EventPluginUtils":132,"./accumulateInto":225,"./forEachAccumulated":234,"_process":112,"fbjs/lib/warning":42}],134:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -5526,7 +10657,7 @@ _assign(FallbackCompositionState.prototype, {
 PooledClass.addPoolingTo(FallbackCompositionState);
 
 module.exports = FallbackCompositionState;
-},{"./PooledClass":69,"./getTextContentAccessor":173,"object-assign":42}],66:[function(require,module,exports){
+},{"./PooledClass":138,"./getTextContentAccessor":242,"object-assign":111}],135:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -5736,7 +10867,7 @@ var HTMLDOMPropertyConfig = {
 };
 
 module.exports = HTMLDOMPropertyConfig;
-},{"./DOMProperty":54}],67:[function(require,module,exports){
+},{"./DOMProperty":123}],136:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -5796,7 +10927,7 @@ var KeyEscapeUtils = {
 };
 
 module.exports = KeyEscapeUtils;
-},{}],68:[function(require,module,exports){
+},{}],137:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -5935,7 +11066,7 @@ var LinkedValueUtils = {
 
 module.exports = LinkedValueUtils;
 }).call(this,require('_process'))
-},{"./ReactPropTypeLocations":126,"./ReactPropTypes":127,"./ReactPropTypesSecret":128,"./reactProdInvariant":180,"_process":43,"fbjs/lib/invariant":30,"fbjs/lib/warning":39}],69:[function(require,module,exports){
+},{"./ReactPropTypeLocations":195,"./ReactPropTypes":196,"./ReactPropTypesSecret":197,"./reactProdInvariant":249,"_process":112,"fbjs/lib/invariant":33,"fbjs/lib/warning":42}],138:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -6059,7 +11190,7 @@ var PooledClass = {
 
 module.exports = PooledClass;
 }).call(this,require('_process'))
-},{"./reactProdInvariant":180,"_process":43,"fbjs/lib/invariant":30}],70:[function(require,module,exports){
+},{"./reactProdInvariant":249,"_process":112,"fbjs/lib/invariant":33}],139:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -6151,7 +11282,7 @@ var React = {
 
 module.exports = React;
 }).call(this,require('_process'))
-},{"./ReactChildren":73,"./ReactClass":75,"./ReactComponent":76,"./ReactDOMFactories":89,"./ReactElement":104,"./ReactElementValidator":105,"./ReactPropTypes":127,"./ReactPureComponent":129,"./ReactVersion":137,"./onlyChild":178,"_process":43,"fbjs/lib/warning":39,"object-assign":42}],71:[function(require,module,exports){
+},{"./ReactChildren":142,"./ReactClass":144,"./ReactComponent":145,"./ReactDOMFactories":158,"./ReactElement":173,"./ReactElementValidator":174,"./ReactPropTypes":196,"./ReactPureComponent":198,"./ReactVersion":206,"./onlyChild":247,"_process":112,"fbjs/lib/warning":42,"object-assign":111}],140:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -6469,7 +11600,7 @@ var ReactBrowserEventEmitter = _assign({}, ReactEventEmitterMixin, {
 });
 
 module.exports = ReactBrowserEventEmitter;
-},{"./EventConstants":60,"./EventPluginRegistry":62,"./ReactEventEmitterMixin":108,"./ViewportMetrics":155,"./getVendorPrefixedEventName":174,"./isEventSupported":176,"object-assign":42}],72:[function(require,module,exports){
+},{"./EventConstants":129,"./EventPluginRegistry":131,"./ReactEventEmitterMixin":177,"./ViewportMetrics":224,"./getVendorPrefixedEventName":243,"./isEventSupported":245,"object-assign":111}],141:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-present, Facebook, Inc.
@@ -6626,7 +11757,7 @@ var ReactChildReconciler = {
 
 module.exports = ReactChildReconciler;
 }).call(this,require('_process'))
-},{"./KeyEscapeUtils":67,"./ReactComponentTreeHook":79,"./ReactReconciler":131,"./instantiateReactComponent":175,"./shouldUpdateReactComponent":184,"./traverseAllChildren":185,"_process":43,"fbjs/lib/warning":39}],73:[function(require,module,exports){
+},{"./KeyEscapeUtils":136,"./ReactComponentTreeHook":148,"./ReactReconciler":200,"./instantiateReactComponent":244,"./shouldUpdateReactComponent":253,"./traverseAllChildren":254,"_process":112,"fbjs/lib/warning":42}],142:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -6818,7 +11949,7 @@ var ReactChildren = {
 };
 
 module.exports = ReactChildren;
-},{"./PooledClass":69,"./ReactElement":104,"./traverseAllChildren":185,"fbjs/lib/emptyFunction":22}],74:[function(require,module,exports){
+},{"./PooledClass":138,"./ReactElement":173,"./traverseAllChildren":254,"fbjs/lib/emptyFunction":25}],143:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -6875,7 +12006,7 @@ var ReactChildrenMutationWarningHook = {
 
 module.exports = ReactChildrenMutationWarningHook;
 }).call(this,require('_process'))
-},{"./ReactComponentTreeHook":79,"_process":43,"fbjs/lib/warning":39}],75:[function(require,module,exports){
+},{"./ReactComponentTreeHook":148,"_process":112,"fbjs/lib/warning":42}],144:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -7610,7 +12741,7 @@ var ReactClass = {
 
 module.exports = ReactClass;
 }).call(this,require('_process'))
-},{"./ReactComponent":76,"./ReactElement":104,"./ReactNoopUpdateQueue":123,"./ReactPropTypeLocationNames":125,"./ReactPropTypeLocations":126,"./reactProdInvariant":180,"_process":43,"fbjs/lib/emptyObject":23,"fbjs/lib/invariant":30,"fbjs/lib/keyMirror":33,"fbjs/lib/keyOf":34,"fbjs/lib/warning":39,"object-assign":42}],76:[function(require,module,exports){
+},{"./ReactComponent":145,"./ReactElement":173,"./ReactNoopUpdateQueue":192,"./ReactPropTypeLocationNames":194,"./ReactPropTypeLocations":195,"./reactProdInvariant":249,"_process":112,"fbjs/lib/emptyObject":26,"fbjs/lib/invariant":33,"fbjs/lib/keyMirror":36,"fbjs/lib/keyOf":37,"fbjs/lib/warning":42,"object-assign":111}],145:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -7731,7 +12862,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = ReactComponent;
 }).call(this,require('_process'))
-},{"./ReactNoopUpdateQueue":123,"./canDefineProperty":158,"./reactProdInvariant":180,"_process":43,"fbjs/lib/emptyObject":23,"fbjs/lib/invariant":30,"fbjs/lib/warning":39}],77:[function(require,module,exports){
+},{"./ReactNoopUpdateQueue":192,"./canDefineProperty":227,"./reactProdInvariant":249,"_process":112,"fbjs/lib/emptyObject":26,"fbjs/lib/invariant":33,"fbjs/lib/warning":42}],146:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -7762,7 +12893,7 @@ var ReactComponentBrowserEnvironment = {
 };
 
 module.exports = ReactComponentBrowserEnvironment;
-},{"./DOMChildrenOperations":51,"./ReactDOMIDOperations":91}],78:[function(require,module,exports){
+},{"./DOMChildrenOperations":120,"./ReactDOMIDOperations":160}],147:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-present, Facebook, Inc.
@@ -7810,7 +12941,7 @@ var ReactComponentEnvironment = {
 
 module.exports = ReactComponentEnvironment;
 }).call(this,require('_process'))
-},{"./reactProdInvariant":180,"_process":43,"fbjs/lib/invariant":30}],79:[function(require,module,exports){
+},{"./reactProdInvariant":249,"_process":112,"fbjs/lib/invariant":33}],148:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2016-present, Facebook, Inc.
@@ -8155,7 +13286,7 @@ var ReactComponentTreeHook = {
 
 module.exports = ReactComponentTreeHook;
 }).call(this,require('_process'))
-},{"./ReactCurrentOwner":81,"./reactProdInvariant":180,"_process":43,"fbjs/lib/invariant":30,"fbjs/lib/warning":39}],80:[function(require,module,exports){
+},{"./ReactCurrentOwner":150,"./reactProdInvariant":249,"_process":112,"fbjs/lib/invariant":33,"fbjs/lib/warning":42}],149:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -9078,7 +14209,7 @@ var ReactCompositeComponent = {
 
 module.exports = ReactCompositeComponent;
 }).call(this,require('_process'))
-},{"./ReactComponentEnvironment":78,"./ReactCurrentOwner":81,"./ReactElement":104,"./ReactErrorUtils":107,"./ReactInstanceMap":115,"./ReactInstrumentation":116,"./ReactNodeTypes":122,"./ReactPropTypeLocations":126,"./ReactReconciler":131,"./checkReactTypeSpec":159,"./reactProdInvariant":180,"./shouldUpdateReactComponent":184,"_process":43,"fbjs/lib/emptyObject":23,"fbjs/lib/invariant":30,"fbjs/lib/shallowEqual":38,"fbjs/lib/warning":39,"object-assign":42}],81:[function(require,module,exports){
+},{"./ReactComponentEnvironment":147,"./ReactCurrentOwner":150,"./ReactElement":173,"./ReactErrorUtils":176,"./ReactInstanceMap":184,"./ReactInstrumentation":185,"./ReactNodeTypes":191,"./ReactPropTypeLocations":195,"./ReactReconciler":200,"./checkReactTypeSpec":228,"./reactProdInvariant":249,"./shouldUpdateReactComponent":253,"_process":112,"fbjs/lib/emptyObject":26,"fbjs/lib/invariant":33,"fbjs/lib/shallowEqual":41,"fbjs/lib/warning":42,"object-assign":111}],150:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -9110,7 +14241,7 @@ var ReactCurrentOwner = {
 };
 
 module.exports = ReactCurrentOwner;
-},{}],82:[function(require,module,exports){
+},{}],151:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -9223,7 +14354,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = ReactDOM;
 }).call(this,require('_process'))
-},{"./ReactDOMComponentTree":86,"./ReactDOMNullInputValuePropHook":93,"./ReactDOMUnknownPropertyHook":100,"./ReactDefaultInjection":103,"./ReactInstrumentation":116,"./ReactMount":119,"./ReactReconciler":131,"./ReactUpdates":136,"./ReactVersion":137,"./findDOMNode":163,"./getHostComponentFromComposite":170,"./renderSubtreeIntoContainer":181,"_process":43,"fbjs/lib/ExecutionEnvironment":16,"fbjs/lib/warning":39}],83:[function(require,module,exports){
+},{"./ReactDOMComponentTree":155,"./ReactDOMNullInputValuePropHook":162,"./ReactDOMUnknownPropertyHook":169,"./ReactDefaultInjection":172,"./ReactInstrumentation":185,"./ReactMount":188,"./ReactReconciler":200,"./ReactUpdates":205,"./ReactVersion":206,"./findDOMNode":232,"./getHostComponentFromComposite":239,"./renderSubtreeIntoContainer":250,"_process":112,"fbjs/lib/ExecutionEnvironment":19,"fbjs/lib/warning":42}],152:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -9248,7 +14379,7 @@ var ReactDOMButton = {
 };
 
 module.exports = ReactDOMButton;
-},{"./DisabledInputUtils":58}],84:[function(require,module,exports){
+},{"./DisabledInputUtils":127}],153:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -10256,7 +15387,7 @@ _assign(ReactDOMComponent.prototype, ReactDOMComponent.Mixin, ReactMultiChild.Mi
 
 module.exports = ReactDOMComponent;
 }).call(this,require('_process'))
-},{"./AutoFocusUtils":45,"./CSSPropertyOperations":48,"./DOMLazyTree":52,"./DOMNamespaces":53,"./DOMProperty":54,"./DOMPropertyOperations":55,"./EventConstants":60,"./EventPluginHub":61,"./EventPluginRegistry":62,"./ReactBrowserEventEmitter":71,"./ReactDOMButton":83,"./ReactDOMComponentFlags":85,"./ReactDOMComponentTree":86,"./ReactDOMInput":92,"./ReactDOMOption":94,"./ReactDOMSelect":95,"./ReactDOMTextarea":98,"./ReactInstrumentation":116,"./ReactMultiChild":120,"./ReactServerRenderingTransaction":133,"./escapeTextContentForBrowser":162,"./isEventSupported":176,"./reactProdInvariant":180,"./validateDOMNesting":186,"_process":43,"fbjs/lib/emptyFunction":22,"fbjs/lib/invariant":30,"fbjs/lib/keyOf":34,"fbjs/lib/shallowEqual":38,"fbjs/lib/warning":39,"object-assign":42}],85:[function(require,module,exports){
+},{"./AutoFocusUtils":114,"./CSSPropertyOperations":117,"./DOMLazyTree":121,"./DOMNamespaces":122,"./DOMProperty":123,"./DOMPropertyOperations":124,"./EventConstants":129,"./EventPluginHub":130,"./EventPluginRegistry":131,"./ReactBrowserEventEmitter":140,"./ReactDOMButton":152,"./ReactDOMComponentFlags":154,"./ReactDOMComponentTree":155,"./ReactDOMInput":161,"./ReactDOMOption":163,"./ReactDOMSelect":164,"./ReactDOMTextarea":167,"./ReactInstrumentation":185,"./ReactMultiChild":189,"./ReactServerRenderingTransaction":202,"./escapeTextContentForBrowser":231,"./isEventSupported":245,"./reactProdInvariant":249,"./validateDOMNesting":255,"_process":112,"fbjs/lib/emptyFunction":25,"fbjs/lib/invariant":33,"fbjs/lib/keyOf":37,"fbjs/lib/shallowEqual":41,"fbjs/lib/warning":42,"object-assign":111}],154:[function(require,module,exports){
 /**
  * Copyright 2015-present, Facebook, Inc.
  * All rights reserved.
@@ -10275,7 +15406,7 @@ var ReactDOMComponentFlags = {
 };
 
 module.exports = ReactDOMComponentFlags;
-},{}],86:[function(require,module,exports){
+},{}],155:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -10466,7 +15597,7 @@ var ReactDOMComponentTree = {
 
 module.exports = ReactDOMComponentTree;
 }).call(this,require('_process'))
-},{"./DOMProperty":54,"./ReactDOMComponentFlags":85,"./reactProdInvariant":180,"_process":43,"fbjs/lib/invariant":30}],87:[function(require,module,exports){
+},{"./DOMProperty":123,"./ReactDOMComponentFlags":154,"./reactProdInvariant":249,"_process":112,"fbjs/lib/invariant":33}],156:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -10502,7 +15633,7 @@ function ReactDOMContainerInfo(topLevelWrapper, node) {
 
 module.exports = ReactDOMContainerInfo;
 }).call(this,require('_process'))
-},{"./validateDOMNesting":186,"_process":43}],88:[function(require,module,exports){
+},{"./validateDOMNesting":255,"_process":112}],157:[function(require,module,exports){
 /**
  * Copyright 2014-present, Facebook, Inc.
  * All rights reserved.
@@ -10563,7 +15694,7 @@ _assign(ReactDOMEmptyComponent.prototype, {
 });
 
 module.exports = ReactDOMEmptyComponent;
-},{"./DOMLazyTree":52,"./ReactDOMComponentTree":86,"object-assign":42}],89:[function(require,module,exports){
+},{"./DOMLazyTree":121,"./ReactDOMComponentTree":155,"object-assign":111}],158:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -10736,7 +15867,7 @@ var ReactDOMFactories = {
 
 module.exports = ReactDOMFactories;
 }).call(this,require('_process'))
-},{"./ReactElement":104,"./ReactElementValidator":105,"_process":43}],90:[function(require,module,exports){
+},{"./ReactElement":173,"./ReactElementValidator":174,"_process":112}],159:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -10755,7 +15886,7 @@ var ReactDOMFeatureFlags = {
 };
 
 module.exports = ReactDOMFeatureFlags;
-},{}],91:[function(require,module,exports){
+},{}],160:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -10790,7 +15921,7 @@ var ReactDOMIDOperations = {
 };
 
 module.exports = ReactDOMIDOperations;
-},{"./DOMChildrenOperations":51,"./ReactDOMComponentTree":86}],92:[function(require,module,exports){
+},{"./DOMChildrenOperations":120,"./ReactDOMComponentTree":155}],161:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -11062,7 +16193,7 @@ function _handleChange(event) {
 
 module.exports = ReactDOMInput;
 }).call(this,require('_process'))
-},{"./DOMPropertyOperations":55,"./DisabledInputUtils":58,"./LinkedValueUtils":68,"./ReactDOMComponentTree":86,"./ReactUpdates":136,"./reactProdInvariant":180,"_process":43,"fbjs/lib/invariant":30,"fbjs/lib/warning":39,"object-assign":42}],93:[function(require,module,exports){
+},{"./DOMPropertyOperations":124,"./DisabledInputUtils":127,"./LinkedValueUtils":137,"./ReactDOMComponentTree":155,"./ReactUpdates":205,"./reactProdInvariant":249,"_process":112,"fbjs/lib/invariant":33,"fbjs/lib/warning":42,"object-assign":111}],162:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -11108,7 +16239,7 @@ var ReactDOMNullInputValuePropHook = {
 
 module.exports = ReactDOMNullInputValuePropHook;
 }).call(this,require('_process'))
-},{"./ReactComponentTreeHook":79,"_process":43,"fbjs/lib/warning":39}],94:[function(require,module,exports){
+},{"./ReactComponentTreeHook":148,"_process":112,"fbjs/lib/warning":42}],163:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -11234,7 +16365,7 @@ var ReactDOMOption = {
 
 module.exports = ReactDOMOption;
 }).call(this,require('_process'))
-},{"./ReactChildren":73,"./ReactDOMComponentTree":86,"./ReactDOMSelect":95,"_process":43,"fbjs/lib/warning":39,"object-assign":42}],95:[function(require,module,exports){
+},{"./ReactChildren":142,"./ReactDOMComponentTree":155,"./ReactDOMSelect":164,"_process":112,"fbjs/lib/warning":42,"object-assign":111}],164:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -11438,7 +16569,7 @@ function _handleChange(event) {
 
 module.exports = ReactDOMSelect;
 }).call(this,require('_process'))
-},{"./DisabledInputUtils":58,"./LinkedValueUtils":68,"./ReactDOMComponentTree":86,"./ReactUpdates":136,"_process":43,"fbjs/lib/warning":39,"object-assign":42}],96:[function(require,module,exports){
+},{"./DisabledInputUtils":127,"./LinkedValueUtils":137,"./ReactDOMComponentTree":155,"./ReactUpdates":205,"_process":112,"fbjs/lib/warning":42,"object-assign":111}],165:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -11651,7 +16782,7 @@ var ReactDOMSelection = {
 };
 
 module.exports = ReactDOMSelection;
-},{"./getNodeForCharacterOffset":172,"./getTextContentAccessor":173,"fbjs/lib/ExecutionEnvironment":16}],97:[function(require,module,exports){
+},{"./getNodeForCharacterOffset":241,"./getTextContentAccessor":242,"fbjs/lib/ExecutionEnvironment":19}],166:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -11818,7 +16949,7 @@ _assign(ReactDOMTextComponent.prototype, {
 
 module.exports = ReactDOMTextComponent;
 }).call(this,require('_process'))
-},{"./DOMChildrenOperations":51,"./DOMLazyTree":52,"./ReactDOMComponentTree":86,"./escapeTextContentForBrowser":162,"./reactProdInvariant":180,"./validateDOMNesting":186,"_process":43,"fbjs/lib/invariant":30,"object-assign":42}],98:[function(require,module,exports){
+},{"./DOMChildrenOperations":120,"./DOMLazyTree":121,"./ReactDOMComponentTree":155,"./escapeTextContentForBrowser":231,"./reactProdInvariant":249,"./validateDOMNesting":255,"_process":112,"fbjs/lib/invariant":33,"object-assign":111}],167:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -11976,7 +17107,7 @@ function _handleChange(event) {
 
 module.exports = ReactDOMTextarea;
 }).call(this,require('_process'))
-},{"./DisabledInputUtils":58,"./LinkedValueUtils":68,"./ReactDOMComponentTree":86,"./ReactUpdates":136,"./reactProdInvariant":180,"_process":43,"fbjs/lib/invariant":30,"fbjs/lib/warning":39,"object-assign":42}],99:[function(require,module,exports){
+},{"./DisabledInputUtils":127,"./LinkedValueUtils":137,"./ReactDOMComponentTree":155,"./ReactUpdates":205,"./reactProdInvariant":249,"_process":112,"fbjs/lib/invariant":33,"fbjs/lib/warning":42,"object-assign":111}],168:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2015-present, Facebook, Inc.
@@ -12115,7 +17246,7 @@ module.exports = {
   traverseEnterLeave: traverseEnterLeave
 };
 }).call(this,require('_process'))
-},{"./reactProdInvariant":180,"_process":43,"fbjs/lib/invariant":30}],100:[function(require,module,exports){
+},{"./reactProdInvariant":249,"_process":112,"fbjs/lib/invariant":33}],169:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -12230,7 +17361,7 @@ var ReactDOMUnknownPropertyHook = {
 
 module.exports = ReactDOMUnknownPropertyHook;
 }).call(this,require('_process'))
-},{"./DOMProperty":54,"./EventPluginRegistry":62,"./ReactComponentTreeHook":79,"_process":43,"fbjs/lib/warning":39}],101:[function(require,module,exports){
+},{"./DOMProperty":123,"./EventPluginRegistry":131,"./ReactComponentTreeHook":148,"_process":112,"fbjs/lib/warning":42}],170:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2016-present, Facebook, Inc.
@@ -12540,7 +17671,7 @@ if (/[?&]react_perf\b/.test(url)) {
 
 module.exports = ReactDebugTool;
 }).call(this,require('_process'))
-},{"./ReactChildrenMutationWarningHook":74,"./ReactComponentTreeHook":79,"./ReactHostOperationHistoryHook":112,"./ReactInvalidSetStateWarningHook":117,"_process":43,"fbjs/lib/ExecutionEnvironment":16,"fbjs/lib/performanceNow":37,"fbjs/lib/warning":39}],102:[function(require,module,exports){
+},{"./ReactChildrenMutationWarningHook":143,"./ReactComponentTreeHook":148,"./ReactHostOperationHistoryHook":181,"./ReactInvalidSetStateWarningHook":186,"_process":112,"fbjs/lib/ExecutionEnvironment":19,"fbjs/lib/performanceNow":40,"fbjs/lib/warning":42}],171:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -12609,7 +17740,7 @@ var ReactDefaultBatchingStrategy = {
 };
 
 module.exports = ReactDefaultBatchingStrategy;
-},{"./ReactUpdates":136,"./Transaction":154,"fbjs/lib/emptyFunction":22,"object-assign":42}],103:[function(require,module,exports){
+},{"./ReactUpdates":205,"./Transaction":223,"fbjs/lib/emptyFunction":25,"object-assign":111}],172:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -12694,7 +17825,7 @@ function inject() {
 module.exports = {
   inject: inject
 };
-},{"./BeforeInputEventPlugin":46,"./ChangeEventPlugin":50,"./DefaultEventPluginOrder":57,"./EnterLeaveEventPlugin":59,"./HTMLDOMPropertyConfig":66,"./ReactComponentBrowserEnvironment":77,"./ReactDOMComponent":84,"./ReactDOMComponentTree":86,"./ReactDOMEmptyComponent":88,"./ReactDOMTextComponent":97,"./ReactDOMTreeTraversal":99,"./ReactDefaultBatchingStrategy":102,"./ReactEventListener":109,"./ReactInjection":113,"./ReactReconcileTransaction":130,"./SVGDOMPropertyConfig":138,"./SelectEventPlugin":139,"./SimpleEventPlugin":140}],104:[function(require,module,exports){
+},{"./BeforeInputEventPlugin":115,"./ChangeEventPlugin":119,"./DefaultEventPluginOrder":126,"./EnterLeaveEventPlugin":128,"./HTMLDOMPropertyConfig":135,"./ReactComponentBrowserEnvironment":146,"./ReactDOMComponent":153,"./ReactDOMComponentTree":155,"./ReactDOMEmptyComponent":157,"./ReactDOMTextComponent":166,"./ReactDOMTreeTraversal":168,"./ReactDefaultBatchingStrategy":171,"./ReactEventListener":178,"./ReactInjection":182,"./ReactReconcileTransaction":199,"./SVGDOMPropertyConfig":207,"./SelectEventPlugin":208,"./SimpleEventPlugin":209}],173:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-present, Facebook, Inc.
@@ -13061,7 +18192,7 @@ ReactElement.REACT_ELEMENT_TYPE = REACT_ELEMENT_TYPE;
 
 module.exports = ReactElement;
 }).call(this,require('_process'))
-},{"./ReactCurrentOwner":81,"./canDefineProperty":158,"_process":43,"fbjs/lib/warning":39,"object-assign":42}],105:[function(require,module,exports){
+},{"./ReactCurrentOwner":150,"./canDefineProperty":227,"_process":112,"fbjs/lib/warning":42,"object-assign":111}],174:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-present, Facebook, Inc.
@@ -13292,7 +18423,7 @@ var ReactElementValidator = {
 
 module.exports = ReactElementValidator;
 }).call(this,require('_process'))
-},{"./ReactComponentTreeHook":79,"./ReactCurrentOwner":81,"./ReactElement":104,"./ReactPropTypeLocations":126,"./canDefineProperty":158,"./checkReactTypeSpec":159,"./getIteratorFn":171,"_process":43,"fbjs/lib/warning":39}],106:[function(require,module,exports){
+},{"./ReactComponentTreeHook":148,"./ReactCurrentOwner":150,"./ReactElement":173,"./ReactPropTypeLocations":195,"./canDefineProperty":227,"./checkReactTypeSpec":228,"./getIteratorFn":240,"_process":112,"fbjs/lib/warning":42}],175:[function(require,module,exports){
 /**
  * Copyright 2014-present, Facebook, Inc.
  * All rights reserved.
@@ -13323,7 +18454,7 @@ var ReactEmptyComponent = {
 ReactEmptyComponent.injection = ReactEmptyComponentInjection;
 
 module.exports = ReactEmptyComponent;
-},{}],107:[function(require,module,exports){
+},{}],176:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -13402,7 +18533,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = ReactErrorUtils;
 }).call(this,require('_process'))
-},{"_process":43}],108:[function(require,module,exports){
+},{"_process":112}],177:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -13436,7 +18567,7 @@ var ReactEventEmitterMixin = {
 };
 
 module.exports = ReactEventEmitterMixin;
-},{"./EventPluginHub":61}],109:[function(require,module,exports){
+},{"./EventPluginHub":130}],178:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -13594,7 +18725,7 @@ var ReactEventListener = {
 };
 
 module.exports = ReactEventListener;
-},{"./PooledClass":69,"./ReactDOMComponentTree":86,"./ReactUpdates":136,"./getEventTarget":169,"fbjs/lib/EventListener":15,"fbjs/lib/ExecutionEnvironment":16,"fbjs/lib/getUnboundedScrollPosition":27,"object-assign":42}],110:[function(require,module,exports){
+},{"./PooledClass":138,"./ReactDOMComponentTree":155,"./ReactUpdates":205,"./getEventTarget":238,"fbjs/lib/EventListener":18,"fbjs/lib/ExecutionEnvironment":19,"fbjs/lib/getUnboundedScrollPosition":30,"object-assign":111}],179:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -13617,7 +18748,7 @@ var ReactFeatureFlags = {
 };
 
 module.exports = ReactFeatureFlags;
-},{}],111:[function(require,module,exports){
+},{}],180:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-present, Facebook, Inc.
@@ -13696,7 +18827,7 @@ var ReactHostComponent = {
 
 module.exports = ReactHostComponent;
 }).call(this,require('_process'))
-},{"./reactProdInvariant":180,"_process":43,"fbjs/lib/invariant":30,"object-assign":42}],112:[function(require,module,exports){
+},{"./reactProdInvariant":249,"_process":112,"fbjs/lib/invariant":33,"object-assign":111}],181:[function(require,module,exports){
 /**
  * Copyright 2016-present, Facebook, Inc.
  * All rights reserved.
@@ -13734,7 +18865,7 @@ var ReactHostOperationHistoryHook = {
 };
 
 module.exports = ReactHostOperationHistoryHook;
-},{}],113:[function(require,module,exports){
+},{}],182:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -13771,7 +18902,7 @@ var ReactInjection = {
 };
 
 module.exports = ReactInjection;
-},{"./DOMProperty":54,"./EventPluginHub":61,"./EventPluginUtils":63,"./ReactBrowserEventEmitter":71,"./ReactClass":75,"./ReactComponentEnvironment":78,"./ReactEmptyComponent":106,"./ReactHostComponent":111,"./ReactUpdates":136}],114:[function(require,module,exports){
+},{"./DOMProperty":123,"./EventPluginHub":130,"./EventPluginUtils":132,"./ReactBrowserEventEmitter":140,"./ReactClass":144,"./ReactComponentEnvironment":147,"./ReactEmptyComponent":175,"./ReactHostComponent":180,"./ReactUpdates":205}],183:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -13896,7 +19027,7 @@ var ReactInputSelection = {
 };
 
 module.exports = ReactInputSelection;
-},{"./ReactDOMSelection":96,"fbjs/lib/containsNode":19,"fbjs/lib/focusNode":24,"fbjs/lib/getActiveElement":25}],115:[function(require,module,exports){
+},{"./ReactDOMSelection":165,"fbjs/lib/containsNode":22,"fbjs/lib/focusNode":27,"fbjs/lib/getActiveElement":28}],184:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -13945,7 +19076,7 @@ var ReactInstanceMap = {
 };
 
 module.exports = ReactInstanceMap;
-},{}],116:[function(require,module,exports){
+},{}],185:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2016-present, Facebook, Inc.
@@ -13969,7 +19100,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = { debugTool: debugTool };
 }).call(this,require('_process'))
-},{"./ReactDebugTool":101,"_process":43}],117:[function(require,module,exports){
+},{"./ReactDebugTool":170,"_process":112}],186:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2016-present, Facebook, Inc.
@@ -14008,7 +19139,7 @@ var ReactInvalidSetStateWarningHook = {
 
 module.exports = ReactInvalidSetStateWarningHook;
 }).call(this,require('_process'))
-},{"_process":43,"fbjs/lib/warning":39}],118:[function(require,module,exports){
+},{"_process":112,"fbjs/lib/warning":42}],187:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -14059,7 +19190,7 @@ var ReactMarkupChecksum = {
 };
 
 module.exports = ReactMarkupChecksum;
-},{"./adler32":157}],119:[function(require,module,exports){
+},{"./adler32":226}],188:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -14596,7 +19727,7 @@ var ReactMount = {
 
 module.exports = ReactMount;
 }).call(this,require('_process'))
-},{"./DOMLazyTree":52,"./DOMProperty":54,"./ReactBrowserEventEmitter":71,"./ReactCurrentOwner":81,"./ReactDOMComponentTree":86,"./ReactDOMContainerInfo":87,"./ReactDOMFeatureFlags":90,"./ReactElement":104,"./ReactFeatureFlags":110,"./ReactInstanceMap":115,"./ReactInstrumentation":116,"./ReactMarkupChecksum":118,"./ReactReconciler":131,"./ReactUpdateQueue":135,"./ReactUpdates":136,"./instantiateReactComponent":175,"./reactProdInvariant":180,"./setInnerHTML":182,"./shouldUpdateReactComponent":184,"_process":43,"fbjs/lib/emptyObject":23,"fbjs/lib/invariant":30,"fbjs/lib/warning":39}],120:[function(require,module,exports){
+},{"./DOMLazyTree":121,"./DOMProperty":123,"./ReactBrowserEventEmitter":140,"./ReactCurrentOwner":150,"./ReactDOMComponentTree":155,"./ReactDOMContainerInfo":156,"./ReactDOMFeatureFlags":159,"./ReactElement":173,"./ReactFeatureFlags":179,"./ReactInstanceMap":184,"./ReactInstrumentation":185,"./ReactMarkupChecksum":187,"./ReactReconciler":200,"./ReactUpdateQueue":204,"./ReactUpdates":205,"./instantiateReactComponent":244,"./reactProdInvariant":249,"./setInnerHTML":251,"./shouldUpdateReactComponent":253,"_process":112,"fbjs/lib/emptyObject":26,"fbjs/lib/invariant":33,"fbjs/lib/warning":42}],189:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -15050,7 +20181,7 @@ var ReactMultiChild = {
 
 module.exports = ReactMultiChild;
 }).call(this,require('_process'))
-},{"./ReactChildReconciler":72,"./ReactComponentEnvironment":78,"./ReactCurrentOwner":81,"./ReactInstanceMap":115,"./ReactInstrumentation":116,"./ReactMultiChildUpdateTypes":121,"./ReactReconciler":131,"./flattenChildren":164,"./reactProdInvariant":180,"_process":43,"fbjs/lib/emptyFunction":22,"fbjs/lib/invariant":30}],121:[function(require,module,exports){
+},{"./ReactChildReconciler":141,"./ReactComponentEnvironment":147,"./ReactCurrentOwner":150,"./ReactInstanceMap":184,"./ReactInstrumentation":185,"./ReactMultiChildUpdateTypes":190,"./ReactReconciler":200,"./flattenChildren":233,"./reactProdInvariant":249,"_process":112,"fbjs/lib/emptyFunction":25,"fbjs/lib/invariant":33}],190:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -15083,7 +20214,7 @@ var ReactMultiChildUpdateTypes = keyMirror({
 });
 
 module.exports = ReactMultiChildUpdateTypes;
-},{"fbjs/lib/keyMirror":33}],122:[function(require,module,exports){
+},{"fbjs/lib/keyMirror":36}],191:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -15126,7 +20257,7 @@ var ReactNodeTypes = {
 
 module.exports = ReactNodeTypes;
 }).call(this,require('_process'))
-},{"./ReactElement":104,"./reactProdInvariant":180,"_process":43,"fbjs/lib/invariant":30}],123:[function(require,module,exports){
+},{"./ReactElement":173,"./reactProdInvariant":249,"_process":112,"fbjs/lib/invariant":33}],192:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2015-present, Facebook, Inc.
@@ -15225,7 +20356,7 @@ var ReactNoopUpdateQueue = {
 
 module.exports = ReactNoopUpdateQueue;
 }).call(this,require('_process'))
-},{"_process":43,"fbjs/lib/warning":39}],124:[function(require,module,exports){
+},{"_process":112,"fbjs/lib/warning":42}],193:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -15322,7 +20453,7 @@ var ReactOwner = {
 
 module.exports = ReactOwner;
 }).call(this,require('_process'))
-},{"./reactProdInvariant":180,"_process":43,"fbjs/lib/invariant":30}],125:[function(require,module,exports){
+},{"./reactProdInvariant":249,"_process":112,"fbjs/lib/invariant":33}],194:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -15349,7 +20480,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = ReactPropTypeLocationNames;
 }).call(this,require('_process'))
-},{"_process":43}],126:[function(require,module,exports){
+},{"_process":112}],195:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -15372,7 +20503,7 @@ var ReactPropTypeLocations = keyMirror({
 });
 
 module.exports = ReactPropTypeLocations;
-},{"fbjs/lib/keyMirror":33}],127:[function(require,module,exports){
+},{"fbjs/lib/keyMirror":36}],196:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -15806,7 +20937,7 @@ function getClassName(propValue) {
 
 module.exports = ReactPropTypes;
 }).call(this,require('_process'))
-},{"./ReactElement":104,"./ReactPropTypeLocationNames":125,"./ReactPropTypesSecret":128,"./getIteratorFn":171,"_process":43,"fbjs/lib/emptyFunction":22,"fbjs/lib/warning":39}],128:[function(require,module,exports){
+},{"./ReactElement":173,"./ReactPropTypeLocationNames":194,"./ReactPropTypesSecret":197,"./getIteratorFn":240,"_process":112,"fbjs/lib/emptyFunction":25,"fbjs/lib/warning":42}],197:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -15823,7 +20954,7 @@ module.exports = ReactPropTypes;
 var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 
 module.exports = ReactPropTypesSecret;
-},{}],129:[function(require,module,exports){
+},{}],198:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -15866,7 +20997,7 @@ _assign(ReactPureComponent.prototype, ReactComponent.prototype);
 ReactPureComponent.prototype.isPureReactComponent = true;
 
 module.exports = ReactPureComponent;
-},{"./ReactComponent":76,"./ReactNoopUpdateQueue":123,"fbjs/lib/emptyObject":23,"object-assign":42}],130:[function(require,module,exports){
+},{"./ReactComponent":145,"./ReactNoopUpdateQueue":192,"fbjs/lib/emptyObject":26,"object-assign":111}],199:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -16047,7 +21178,7 @@ PooledClass.addPoolingTo(ReactReconcileTransaction);
 
 module.exports = ReactReconcileTransaction;
 }).call(this,require('_process'))
-},{"./CallbackQueue":49,"./PooledClass":69,"./ReactBrowserEventEmitter":71,"./ReactInputSelection":114,"./ReactInstrumentation":116,"./ReactUpdateQueue":135,"./Transaction":154,"_process":43,"object-assign":42}],131:[function(require,module,exports){
+},{"./CallbackQueue":118,"./PooledClass":138,"./ReactBrowserEventEmitter":140,"./ReactInputSelection":183,"./ReactInstrumentation":185,"./ReactUpdateQueue":204,"./Transaction":223,"_process":112,"object-assign":111}],200:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -16218,7 +21349,7 @@ var ReactReconciler = {
 
 module.exports = ReactReconciler;
 }).call(this,require('_process'))
-},{"./ReactInstrumentation":116,"./ReactRef":132,"_process":43,"fbjs/lib/warning":39}],132:[function(require,module,exports){
+},{"./ReactInstrumentation":185,"./ReactRef":201,"_process":112,"fbjs/lib/warning":42}],201:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -16299,7 +21430,7 @@ ReactRef.detachRefs = function (instance, element) {
 };
 
 module.exports = ReactRef;
-},{"./ReactOwner":124}],133:[function(require,module,exports){
+},{"./ReactOwner":193}],202:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-present, Facebook, Inc.
@@ -16392,7 +21523,7 @@ PooledClass.addPoolingTo(ReactServerRenderingTransaction);
 
 module.exports = ReactServerRenderingTransaction;
 }).call(this,require('_process'))
-},{"./PooledClass":69,"./ReactInstrumentation":116,"./ReactServerUpdateQueue":134,"./Transaction":154,"_process":43,"object-assign":42}],134:[function(require,module,exports){
+},{"./PooledClass":138,"./ReactInstrumentation":185,"./ReactServerUpdateQueue":203,"./Transaction":223,"_process":112,"object-assign":111}],203:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2015-present, Facebook, Inc.
@@ -16536,7 +21667,7 @@ var ReactServerUpdateQueue = function () {
 
 module.exports = ReactServerUpdateQueue;
 }).call(this,require('_process'))
-},{"./ReactUpdateQueue":135,"./Transaction":154,"_process":43,"fbjs/lib/warning":39}],135:[function(require,module,exports){
+},{"./ReactUpdateQueue":204,"./Transaction":223,"_process":112,"fbjs/lib/warning":42}],204:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2015-present, Facebook, Inc.
@@ -16765,7 +21896,7 @@ var ReactUpdateQueue = {
 
 module.exports = ReactUpdateQueue;
 }).call(this,require('_process'))
-},{"./ReactCurrentOwner":81,"./ReactInstanceMap":115,"./ReactInstrumentation":116,"./ReactUpdates":136,"./reactProdInvariant":180,"_process":43,"fbjs/lib/invariant":30,"fbjs/lib/warning":39}],136:[function(require,module,exports){
+},{"./ReactCurrentOwner":150,"./ReactInstanceMap":184,"./ReactInstrumentation":185,"./ReactUpdates":205,"./reactProdInvariant":249,"_process":112,"fbjs/lib/invariant":33,"fbjs/lib/warning":42}],205:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -17019,7 +22150,7 @@ var ReactUpdates = {
 
 module.exports = ReactUpdates;
 }).call(this,require('_process'))
-},{"./CallbackQueue":49,"./PooledClass":69,"./ReactFeatureFlags":110,"./ReactReconciler":131,"./Transaction":154,"./reactProdInvariant":180,"_process":43,"fbjs/lib/invariant":30,"object-assign":42}],137:[function(require,module,exports){
+},{"./CallbackQueue":118,"./PooledClass":138,"./ReactFeatureFlags":179,"./ReactReconciler":200,"./Transaction":223,"./reactProdInvariant":249,"_process":112,"fbjs/lib/invariant":33,"object-assign":111}],206:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -17034,7 +22165,7 @@ module.exports = ReactUpdates;
 'use strict';
 
 module.exports = '15.3.1';
-},{}],138:[function(require,module,exports){
+},{}],207:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -17337,7 +22468,7 @@ Object.keys(ATTRS).forEach(function (key) {
 });
 
 module.exports = SVGDOMPropertyConfig;
-},{}],139:[function(require,module,exports){
+},{}],208:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -17534,7 +22665,7 @@ var SelectEventPlugin = {
 };
 
 module.exports = SelectEventPlugin;
-},{"./EventConstants":60,"./EventPropagators":64,"./ReactDOMComponentTree":86,"./ReactInputSelection":114,"./SyntheticEvent":145,"./isTextInputElement":177,"fbjs/lib/ExecutionEnvironment":16,"fbjs/lib/getActiveElement":25,"fbjs/lib/keyOf":34,"fbjs/lib/shallowEqual":38}],140:[function(require,module,exports){
+},{"./EventConstants":129,"./EventPropagators":133,"./ReactDOMComponentTree":155,"./ReactInputSelection":183,"./SyntheticEvent":214,"./isTextInputElement":246,"fbjs/lib/ExecutionEnvironment":19,"fbjs/lib/getActiveElement":28,"fbjs/lib/keyOf":37,"fbjs/lib/shallowEqual":41}],209:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -18172,7 +23303,7 @@ var SimpleEventPlugin = {
 
 module.exports = SimpleEventPlugin;
 }).call(this,require('_process'))
-},{"./EventConstants":60,"./EventPropagators":64,"./ReactDOMComponentTree":86,"./SyntheticAnimationEvent":141,"./SyntheticClipboardEvent":142,"./SyntheticDragEvent":144,"./SyntheticEvent":145,"./SyntheticFocusEvent":146,"./SyntheticKeyboardEvent":148,"./SyntheticMouseEvent":149,"./SyntheticTouchEvent":150,"./SyntheticTransitionEvent":151,"./SyntheticUIEvent":152,"./SyntheticWheelEvent":153,"./getEventCharCode":166,"./reactProdInvariant":180,"_process":43,"fbjs/lib/EventListener":15,"fbjs/lib/emptyFunction":22,"fbjs/lib/invariant":30,"fbjs/lib/keyOf":34}],141:[function(require,module,exports){
+},{"./EventConstants":129,"./EventPropagators":133,"./ReactDOMComponentTree":155,"./SyntheticAnimationEvent":210,"./SyntheticClipboardEvent":211,"./SyntheticDragEvent":213,"./SyntheticEvent":214,"./SyntheticFocusEvent":215,"./SyntheticKeyboardEvent":217,"./SyntheticMouseEvent":218,"./SyntheticTouchEvent":219,"./SyntheticTransitionEvent":220,"./SyntheticUIEvent":221,"./SyntheticWheelEvent":222,"./getEventCharCode":235,"./reactProdInvariant":249,"_process":112,"fbjs/lib/EventListener":18,"fbjs/lib/emptyFunction":25,"fbjs/lib/invariant":33,"fbjs/lib/keyOf":37}],210:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -18212,7 +23343,7 @@ function SyntheticAnimationEvent(dispatchConfig, dispatchMarker, nativeEvent, na
 SyntheticEvent.augmentClass(SyntheticAnimationEvent, AnimationEventInterface);
 
 module.exports = SyntheticAnimationEvent;
-},{"./SyntheticEvent":145}],142:[function(require,module,exports){
+},{"./SyntheticEvent":214}],211:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -18251,7 +23382,7 @@ function SyntheticClipboardEvent(dispatchConfig, dispatchMarker, nativeEvent, na
 SyntheticEvent.augmentClass(SyntheticClipboardEvent, ClipboardEventInterface);
 
 module.exports = SyntheticClipboardEvent;
-},{"./SyntheticEvent":145}],143:[function(require,module,exports){
+},{"./SyntheticEvent":214}],212:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -18288,7 +23419,7 @@ function SyntheticCompositionEvent(dispatchConfig, dispatchMarker, nativeEvent, 
 SyntheticEvent.augmentClass(SyntheticCompositionEvent, CompositionEventInterface);
 
 module.exports = SyntheticCompositionEvent;
-},{"./SyntheticEvent":145}],144:[function(require,module,exports){
+},{"./SyntheticEvent":214}],213:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -18325,7 +23456,7 @@ function SyntheticDragEvent(dispatchConfig, dispatchMarker, nativeEvent, nativeE
 SyntheticMouseEvent.augmentClass(SyntheticDragEvent, DragEventInterface);
 
 module.exports = SyntheticDragEvent;
-},{"./SyntheticMouseEvent":149}],145:[function(require,module,exports){
+},{"./SyntheticMouseEvent":218}],214:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -18595,7 +23726,7 @@ function getPooledWarningPropertyDefinition(propName, getVal) {
   }
 }
 }).call(this,require('_process'))
-},{"./PooledClass":69,"_process":43,"fbjs/lib/emptyFunction":22,"fbjs/lib/warning":39,"object-assign":42}],146:[function(require,module,exports){
+},{"./PooledClass":138,"_process":112,"fbjs/lib/emptyFunction":25,"fbjs/lib/warning":42,"object-assign":111}],215:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -18632,7 +23763,7 @@ function SyntheticFocusEvent(dispatchConfig, dispatchMarker, nativeEvent, native
 SyntheticUIEvent.augmentClass(SyntheticFocusEvent, FocusEventInterface);
 
 module.exports = SyntheticFocusEvent;
-},{"./SyntheticUIEvent":152}],147:[function(require,module,exports){
+},{"./SyntheticUIEvent":221}],216:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -18670,7 +23801,7 @@ function SyntheticInputEvent(dispatchConfig, dispatchMarker, nativeEvent, native
 SyntheticEvent.augmentClass(SyntheticInputEvent, InputEventInterface);
 
 module.exports = SyntheticInputEvent;
-},{"./SyntheticEvent":145}],148:[function(require,module,exports){
+},{"./SyntheticEvent":214}],217:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -18755,7 +23886,7 @@ function SyntheticKeyboardEvent(dispatchConfig, dispatchMarker, nativeEvent, nat
 SyntheticUIEvent.augmentClass(SyntheticKeyboardEvent, KeyboardEventInterface);
 
 module.exports = SyntheticKeyboardEvent;
-},{"./SyntheticUIEvent":152,"./getEventCharCode":166,"./getEventKey":167,"./getEventModifierState":168}],149:[function(require,module,exports){
+},{"./SyntheticUIEvent":221,"./getEventCharCode":235,"./getEventKey":236,"./getEventModifierState":237}],218:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -18828,7 +23959,7 @@ function SyntheticMouseEvent(dispatchConfig, dispatchMarker, nativeEvent, native
 SyntheticUIEvent.augmentClass(SyntheticMouseEvent, MouseEventInterface);
 
 module.exports = SyntheticMouseEvent;
-},{"./SyntheticUIEvent":152,"./ViewportMetrics":155,"./getEventModifierState":168}],150:[function(require,module,exports){
+},{"./SyntheticUIEvent":221,"./ViewportMetrics":224,"./getEventModifierState":237}],219:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -18874,7 +24005,7 @@ function SyntheticTouchEvent(dispatchConfig, dispatchMarker, nativeEvent, native
 SyntheticUIEvent.augmentClass(SyntheticTouchEvent, TouchEventInterface);
 
 module.exports = SyntheticTouchEvent;
-},{"./SyntheticUIEvent":152,"./getEventModifierState":168}],151:[function(require,module,exports){
+},{"./SyntheticUIEvent":221,"./getEventModifierState":237}],220:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -18914,7 +24045,7 @@ function SyntheticTransitionEvent(dispatchConfig, dispatchMarker, nativeEvent, n
 SyntheticEvent.augmentClass(SyntheticTransitionEvent, TransitionEventInterface);
 
 module.exports = SyntheticTransitionEvent;
-},{"./SyntheticEvent":145}],152:[function(require,module,exports){
+},{"./SyntheticEvent":214}],221:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -18974,7 +24105,7 @@ function SyntheticUIEvent(dispatchConfig, dispatchMarker, nativeEvent, nativeEve
 SyntheticEvent.augmentClass(SyntheticUIEvent, UIEventInterface);
 
 module.exports = SyntheticUIEvent;
-},{"./SyntheticEvent":145,"./getEventTarget":169}],153:[function(require,module,exports){
+},{"./SyntheticEvent":214,"./getEventTarget":238}],222:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -19029,7 +24160,7 @@ function SyntheticWheelEvent(dispatchConfig, dispatchMarker, nativeEvent, native
 SyntheticMouseEvent.augmentClass(SyntheticWheelEvent, WheelEventInterface);
 
 module.exports = SyntheticWheelEvent;
-},{"./SyntheticMouseEvent":149}],154:[function(require,module,exports){
+},{"./SyntheticMouseEvent":218}],223:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -19265,7 +24396,7 @@ var Transaction = {
 
 module.exports = Transaction;
 }).call(this,require('_process'))
-},{"./reactProdInvariant":180,"_process":43,"fbjs/lib/invariant":30}],155:[function(require,module,exports){
+},{"./reactProdInvariant":249,"_process":112,"fbjs/lib/invariant":33}],224:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -19293,7 +24424,7 @@ var ViewportMetrics = {
 };
 
 module.exports = ViewportMetrics;
-},{}],156:[function(require,module,exports){
+},{}],225:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-present, Facebook, Inc.
@@ -19354,7 +24485,7 @@ function accumulateInto(current, next) {
 
 module.exports = accumulateInto;
 }).call(this,require('_process'))
-},{"./reactProdInvariant":180,"_process":43,"fbjs/lib/invariant":30}],157:[function(require,module,exports){
+},{"./reactProdInvariant":249,"_process":112,"fbjs/lib/invariant":33}],226:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -19399,7 +24530,7 @@ function adler32(data) {
 }
 
 module.exports = adler32;
-},{}],158:[function(require,module,exports){
+},{}],227:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -19426,7 +24557,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = canDefineProperty;
 }).call(this,require('_process'))
-},{"_process":43}],159:[function(require,module,exports){
+},{"_process":112}],228:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -19516,7 +24647,7 @@ function checkReactTypeSpec(typeSpecs, values, location, componentName, element,
 
 module.exports = checkReactTypeSpec;
 }).call(this,require('_process'))
-},{"./ReactComponentTreeHook":79,"./ReactPropTypeLocationNames":125,"./ReactPropTypesSecret":128,"./reactProdInvariant":180,"_process":43,"fbjs/lib/invariant":30,"fbjs/lib/warning":39}],160:[function(require,module,exports){
+},{"./ReactComponentTreeHook":148,"./ReactPropTypeLocationNames":194,"./ReactPropTypesSecret":197,"./reactProdInvariant":249,"_process":112,"fbjs/lib/invariant":33,"fbjs/lib/warning":42}],229:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -19549,7 +24680,7 @@ var createMicrosoftUnsafeLocalFunction = function (func) {
 };
 
 module.exports = createMicrosoftUnsafeLocalFunction;
-},{}],161:[function(require,module,exports){
+},{}],230:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -19631,7 +24762,7 @@ function dangerousStyleValue(name, value, component) {
 
 module.exports = dangerousStyleValue;
 }).call(this,require('_process'))
-},{"./CSSProperty":47,"_process":43,"fbjs/lib/warning":39}],162:[function(require,module,exports){
+},{"./CSSProperty":116,"_process":112,"fbjs/lib/warning":42}],231:[function(require,module,exports){
 /**
  * Copyright 2016-present, Facebook, Inc.
  * All rights reserved.
@@ -19755,7 +24886,7 @@ function escapeTextContentForBrowser(text) {
 }
 
 module.exports = escapeTextContentForBrowser;
-},{}],163:[function(require,module,exports){
+},{}],232:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -19818,7 +24949,7 @@ function findDOMNode(componentOrElement) {
 
 module.exports = findDOMNode;
 }).call(this,require('_process'))
-},{"./ReactCurrentOwner":81,"./ReactDOMComponentTree":86,"./ReactInstanceMap":115,"./getHostComponentFromComposite":170,"./reactProdInvariant":180,"_process":43,"fbjs/lib/invariant":30,"fbjs/lib/warning":39}],164:[function(require,module,exports){
+},{"./ReactCurrentOwner":150,"./ReactDOMComponentTree":155,"./ReactInstanceMap":184,"./getHostComponentFromComposite":239,"./reactProdInvariant":249,"_process":112,"fbjs/lib/invariant":33,"fbjs/lib/warning":42}],233:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -19897,7 +25028,7 @@ function flattenChildren(children, selfDebugID) {
 
 module.exports = flattenChildren;
 }).call(this,require('_process'))
-},{"./KeyEscapeUtils":67,"./ReactComponentTreeHook":79,"./traverseAllChildren":185,"_process":43,"fbjs/lib/warning":39}],165:[function(require,module,exports){
+},{"./KeyEscapeUtils":136,"./ReactComponentTreeHook":148,"./traverseAllChildren":254,"_process":112,"fbjs/lib/warning":42}],234:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -19929,7 +25060,7 @@ function forEachAccumulated(arr, cb, scope) {
 }
 
 module.exports = forEachAccumulated;
-},{}],166:[function(require,module,exports){
+},{}],235:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -19980,7 +25111,7 @@ function getEventCharCode(nativeEvent) {
 }
 
 module.exports = getEventCharCode;
-},{}],167:[function(require,module,exports){
+},{}],236:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -20083,7 +25214,7 @@ function getEventKey(nativeEvent) {
 }
 
 module.exports = getEventKey;
-},{"./getEventCharCode":166}],168:[function(require,module,exports){
+},{"./getEventCharCode":235}],237:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -20127,7 +25258,7 @@ function getEventModifierState(nativeEvent) {
 }
 
 module.exports = getEventModifierState;
-},{}],169:[function(require,module,exports){
+},{}],238:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -20163,7 +25294,7 @@ function getEventTarget(nativeEvent) {
 }
 
 module.exports = getEventTarget;
-},{}],170:[function(require,module,exports){
+},{}],239:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -20194,7 +25325,7 @@ function getHostComponentFromComposite(inst) {
 }
 
 module.exports = getHostComponentFromComposite;
-},{"./ReactNodeTypes":122}],171:[function(require,module,exports){
+},{"./ReactNodeTypes":191}],240:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -20236,7 +25367,7 @@ function getIteratorFn(maybeIterable) {
 }
 
 module.exports = getIteratorFn;
-},{}],172:[function(require,module,exports){
+},{}],241:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -20311,7 +25442,7 @@ function getNodeForCharacterOffset(root, offset) {
 }
 
 module.exports = getNodeForCharacterOffset;
-},{}],173:[function(require,module,exports){
+},{}],242:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -20345,7 +25476,7 @@ function getTextContentAccessor() {
 }
 
 module.exports = getTextContentAccessor;
-},{"fbjs/lib/ExecutionEnvironment":16}],174:[function(require,module,exports){
+},{"fbjs/lib/ExecutionEnvironment":19}],243:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -20447,7 +25578,7 @@ function getVendorPrefixedEventName(eventName) {
 }
 
 module.exports = getVendorPrefixedEventName;
-},{"fbjs/lib/ExecutionEnvironment":16}],175:[function(require,module,exports){
+},{"fbjs/lib/ExecutionEnvironment":19}],244:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -20569,7 +25700,7 @@ function instantiateReactComponent(node, shouldHaveDebugID) {
 
 module.exports = instantiateReactComponent;
 }).call(this,require('_process'))
-},{"./ReactCompositeComponent":80,"./ReactEmptyComponent":106,"./ReactHostComponent":111,"./reactProdInvariant":180,"_process":43,"fbjs/lib/invariant":30,"fbjs/lib/warning":39,"object-assign":42}],176:[function(require,module,exports){
+},{"./ReactCompositeComponent":149,"./ReactEmptyComponent":175,"./ReactHostComponent":180,"./reactProdInvariant":249,"_process":112,"fbjs/lib/invariant":33,"fbjs/lib/warning":42,"object-assign":111}],245:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -20630,7 +25761,7 @@ function isEventSupported(eventNameSuffix, capture) {
 }
 
 module.exports = isEventSupported;
-},{"fbjs/lib/ExecutionEnvironment":16}],177:[function(require,module,exports){
+},{"fbjs/lib/ExecutionEnvironment":19}],246:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -20682,7 +25813,7 @@ function isTextInputElement(elem) {
 }
 
 module.exports = isTextInputElement;
-},{}],178:[function(require,module,exports){
+},{}],247:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -20723,7 +25854,7 @@ function onlyChild(children) {
 
 module.exports = onlyChild;
 }).call(this,require('_process'))
-},{"./ReactElement":104,"./reactProdInvariant":180,"_process":43,"fbjs/lib/invariant":30}],179:[function(require,module,exports){
+},{"./ReactElement":173,"./reactProdInvariant":249,"_process":112,"fbjs/lib/invariant":33}],248:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -20750,7 +25881,7 @@ function quoteAttributeValueForBrowser(value) {
 }
 
 module.exports = quoteAttributeValueForBrowser;
-},{"./escapeTextContentForBrowser":162}],180:[function(require,module,exports){
+},{"./escapeTextContentForBrowser":231}],249:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -20790,7 +25921,7 @@ function reactProdInvariant(code) {
 }
 
 module.exports = reactProdInvariant;
-},{}],181:[function(require,module,exports){
+},{}],250:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -20807,7 +25938,7 @@ module.exports = reactProdInvariant;
 var ReactMount = require('./ReactMount');
 
 module.exports = ReactMount.renderSubtreeIntoContainer;
-},{"./ReactMount":119}],182:[function(require,module,exports){
+},{"./ReactMount":188}],251:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -20906,7 +26037,7 @@ if (ExecutionEnvironment.canUseDOM) {
 }
 
 module.exports = setInnerHTML;
-},{"./DOMNamespaces":53,"./createMicrosoftUnsafeLocalFunction":160,"fbjs/lib/ExecutionEnvironment":16}],183:[function(require,module,exports){
+},{"./DOMNamespaces":122,"./createMicrosoftUnsafeLocalFunction":229,"fbjs/lib/ExecutionEnvironment":19}],252:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -20955,7 +26086,7 @@ if (ExecutionEnvironment.canUseDOM) {
 }
 
 module.exports = setTextContent;
-},{"./escapeTextContentForBrowser":162,"./setInnerHTML":182,"fbjs/lib/ExecutionEnvironment":16}],184:[function(require,module,exports){
+},{"./escapeTextContentForBrowser":231,"./setInnerHTML":251,"fbjs/lib/ExecutionEnvironment":19}],253:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -20998,7 +26129,7 @@ function shouldUpdateReactComponent(prevElement, nextElement) {
 }
 
 module.exports = shouldUpdateReactComponent;
-},{}],185:[function(require,module,exports){
+},{}],254:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -21168,7 +26299,7 @@ function traverseAllChildren(children, callback, traverseContext) {
 
 module.exports = traverseAllChildren;
 }).call(this,require('_process'))
-},{"./KeyEscapeUtils":67,"./ReactCurrentOwner":81,"./ReactElement":104,"./getIteratorFn":171,"./reactProdInvariant":180,"_process":43,"fbjs/lib/invariant":30,"fbjs/lib/warning":39}],186:[function(require,module,exports){
+},{"./KeyEscapeUtils":136,"./ReactCurrentOwner":150,"./ReactElement":173,"./getIteratorFn":240,"./reactProdInvariant":249,"_process":112,"fbjs/lib/invariant":33,"fbjs/lib/warning":42}],255:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2015-present, Facebook, Inc.
@@ -21540,19 +26671,71 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = validateDOMNesting;
 }).call(this,require('_process'))
-},{"_process":43,"fbjs/lib/emptyFunction":22,"fbjs/lib/warning":39,"object-assign":42}],187:[function(require,module,exports){
+},{"_process":112,"fbjs/lib/emptyFunction":25,"fbjs/lib/warning":42,"object-assign":111}],256:[function(require,module,exports){
 'use strict';
 
 module.exports = require('./lib/React');
 
-},{"./lib/React":70}],188:[function(require,module,exports){
+},{"./lib/React":139}],257:[function(require,module,exports){
+module.exports = require('./lib/index');
+
+},{"./lib/index":258}],258:[function(require,module,exports){
+(function (global){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _ponyfill = require('./ponyfill');
+
+var _ponyfill2 = _interopRequireDefault(_ponyfill);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var root = undefined; /* global window */
+
+if (typeof global !== 'undefined') {
+	root = global;
+} else if (typeof window !== 'undefined') {
+	root = window;
+}
+
+var result = (0, _ponyfill2['default'])(root);
+exports['default'] = result;
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./ponyfill":259}],259:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports['default'] = symbolObservablePonyfill;
+function symbolObservablePonyfill(root) {
+	var result;
+	var _Symbol = root.Symbol;
+
+	if (typeof _Symbol === 'function') {
+		if (_Symbol.observable) {
+			result = _Symbol.observable;
+		} else {
+			result = _Symbol('observable');
+			_Symbol.observable = result;
+		}
+	} else {
+		result = '@@observable';
+	}
+
+	return result;
+};
+},{}],260:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],189:[function(require,module,exports){
+},{}],261:[function(require,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -22142,4 +27325,4 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":188,"_process":43,"inherits":40}]},{},[13]);
+},{"./support/isBuffer":260,"_process":112,"inherits":43}]},{},[14]);
